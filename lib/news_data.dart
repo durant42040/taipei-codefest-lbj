@@ -10,6 +10,7 @@ class NewsArticle {
     this.articleText = loremIpsum,
     this.image,
   });
+  
 }
 
 const String loremIpsum =

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'home_screen.dart';
 import 'news_data.dart';
 
 class ArticleScreen extends StatefulWidget {
@@ -29,6 +29,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
               content: Text('Updating home screen widget...'),
             ),
           );
+          updateHeadline(widget.article);
         },
         label: const Text('Update Homescreen'),
       ),
