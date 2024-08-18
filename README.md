@@ -1,1 +1,0 @@
-# taipei-codefest-lbj
