@@ -1,0 +1,17 @@
+{
+  "name": "taipei-codefest-lbj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "frontend": "cd frontend && pnpm run dev",
+    "backend": "cd backend && pnpm start",
+    "lint": "cd frontend && pnpm lint",
+    "generate": "cd backend && pnpm generate",
+    "migrate": "cd backend && pnpm migrate",
+    "install:all": "pnpm install && cd frontend && pnpm install && cd ../backend && pnpm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
