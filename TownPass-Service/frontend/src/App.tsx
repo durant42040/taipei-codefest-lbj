@@ -3,6 +3,9 @@ import axios from 'axios'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { useConnectionMessage } from './composables/useConnectionMessage'
+import { useHandleConnectionData } from './composables/useHandleConnectionData'
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,12 +15,23 @@ function App() {
     baseURL: 'http://localhost:4000',
   });
 
+
+  const handleDogInfo = (event: { data: string }) => {
+    const result: { name: string; data: any } = JSON.parse(event.data);
+    alert(`name: ${result.data.name}, age: ${result.data.age}`);
+  };
+
+  useEffect(() => {
+    useConnectionMessage('doginfo', null);
+    useHandleConnectionData(handleDogInfo);
+  }, []);
+
   useEffect(() => {
     client.get('/api/monster').then((response) => {
       const {data: monster} = response;
       setMonster(monster);
     })
-  });
+  }, []);
 
   return (
     <>

@@ -1,4 +1,3 @@
-import { primaryKey } from "drizzle-orm/mysql-core";
 import { serial, text, timestamp, integer, pgTable, boolean } from "drizzle-orm/pg-core";
 
 export const monster = pgTable("monster", {

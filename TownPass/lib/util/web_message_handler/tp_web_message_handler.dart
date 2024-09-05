@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:town_pass/service/account_service.dart';
 import 'package:town_pass/service/device_service.dart';
@@ -165,5 +166,27 @@ class OpenLinkMessageHandler extends TPWebMessageHandler {
       TPRoute.webView,
       arguments: message,
     );
+  }
+}
+
+class DogMessageHandler extends TPWebMessageHandler {
+  @override
+  String get name => 'doginfo';
+
+
+  Map<String, Object> dog_1 = {
+    'name': 'john',
+    'age': 3,
+  };
+
+  @override
+  handle({
+    required String? message,
+    required WebUri? sourceOrigin,
+    required bool isMainFrame,
+    required Function(WebMessage reply)? onReply,
+  }) async {
+    print(dog_1);
+    onReply?.call(replyWebMessage(data: dog_1)); 
   }
 }
