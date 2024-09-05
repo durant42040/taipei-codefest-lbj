@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:town_pass/gen/assets.gen.dart';
+import 'dart:io' show Platform;
 
 // 先於 MyServiceItemId enum 加入新服務；
 // 再在 MyServiceIdExt 擴充中加入該服務的 MyServiceItem 物件。
@@ -39,7 +40,7 @@ extension MyServiceIdExt on MyServiceItemId {
           description: 'Lebron James',
           icon: Assets.svg.iconLebron.svg(),
           category: MyServiceCategory.cityService,
-          destinationUrl: 'http://localhost:5173',
+          destinationUrl: Platform.isAndroid ? 'http://10.0.2.2:5173' : 'http://localhost:5173',
         ),
       MyServiceItemId.dedicatedLine => MyServiceItem(
           title: '1999',
