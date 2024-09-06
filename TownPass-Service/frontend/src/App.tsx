@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { useConnectionMessage } from './composables/useConnectionMessage'
-import { useHandleConnectionData } from './composables/useHandleConnectionData'
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { useConnectionMessage } from "./composables/useConnectionMessage";
+import { useHandleConnectionData } from "./composables/useHandleConnectionData";
 
 function App() {
   const [count, setCount] = useState(0);
-  const [monster, setMonster] = useState({ name: '', health: 0, ugly: true });
+  const [monster, setMonster] = useState({ name: "", health: 0, ugly: true });
 
   const client = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: "http://localhost:4000",
   });
-
 
   const handleDogInfo = (event: { data: string }) => {
     const result: { name: string; data: any } = JSON.parse(event.data);
@@ -22,15 +20,15 @@ function App() {
   };
 
   useEffect(() => {
-    useConnectionMessage('doginfo', null);
+    useConnectionMessage("doginfo", null);
     useHandleConnectionData(handleDogInfo);
   }, []);
 
   useEffect(() => {
-    client.get('/api/monster').then((response) => {
-      const {data: monster} = response;
+    client.get("/api/monster").then((response) => {
+      const { data: monster } = response;
       setMonster(monster);
-    })
+    });
   }, []);
 
   return (
@@ -56,7 +54,7 @@ function App() {
         {`Hello ${monster.name}!`}
       </h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
