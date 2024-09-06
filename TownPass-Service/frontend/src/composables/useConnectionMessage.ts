@@ -5,6 +5,6 @@ export const useConnectionMessage = <T>(name: string, data: T) => {
 
     // @ts-ignore
     flutterObject.postMessage(postInfo);
-    alert("message sent");
+    // alert("message sent");
   }
 };

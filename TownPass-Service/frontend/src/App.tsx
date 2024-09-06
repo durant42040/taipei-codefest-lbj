@@ -5,6 +5,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
+import { Button } from "./components/ui/button";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,7 +17,7 @@ function App() {
 
   const handleDogInfo = (event: { data: string }) => {
     const result: { name: string; data: any } = JSON.parse(event.data);
-    alert(`name: ${result.data.name}, age: ${result.data.age}`);
+    // alert(`name: ${result.data.name}, age: ${result.data.age}`);
   };
 
   useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <>
+      <Button variant="outline">Button</Button>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

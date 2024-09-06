@@ -3,7 +3,7 @@ export const useHandleConnectionData = (
 ) => {
   // @ts-ignore
   if (typeof flutterObject !== "undefined" && flutterObject && cb) {
-    alert("message received");
+    // alert("message received");
     // @ts-ignore
     flutterObject.addEventListener("message", cb);
 
