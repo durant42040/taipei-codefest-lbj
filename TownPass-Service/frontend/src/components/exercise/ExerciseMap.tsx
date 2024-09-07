@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
-import { PinIcon } from "lucide-react";
+import { LocateFixed, PinIcon } from "lucide-react";
+import { useConnectionMessage } from "@/composables/useConnectionMessage";
+import { useHandleConnectionData } from "@/composables/useHandleConnectionData";
 
 const envConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
