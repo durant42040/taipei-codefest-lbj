@@ -136,6 +136,6 @@ button:focus-visible {
 
 @layer utilities {
   .button-class {
-    @apply text-white border-[#5ab4c5] bg-[#5ab4c5] py-2 px-3;
+    @apply text-white border-[#5ab4c5] bg-[#5ab4c5] py-2 px-3 hover:cursor-pointer;
   }
 }
