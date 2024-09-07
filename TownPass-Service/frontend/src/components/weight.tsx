@@ -32,6 +32,11 @@ import { useExercise } from "@/contexts/useExercise.tsx";
 
 export const description = "A linear line chart";
 
+type WeightType = {
+  weight: string;
+  month: string;
+};
+
 const chartConfig = {
   weight: {
     label: "weight",
@@ -42,10 +47,10 @@ const chartConfig = {
 export default function Weight() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newWeight, setNewWeight] = useState("");
-  const [weights, setWeights] = useState([]);
+  const [weights, setWeights] = useState<WeightType[]>([]);
   const { userData } = useExercise();
 
-  const handleWeightChange = (event) => {
+  const handleWeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewWeight(event.target.value);
   };
 
@@ -55,7 +60,7 @@ export default function Weight() {
 
   const handleSubmitWeight = () => {
     // ensure weight is number
-    if (isNaN(newWeight) || newWeight === "") {
+    if (isNaN(parseInt(newWeight)) || newWeight === "") {
       alert("請輸入數字");
       return;
     }
