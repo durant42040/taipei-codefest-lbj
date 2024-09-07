@@ -70,7 +70,7 @@ export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
     height: "",
     gender: "",
   });
-
+  
   const contextValue = {
     exercise,
     selectedCourt,

@@ -48,19 +48,18 @@ function App(): React.ReactNode {
   const handleUserInfo = (event: { data: string }) => {
     const result: { name: string; data: any } = JSON.parse(event.data);
     if (userData.name === "") {
-      client.get(`/user?id=${result.data.id}`).then((response) => {
+      client.get(`/user?id=7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250`).then((response) => {
         if (response.data.length) {
           setUserData(response.data[0]);
         } else {
           setUserData({
             ...userData,
-            id: result.data.id,
-            name: result.data.realName,
+            id: "7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250",
+            name: "金大森",
           });
         }
       });
     }
-    // alert(`name: ${result.data.name}, age: ${result.data.age}`);
   };
 
   useEffect(() => {

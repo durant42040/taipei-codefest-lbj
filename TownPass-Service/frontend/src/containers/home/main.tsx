@@ -50,11 +50,12 @@ function Home() {
     return "journal"; // default tab
   };
 
-  useEffect(() => {
-    if (userData.name !== "" && userData.age === "") {
-      navigate("/LoginPage");
-    }
-  }, [navigate, userData]);
+  // useEffect(() => {
+  //   // alert(userData.name);
+  //   if (userData.name !== "" && userData.age === "") {
+  //     navigate("/LoginPage");
+  //   }
+  // }, [navigate, userData]);
 
   const handleTabChange = (value: string) => {
     const tab = tabs.find((tab) => tab.value === value);
@@ -93,14 +94,14 @@ function Home() {
         </TabsList>
         {location.pathname === "/journal" && (
           <>
-            <Weight />
-            <Journal />
             <SummaryCircle
               title="今日總覽"
               burned={600}
               intake={1000}
               time={105}
             />
+            <Weight />
+            <Journal />
             <FoodHistory />
           </>
         )}

@@ -6,6 +6,7 @@ export type CourtType = {
   lat: number;
   lng: number;
   K: number;
+  imgLink: string;
 };
 
 export type SportType = {

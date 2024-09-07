@@ -1,8 +1,4 @@
-import React from "react";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Utensils, Info, Flame } from "lucide-react";
-import { FoodActivityCard } from "@/components/ui/foodCard";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,49 +7,56 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import { Label } from "@/components/ui/label";
-import { useEffect, useState } from "react";
+import { useFood } from "@/contexts/useFood";
+import { FoodActivityCard } from "@/components/ui/foodCard";
+import { Utensils } from "lucide-react";
+import { useExercise } from "@/contexts/useExercise";
+import axios from "axios";
 
-// Mock food history data
-const foodHistory = [
-  {
-    id: 1,
-    meal: "早餐",
-    food: "雞蛋",
-    amount: "100克",
-    calories: 130,
-    protein: 13,
-    fat: 8,
-    carbs: 2,
-    icon: <Utensils className="inline-block w-4 h-4 mr-1" />,
-  },
-  {
-    id: 2,
-    meal: "午餐",
-    food: "牛肉",
-    amount: "100克",
-    calories: 112,
-    protein: 21,
-    fat: 2,
-    carbs: 1,
-    icon: <Utensils className="inline-block w-4 h-4 mr-1" />,
-  },
-  {
-    id: 3,
-    meal: "晚餐",
-    food: "鮭魚",
-    amount: "100克",
-    calories: 139,
-    protein: 17,
-    fat: 7,
-    carbs: 0,
-    icon: <Utensils className="inline-block w-4 h-4 mr-1" />,
-  },
-];
+const FoodJournal = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { userData } = useExercise();
+  // const { foodHistory, addFoodEntry } = useFood();
+  const [foodHistory, setFoodHistory] = useState([]);
+  const [newFood, setNewFood] = useState({
+    food: "",
+    calories: 0,
+  });
 
-const FoodHistory = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false); // Manage dialog open state
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewFood({ ...newFood, [name]: value });
+  };
+
+  const client = axios.create({
+    baseURL: "http://localhost:4000",
+  });
+
+  // const handleSubmit = () => {
+  //   addFoodEntry(newFood);
+  //   setNewFood({ food: "", calories: 0, userId:"0" }); // Reset form
+  //   setIsDialogOpen(false); // Close dialog
+  // };
+  const handleSubmit = () => {
+    // Add the new activity with a unique id
+    client
+      .post("food/", { ...newFood, userId: userData.id })
+      .then((response) => {
+        setFoodHistory([...foodHistory, response.data]);
+        setNewFood({ food: "", calories: 0 }); // Reset the form
+        setIsDialogOpen(false); // Close the dialog after successful submission
+      });
+  };
+  useEffect(() => {
+    client.get(`food?user=${userData.id}`).then((response) => {
+      const { data: sessions } = response;
+      setFoodHistory(sessions);
+    });
+  }, [userData]);
+
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mx-2">
@@ -69,19 +72,43 @@ const FoodHistory = () => {
             <DialogHeader>
               <DialogTitle>新增食物</DialogTitle>
             </DialogHeader>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="food">食物</Label>
+                <Input
+                  id="food"
+                  name="food"
+                  value={newFood.food}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="calorie">熱量</Label>
+                <Input
+                  id="calorie"
+                  name="calorie"
+                  value={newFood.calories}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
             <DialogFooter>
-              <Button type="submit">新增</Button>
+              <Button type="button" onClick={handleSubmit}>
+                新增
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>
       <div className="rounded-lg">
-        {foodHistory.map((item) => (
-          <FoodActivityCard key={item.id} {...item} />
+        {foodHistory.map((food) => (
+          <FoodActivityCard key={food.id} {...food} />
         ))}
       </div>
     </div>
   );
 };
 
-export default FoodHistory;
+export default FoodJournal;
