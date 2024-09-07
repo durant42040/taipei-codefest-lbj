@@ -6,7 +6,7 @@ interface ExerciseSessionProps {
   id: number;
   time: string;
   sport: string;
-  caloriesBurnt: number;
+  caloriesBurnt: string;
 }
 
 export function ActivityCard({

@@ -67,9 +67,7 @@ function ToggleList() {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <button className="w-3/12 bg-gray-100 text-black p-1 text-base font-bold">
-            建議
-          </button>
+          <button className="w-3/12 button-class">建議</button>
         </div>
       </div>
       <div

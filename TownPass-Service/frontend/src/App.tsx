@@ -47,18 +47,19 @@ function App(): React.ReactNode {
 
   const handleUserInfo = () => {
     if (userData.name === "") {
-
-      client.get(`/user?id=7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250`).then((response) => {
-        if (response.data.length) {
-          setUserData(response.data[0]);
-        } else {
-          setUserData({
-            ...userData,
-            id: "7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250",
-            name: "金大森",
-          });
-        }
-      });
+      client
+        .get(`/user?id=7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250`)
+        .then((response) => {
+          if (response.data.length) {
+            setUserData(response.data[0]);
+          } else {
+            setUserData({
+              ...userData,
+              id: "7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250",
+              name: "金大森",
+            });
+          }
+        });
     }
   };
 

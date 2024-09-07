@@ -16,20 +16,34 @@ import axios from "axios";
 import { useExercise } from "@/contexts/useExercise.tsx";
 import { Dumbbell } from "lucide-react";
 
+type ActivityType = {
+  id: number;
+  userId: string;
+  calories: string;
+  time: Date;
+  sport: string;
+  duration: string;
+  location: string;
+};
+
 const Journal = () => {
-  const [activityHistory, setActivityHistory] = useState([]);
-  const [newActivity, setNewActivity] = useState({
+  const [activityHistory, setActivityHistory] = useState<ActivityType[]>([]);
+  const fakeActivity = {
+    id: 0,
+    userId: "",
+    calories: "",
+    time: new Date(),
     sport: "",
-    location: "",
     duration: "",
-    calories: 0,
-  });
+    location: "",
+  };
+  const [newActivity, setNewActivity] = useState<ActivityType>(fakeActivity);
   const [isDialogOpen, setIsDialogOpen] = useState(false); // Manage dialog open state
   const { userData } = useExercise();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewActivity({ ...newActivity, [name]: value });
+    setNewActivity({ ...newActivity!, [name]: value });
   };
 
   const client = axios.create({
@@ -39,10 +53,10 @@ const Journal = () => {
   const handleSubmit = () => {
     // Add the new activity with a unique id
     client
-      .post("session/", { ...newActivity, userId: userData.id })
+      .post("/session", { ...newActivity, userId: userData.id })
       .then((response) => {
-        setActivityHistory([...activityHistory, response.data]);
-        setNewActivity({ sport: "", location: "", duration: "", calories: 0 }); // Reset the form
+        setActivityHistory([...activityHistory!, response.data]);
+        setNewActivity(fakeActivity); // Reset the form
         setIsDialogOpen(false); // Close the dialog after successful submission
       });
   };
@@ -56,17 +70,14 @@ const Journal = () => {
 
   return (
     <div>
-      {/* Flex container to align title and button */}
-      <div className="flex items-center justify-between mx-2">
+      <div className="flex items-center justify-between mx-2 mt-4">
         <h2 className="text-xl font-bold mb-1 flex items-center">
           <Dumbbell className="mr-2" />
           最近活動
         </h2>
-
-        {/* Button aligned to the right */}
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="my-4">新增活動</Button>
+            <button className="button-class">新增活動</button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -78,7 +89,7 @@ const Journal = () => {
                 <Input
                   id="sport"
                   name="sport"
-                  value={newActivity.sport}
+                  value={newActivity?.sport}
                   onChange={handleInputChange}
                   required
                 />
@@ -88,7 +99,7 @@ const Journal = () => {
                 <Input
                   id="location"
                   name="location"
-                  value={newActivity.location}
+                  value={newActivity?.location}
                   onChange={handleInputChange}
                   required
                 />
@@ -98,7 +109,7 @@ const Journal = () => {
                 <Input
                   id="duration"
                   name="duration"
-                  value={newActivity.duration}
+                  value={newActivity?.duration}
                   onChange={handleInputChange}
                   required
                 />
@@ -109,7 +120,7 @@ const Journal = () => {
                   id="calories"
                   name="calories"
                   type="number"
-                  value={newActivity.calories}
+                  value={newActivity?.calories}
                   onChange={handleInputChange}
                   required
                 />

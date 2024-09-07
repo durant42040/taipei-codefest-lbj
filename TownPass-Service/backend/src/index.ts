@@ -82,7 +82,7 @@ app.get('/weight', async (req, res) => {
     const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.month);
     const weightinfo = weight.map((w) => {
         return {
-            month: months[w.month - 1],
+            month: months[w.month! - 1],
             weight: w.weight,
         };
     });
@@ -142,17 +142,17 @@ app.get("/today", async (req, res) => {
     let today = await db.select().from(sessions).where(eq(sessions.userId, user));
     
     today = today.filter((session) => {
-        return new Date(session.time).getDate() === new Date().getDate();
+        return new Date(session.time!).getDate() === new Date().getDate();
     });
     
     let duration = 0;
     today.forEach((session) => {
-        duration += parseInt(session.duration);
+        duration += parseInt(session.duration!);
     });
     
     let burned = 0;
     today.forEach((session) => {
-        burned += parseFloat(session.calories);
+        burned += parseFloat(session.calories!);
     });
     
     console.log("duration", duration);
