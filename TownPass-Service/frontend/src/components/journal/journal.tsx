@@ -8,18 +8,21 @@ const activityHistory = [
     sport: "籃球",
     location: "大安運動中心",
     time: "1 hour",
+    caloriesBurnt: 450,
   },
   {
     id: 2,
     sport: "跑步",
     location: "台北市立大學",
     time: "30 min",
+    caloriesBurnt: 200,
   },
   {
     id: 3,
     sport: "游泳",
     location: "台北市立大學",
     time: "1 hour",
+    caloriesBurnt: 600,
   },
 ];
 
@@ -32,9 +35,10 @@ const Journal = () => {
           <TableBody>
             {activityHistory.map((activity) => (
                 <ActivityCard
+                    id={activity.id}
                     sport={activity.sport}
                     time={activity.time}
-                    caloriesBurnt={450}
+                    caloriesBurnt={activity.caloriesBurnt}
                 />
             ))}
           </TableBody>
