@@ -17,7 +17,7 @@ import { useExercise } from "@/contexts/useExercise.tsx";
 import { Dumbbell } from "lucide-react";
 
 type ActivityType = {
-  id: number;
+  id?: number;
   userId: string;
   calories: string;
   sport: string;
@@ -28,7 +28,6 @@ type ActivityType = {
 const Journal = () => {
   const [activityHistory, setActivityHistory] = useState<ActivityType[]>([]);
   const fakeActivity = {
-    id: 0,
     userId: "",
     calories: "",
     sport: "",
@@ -108,7 +107,7 @@ const Journal = () => {
               </div>
               <div className="space-y-0.5">
                 <Label htmlFor="time" className="text-lg">
-                  時長
+                  時長 (hr)
                 </Label>
                 <Input
                   id="duration"
@@ -120,7 +119,7 @@ const Journal = () => {
               </div>
               <div className="space-y-0.5">
                 <Label htmlFor="caloriesBurnt" className="text-lg">
-                  燃燒熱量
+                  燃燒熱量 (kcal)
                 </Label>
                 <Input
                   id="calories"
@@ -146,7 +145,7 @@ const Journal = () => {
       </div>
       <div className="rounded-lg">
         <Table>
-          <TableBody>
+          <TableBody className="flex flex-col gap-2">
             {activityHistory.map((activity) => (
               <ActivityCard
                 key={activity.id}

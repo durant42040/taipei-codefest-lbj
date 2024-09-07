@@ -244,43 +244,37 @@ export const sports = [
   },
   {
     id: 3,
-    name: "跑步",
-    icon: "🏃",
-  },
-  {
-    id: 4,
     name: "游泳",
     icon: "🏊",
   },
   {
-    id: 5,
+    id: 4,
     name: "健身",
     icon: "🏋️",
   },
   {
-    id: 6,
+    id: 5,
     name: "羽球",
     icon: "🏸",
   },
   {
-    id: 7,
+    id: 6,
     name: "網球",
     icon: "🎾",
   },
   {
-    id: 8,
+    id: 7,
     name: "足球",
     icon: "⚽",
   },
   {
-    id: 9,
+    id: 8,
     name: "桌球",
     icon: "🏓",
   },
   {
-    id: 10,
+    id: 9,
     name: "自行車",
     icon: "🚲",
   },
-  ,
 ];

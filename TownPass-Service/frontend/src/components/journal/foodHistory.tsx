@@ -15,7 +15,7 @@ import { useExercise } from "@/contexts/useExercise";
 import axios from "axios";
 
 type FoodType = {
-  id: number;
+  id?: number;
   userId: string;
   calories: string;
   food: string;
@@ -23,14 +23,13 @@ type FoodType = {
   protein: string;
   carbo: string;
   fat: string;
-}
+};
 
 const FoodJournal = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { userData } = useExercise();
   const [foodHistory, setFoodHistory] = useState<FoodType[]>([]);
   const fakeFood = {
-    id: 0,
     userId: "",
     calories: "",
     food: "",
@@ -38,7 +37,7 @@ const FoodJournal = () => {
     protein: "",
     carbo: "",
     fat: "",
-  }
+  };
   const [newFood, setNewFood] = useState(fakeFood);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +82,9 @@ const FoodJournal = () => {
             </DialogHeader>
             <div className="flex flex-col gap-2">
               <div className="space-y-0.5">
-                <Label htmlFor="food"  className="text-lg">食物</Label>
+                <Label htmlFor="food" className="text-lg">
+                  食物
+                </Label>
                 <Input
                   id="food"
                   name="food"
@@ -93,7 +94,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="amount"  className="text-lg">數量</Label>
+                <Label htmlFor="amount" className="text-lg">
+                  數量
+                </Label>
                 <Input
                   id="amount"
                   name="amount"
@@ -103,7 +106,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="calorie"  className="text-lg">熱量</Label>
+                <Label htmlFor="calorie" className="text-lg">
+                  熱量 (kcal)
+                </Label>
                 <Input
                   id="calorie"
                   name="calorie"
@@ -116,7 +121,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="protein"  className="text-lg">蛋白質</Label>
+                <Label htmlFor="protein" className="text-lg">
+                  蛋白質 (g)
+                </Label>
                 <Input
                   id="protein"
                   name="protein"
@@ -129,7 +136,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="carbo"  className="text-lg">碳水</Label>
+                <Label htmlFor="carbo" className="text-lg">
+                  碳水 (g)
+                </Label>
                 <Input
                   id="carbo"
                   name="carbo"
@@ -142,7 +151,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="fat"  className="text-lg">脂肪</Label>
+                <Label htmlFor="fat" className="text-lg">
+                  脂肪 (g)
+                </Label>
                 <Input
                   id="fat"
                   name="fat"
@@ -167,8 +178,13 @@ const FoodJournal = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="rounded-lg">
-        {foodHistory.map((food) => (
+      {foodHistory.length > 0 && <div className="flex flex-row gap-2 ml-2">
+        <span className="text-red-500">紅色: 蛋白質</span> /
+        <span className="text-yellow-500">黃色: 脂肪</span> /
+        <span className="text-green-500">綠色: 碳水化合物</span>
+      </div>}
+      <div className="rounded-lg flex flex-col gap-2">
+        {foodHistory.slice(0, 3).map((food) => (
           <FoodActivityCard key={food.id} {...food} />
         ))}
       </div>

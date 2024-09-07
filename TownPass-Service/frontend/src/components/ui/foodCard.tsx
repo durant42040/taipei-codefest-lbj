@@ -3,7 +3,7 @@ import { Clock, Utensils, Flame, Info, Weight, Pizza } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 type FoodType = {
-  id: number;
+  id?: number;
   userId: string;
   calories: string;
   food: string;
@@ -11,7 +11,7 @@ type FoodType = {
   protein: string;
   carbo: string;
   fat: string;
-}
+};
 
 export function FoodActivityCard({
   food,
@@ -31,32 +31,22 @@ export function FoodActivityCard({
       <CardContent className="p-4">
         <div className="flex flex-row items-center gap-2.5 justify-between">
           <div className="flex items-center space-x-2">
-            <Pizza className="w-4 h-4 text-muted-foreground"/>
-            <span className="text-sm font-medium">{food}</span>
+            <Pizza className="w-4 h-4 text-muted-foreground" />
+            <span className="text-base font-medium">{food}</span>
           </div>
           <div className="flex items-center space-x-2">
-            <Weight className="w-4 h-4 text-muted-foreground"/>
-            <span className="text-sm font-medium">{amount}</span>
+            <Weight className="w-4 h-4 text-muted-foreground" />
+            <span className="text-base font-medium">{amount}</span>
           </div>
           <div className="flex items-center space-x-1 min-w-20">
-            <Flame className="w-4 h-4 text-muted-foreground"/>
-            <span className="text-sm font-medium">{calories} kcal</span>
+            <Flame className="w-4 h-4 text-muted-foreground" />
+            <span className="text-base font-medium">{calories} kcal</span>
           </div>
         </div>
-        <div className="flex space-x-4 min-w-64">
-            <span
-                title="紅色: 蛋白質 (克) | 黃色: 脂肪 (克) | 綠色: 碳水化合物 (克)"
-                className="flex items-center space-x-1 mt-2"
-            >
-              <span className="text-red-500 text-sm">{protein}</span> /{" "}
-              <span className="text-yellow-500 text-sm">{fat}</span> /{" "}
-              <span className="text-green-500 text-sm">{carbo}</span>
-              <Info className="inline-block ml-1.5 w-4 h-4" onClick={
-                (e) => {
-                  e.stopPropagation();
-                  alert("紅色: 蛋白質 (克) | 黃色: 脂肪 (克) | 綠色: 碳水化合物 (克)");
-              }}/>
-            </span>
+        <div className="flex flex-row gap-1 mt-1">
+          <span className="text-red-500 text-base">{protein}</span> /
+          <span className="text-yellow-500 text-base">{fat}</span> /
+          <span className="text-green-500 text-base">{carbo}</span>
         </div>
       </CardContent>
     </Card>
