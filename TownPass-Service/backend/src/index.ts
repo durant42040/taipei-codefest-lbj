@@ -44,7 +44,6 @@ app.get('/user', async (req, res) => {
     // @ts-ignore
     // console.log(req.query);
     const user = await db.select().from(users).where(eq(users.id, req.query.id));
-    console.log("userData", user);
     // console.log(user)
     res.json(user);
 });
