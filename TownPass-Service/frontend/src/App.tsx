@@ -8,7 +8,7 @@ import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
 import { Button } from "./components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-import Journal from "./components/journal";
+import Journal from "./components/journal/journal";
 
 function App() {
   const [count, setCount] = useState(0);
