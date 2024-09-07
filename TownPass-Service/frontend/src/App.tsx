@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import journalLogo from "./assets/notebook-text.svg"
+import journalLogo from "./assets/notebook-text.svg";
 import mapLogo from "./assets/map-pinned.svg";
 import "./App.css";
 import { useConnectionMessage } from "./composables/useConnectionMessage";
