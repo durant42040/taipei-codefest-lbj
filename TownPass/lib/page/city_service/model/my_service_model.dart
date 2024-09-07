@@ -42,7 +42,7 @@ extension MyServiceIdExt on MyServiceItemId {
           description: 'Lebron James',
           icon: Assets.svg.iconLebron.svg(),
           category: MyServiceCategory.cityService,
-          destinationUrl: Platform.isAndroid ? 'http://10.0.2.2:5173' : 'http://localhost:5173',
+          destinationUrl: Platform.isAndroid ? 'http://10.0.2.2:5173/journal' : 'http://localhost:5173/journal',
         ),
       MyServiceItemId.dedicatedLine => MyServiceItem(
           title: '1999',
