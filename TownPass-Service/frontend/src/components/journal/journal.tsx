@@ -51,7 +51,7 @@ const Journal = () => {
   });
 
   const handleSubmit = () => {
-    // Add the new activity with a unique id
+    // Validate types before submission
     client
       .post("/session", { ...newActivity, userId: userData.id })
       .then((response) => {

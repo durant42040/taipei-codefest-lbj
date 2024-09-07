@@ -30,7 +30,7 @@ export function ActivityCard({
           </div>
           <div className="flex items-center space-x-2">
             <Clock className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-medium">{time}</span>
+            <span className="text-sm font-medium">{time} mins</span>
           </div>
           {/*<div className="flex items-center space-x-2">*/}
           {/*  <MapPin className="w-4 h-4 text-muted-foreground" />*/}

@@ -39,7 +39,7 @@ export default function LoginPage() {
         description: "User registered successfully!",
       });
       console.log(response.data);
-      navigate("/");
+      navigate("/journal");
     } catch (error) {
       console.error("Error submitting user data", error);
       toast({
