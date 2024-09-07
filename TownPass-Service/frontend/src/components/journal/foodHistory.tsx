@@ -88,8 +88,9 @@ const FoodJournal = () => {
                 <Input
                   id="calorie"
                   name="calorie"
+                    type="number"
                   value={newFood.calories}
-                  onChange={handleInputChange}
+                  onChange={(e) => setNewFood({ ...newFood, calories: e.target.value })}
                   required
                 />
               </div>

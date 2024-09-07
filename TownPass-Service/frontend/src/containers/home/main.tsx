@@ -96,9 +96,9 @@ function Home() {
           <>
             <SummaryCircle
               title="今日總覽"
-              burned={600}
-              intake={1000}
-              time={105}
+              burned={today.burned}
+              intake={today.intake}
+              time={today.time}
             />
             <Weight />
             <Journal />

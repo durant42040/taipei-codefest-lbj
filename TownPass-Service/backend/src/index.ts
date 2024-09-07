@@ -157,7 +157,14 @@ app.get("/today", async (req, res) => {
     
     console.log("duration", duration);
     console.log("calories", burned);
-    const intake = 169;
+    let intake = 0;
+    let food = await db.select().from(foodLog).where(eq(foodLog.userId, user));
+    food = food.filter((f) => {
+        return new Date(f.time).getDate() === new Date().getDate();
+    });
+    food.forEach((f) => {
+        intake += parseFloat(f.calories);
+    } )
     
     res.json({
         burned,
