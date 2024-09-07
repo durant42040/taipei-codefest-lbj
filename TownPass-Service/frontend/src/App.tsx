@@ -4,7 +4,6 @@ import Home from "@/containers/home/main" // Import the main.tsx (journal stuff)
 import ExerciseDetails from "./containers/exerciseLog/main"
 import LoginPage from "@/containers/loginPage/main"
 
-
 function App() {
   return (
     <Router>

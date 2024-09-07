@@ -56,9 +56,10 @@ function Home() {
           <Weight />
           <Journal />
           {/* <SummaryCircle /> */}
-
         </TabsContent>
-        <TabsContent value="password">Maps</TabsContent>
+        <TabsContent value="password">
+          <ExercisePage />
+        </TabsContent>
       </Tabs>
     </div>
   );

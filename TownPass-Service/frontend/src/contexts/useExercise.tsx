@@ -16,7 +16,10 @@ type ExerciseProviderProps = {
 
 export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
   const [exercise, setExercise] = useState("");
-  const contextValue = { exercise, setExercise };
+  const contextValue = {
+    exercise,
+    setExercise,
+  };
 
   return (
     <ExerciseContext.Provider value={contextValue}>

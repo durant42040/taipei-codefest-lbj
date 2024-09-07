@@ -29,7 +29,7 @@ const activityHistoryInitial = [
     caloriesBurnt: 600,
   },
 ];
-
+ 
 const Journal = () => {
   const [activityHistory, setActivityHistory] = useState(activityHistoryInitial);
   const [newActivity, setNewActivity] = useState({
@@ -39,12 +39,12 @@ const Journal = () => {
     time: '',
     caloriesBurnt: 0,
   });
-
+ 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewActivity({ ...newActivity, [name]: value });
   };
-
+ 
   const handleSubmit = () => {
     // Add the new activity with a unique id
     setActivityHistory([
@@ -139,5 +139,6 @@ const Journal = () => {
     </div>
   );
 };
-
+ 
 export default Journal;
+ 
