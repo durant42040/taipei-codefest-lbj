@@ -2,6 +2,18 @@ import React from "react";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Utensils, Info, Flame } from "lucide-react";
 import { FoodActivityCard } from "@/components/ui/foodCard";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useEffect, useState } from "react";
 
 // Mock food history data
 const foodHistory = [
@@ -41,12 +53,28 @@ const foodHistory = [
 ];
 
 const FoodHistory = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // Manage dialog open state
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4 flex items-center">
-        <Utensils className="mr-2" />
-        食物攝取紀錄
-      </h2>
+    <div>
+      <div className="flex items-center justify-between mx-2">
+        <h2 className="text-xl font-bold mb-4 flex items-center">
+          <Utensils className="mr-2" />
+          食物攝取紀錄
+        </h2>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
+            <Button className="my-4">新增食物</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>新增食物</DialogTitle>
+            </DialogHeader>
+            <DialogFooter>
+              <Button type="submit">新增</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
       <div className="rounded-lg">
         {foodHistory.map((item) => (
           <FoodActivityCard key={item.id} {...item} />

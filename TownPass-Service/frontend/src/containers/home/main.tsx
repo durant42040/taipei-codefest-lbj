@@ -9,7 +9,8 @@ import FoodHistory from "@/components/journal/foodHistory";
 import { useExercise } from "@/contexts/useExercise.tsx";
 import { useNavigate } from "react-router-dom";
 import ExercisePage from "@/containers/exercise/main";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import SummaryCircle from "@/components/journal/summaryCircle";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -37,6 +38,11 @@ function Home() {
   });
   const location = useLocation();
   const navigate = useNavigate();
+  const [today, setToday] = useState({
+    burned: -1,
+    intake: -1,
+    time: -1,
+  });
 
   const getTabValueFromPath = (path: string) => {
     if (path === "/journal") return "journal";
@@ -56,6 +62,15 @@ function Home() {
       navigate(tab.path);
     }
   };
+
+  useEffect(() => {
+    if (userData.id && today.burned === -1) {
+      client.get(`/today?id=${userData.id}`).then((response) => {
+        const { data: todayData } = response;
+        setToday(todayData);
+      });
+    }
+  }, [client, userData]);
 
   return (
     <div>

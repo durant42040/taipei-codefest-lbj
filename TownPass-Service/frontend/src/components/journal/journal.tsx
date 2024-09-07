@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useExercise } from "@/contexts/useExercise.tsx";
+import { Dumbbell } from "lucide-react";
 
 const Journal = () => {
   const [activityHistory, setActivityHistory] = useState([]);
@@ -57,7 +58,10 @@ const Journal = () => {
     <div>
       {/* Flex container to align title and button */}
       <div className="flex items-center justify-between mx-2">
-        <h2 className="text-xl font-bold mt-2 mb-1">最近活動</h2>
+        <h2 className="text-xl font-bold mb-4 flex items-center">
+          <Dumbbell className="mr-2" />
+          最近活動
+        </h2>
 
         {/* Button aligned to the right */}
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

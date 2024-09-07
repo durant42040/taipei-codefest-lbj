@@ -7,6 +7,21 @@ import {eq} from "drizzle-orm";
 
 dotenv.config();
 
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+];
+
 const app = express();
 const port = process.env.PORT || 4000;
 
@@ -15,7 +30,7 @@ app.use(cors());
 
 app.post('/user', async (req, res) => {
     const user = req.body;
-    console.log(user);
+    // console.log(user);
     // @ts-ignore
     const isUserExist = await db.select().from(users).where(eq(users.id, user.id));
     if (isUserExist.length === 0) {
@@ -38,7 +53,7 @@ app.get('/session', async (req, res) => {
     console.log("user", req.query);
     // @ts-ignore
     const userSessions = await db.select().from(sessions).where(eq(sessions.userId, user));
-    console.log("sessions", userSessions);
+    // console.log("sessions", userSessions);
     res.json(userSessions);
 });
 
@@ -61,19 +76,47 @@ app.post('/session', async (req, res) => {
 });
 
 app.get('/weight', async (req, res) => {
-    const user = req.query.user;
-    // @ts-ignore
-    const weights = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.time);
+    const user = req.query.id;
     
-    res.json(weights);
+    // @ts-ignore
+    const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.month);
+    const weightinfo = weight.map((w) => {
+        return {
+            month: months[w.month - 1],
+            weight: w.weight,
+        };
+    });
+    console.log("weightinfo", weightinfo);
+    
+    res.json(weightinfo);
 });
 
 app.post('/weight', async (req, res) => {
-    const weight = req.body;
+    let weight = req.body;
     // @ts-ignore
-    const new_weight = await db.insert(weights).values(weight).returning();
-    
-    res.json(new_weight[0]);
+    const month = new Date().getMonth() + 1;
+    weight.month = month;
+    // if month exist, update
+    // @ts-ignore
+    const isExist = await db.select().from(weights).where(eq(weights.userId, weight.userId)).where(eq(weights.month, month));
+    if (isExist.length > 0) {
+        // @ts-ignore
+         await db.update(weights).set(weight).where(eq(weights.userId, weight.userId)).where(eq(weights.month, month)).returning();
+    } else {
+        // @ts-ignore
+        await db.insert(weights).values(weight).returning();
+    }
+    weight.month = months[month - 1];
+    console.log("weight", weight);
+    res.json(weight);
+});
+
+app.get('/weight', async (req, res) => {
+    console.log("ok");
+    const user = req.query.id;
+    // @ts-ignore
+    const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.month);
+    res.json(weight);
 });
 
 app.get('/food', async (req, res) => {
@@ -92,8 +135,36 @@ app.post('/food', async (req, res) => {
     res.json(new_food[0]);
 });
 
-
-
+app.get("/today", async (req, res) => {
+    const user = req.query.id;
+    console.log("userid", user);
+    // @ts-ignore
+    let today = await db.select().from(sessions).where(eq(sessions.userId, user));
+    
+    today = today.filter((session) => {
+        return new Date(session.time).getDate() === new Date().getDate();
+    });
+    
+    let duration = 0;
+    today.forEach((session) => {
+        duration += parseInt(session.duration);
+    });
+    
+    let burned = 0;
+    today.forEach((session) => {
+        burned += parseFloat(session.calories);
+    });
+    
+    console.log("duration", duration);
+    console.log("calories", burned);
+    const intake = 169;
+    
+    res.json({
+        burned,
+        intake,
+        time: duration,
+    });
+});
 
 
 app.listen(port, () => {

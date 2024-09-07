@@ -26,7 +26,7 @@ export const weights = pgTable('weights', {
     id: serial('id').primaryKey(),
     userId: varchar('user_id').references(() => users.id), // Foreign key to users table
     weight: decimal('weight', {precision: 5, scale: 2}), // User's weight (e.g., 75.50 kg)
-    time: timestamp('time').defaultNow(),
+    month: integer('month'),
 });
 
 export const foodLog = pgTable('food_log', {

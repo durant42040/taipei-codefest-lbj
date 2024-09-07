@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TrendingUp } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
@@ -26,17 +26,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import axios from "axios";
+import { useExercise } from "@/contexts/useExercise.tsx";
 
 export const description = "A linear line chart";
-
-const chartData = [
-  { month: "January", weight: 60 },
-  { month: "February", weight: 70 },
-  { month: "March", weight: 80 },
-  { month: "April", weight: 90 },
-  { month: "May", weight: 100 },
-  { month: "June", weight: 120 },
-];
 
 const chartConfig = {
   weight: {
@@ -48,21 +41,50 @@ const chartConfig = {
 export default function Weight() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newWeight, setNewWeight] = useState("");
+  const [weights, setWeights] = useState([]);
+  const { userData } = useExercise();
 
   const handleWeightChange = (event) => {
     setNewWeight(event.target.value);
   };
 
+  const client = axios.create({
+    baseURL: "http://localhost:4000",
+  });
+
   const handleSubmitWeight = () => {
     console.log("New weight submitted:", newWeight); // Replace with actual update logic
     setIsDialogOpen(false);
-    setNewWeight("");
+    client
+      .post("weight/", { weight: newWeight, userId: userData.id })
+      .then((response) => {
+        setNewWeight("");
+
+        // alert field of weights
+
+        setWeights([
+          ...weights,
+          {
+            weight: newWeight,
+            month: response.data.month,
+          },
+        ]);
+      });
   };
+
+  useEffect(() => {
+    if (userData.id && weights.length === 0) {
+      client.get(`/weight?id=${userData.id}`).then((response) => {
+        const { data: weights } = response;
+        setWeights(weights);
+      });
+    }
+  }, [client, userData]);
 
   return (
     <>
       <div className="flex justify-between items-center mx-2">
-        <h2 className="text-xl font-bold mt-2 mb-1">體重紀錄</h2>
+        <h2 className="text-xl font-bold mt-2 mb-3">體重紀錄</h2>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button>變更體重</Button>
@@ -89,13 +111,13 @@ export default function Weight() {
       </div>
       <Card>
         <CardHeader>
-          <CardDescription>1月 - 6月 2024</CardDescription>
+          <CardDescription>6月 - 9月 2024</CardDescription>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
             <LineChart
               accessibilityLayer
-              data={chartData}
+              data={weights}
               margin={{
                 left: 12,
                 right: 12,
