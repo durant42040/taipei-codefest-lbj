@@ -52,10 +52,11 @@ function Home() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="account">
+          <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
           <Weight />
           <Journal />
           {/* <SummaryCircle /> */}
-          <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
+
         </TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
