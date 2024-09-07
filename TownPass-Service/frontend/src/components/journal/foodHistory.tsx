@@ -30,7 +30,6 @@ const FoodJournal = () => {
   const { userData } = useExercise();
   const [foodHistory, setFoodHistory] = useState<FoodType[]>([]);
   const fakeFood = {
-    id: 0,
     userId: "",
     calories: "",
     food: "",
@@ -54,7 +53,7 @@ const FoodJournal = () => {
     client
       .post("/food", { ...newFood, userId: userData.id })
       .then((response) => {
-        setFoodHistory([...foodHistory, response.data]);
+        setFoodHistory([response.data, ...foodHistory]);
         setNewFood(fakeFood);
         setIsDialogOpen(false);
       });

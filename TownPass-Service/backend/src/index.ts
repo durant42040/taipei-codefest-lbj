@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import { db } from './db/index.js';
 import {foodLog, sessions, users, weights,} from './db/schema.js';
-import {eq} from "drizzle-orm";
+import {desc, eq} from "drizzle-orm";
 
 dotenv.config();
 
@@ -54,7 +54,7 @@ app.get('/session', async (req, res) => {
     const user = req.query.user;
     console.log("user", req.query);
     // @ts-ignore
-    const userSessions = await db.select().from(sessions).where(eq(sessions.userId, user));
+    const userSessions = await db.select().from(sessions).where(eq(sessions.userId, user)).orderBy(sessions.time);
     // console.log("sessions", userSessions);
     res.json(userSessions);
 });
@@ -124,7 +124,7 @@ app.get('/weight', async (req, res) => {
 app.get('/food', async (req, res) => {
     const user = req.query.user;
     // @ts-ignore
-    const food = await db.select().from(foodLog).where(eq(foodLog.userId, user)).orderBy(foodLog.time);
+    const food = await db.select().from(foodLog).where(eq(foodLog.userId, user)).orderBy(desc(foodLog.time));
     
     res.json(food);
 });

@@ -28,7 +28,6 @@ type ActivityType = {
 const Journal = () => {
   const [activityHistory, setActivityHistory] = useState<ActivityType[]>([]);
   const fakeActivity = {
-    id: 0,
     userId: "",
     calories: "",
     sport: "",
@@ -53,7 +52,7 @@ const Journal = () => {
     client
       .post("/session", { ...newActivity, userId: userData.id })
       .then((response) => {
-        setActivityHistory([...activityHistory!, response.data]);
+        setActivityHistory([response.data, ...activityHistory!]);
         setNewActivity(fakeActivity); // Reset the form
         setIsDialogOpen(false); // Close the dialog after successful submission
       });
