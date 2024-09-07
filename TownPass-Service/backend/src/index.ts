@@ -42,16 +42,22 @@ app.get('/session', async (req, res) => {
     res.json(userSessions);
 });
 
+app.get('/onesession', async (req, res) => {
+    const id = req.query.id;
+    // @ts-ignore
+    const session = await db.select().from(sessions).where(eq(sessions.id, id));
+    res.json(session);
+});
+
 app.post('/session', async (req, res) => {
     const session = req.body;
     // add time field
-    const date = new Date();
-    const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    session.time = time;
-    console.log('session', session);
+    // current year month day
     // @ts-ignore
-    await db.insert(sessions).values(session).execute();
-    res.json(session);
+    const new_session = await db.insert(sessions).values(session).returning();
+    
+    console.log("new_session", new_session);
+    res.json(new_session[0]);
 });
 
 app.get('/weight', async (req, res) => {

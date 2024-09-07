@@ -124,7 +124,7 @@ const Journal = () => {
                                 key={activity.id}
                                 id={activity.id}
                                 sport={activity.sport}
-                                time={activity.time}
+                                time={activity.duration}
                                 caloriesBurnt={activity.calories}
                             />
                         ))}
