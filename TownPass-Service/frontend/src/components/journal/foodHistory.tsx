@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Utensils, Info, Flame } from "lucide-react";
 import { FoodActivityCard } from "@/components/ui/foodCard";
@@ -49,10 +49,7 @@ const FoodHistory = () => {
       </h2>
       <div className="rounded-lg">
         {foodHistory.map((item) => (
-          <FoodActivityCard
-            key={item.id}
-            {...item}
-          />
+          <FoodActivityCard key={item.id} {...item} />
         ))}
       </div>
     </div>

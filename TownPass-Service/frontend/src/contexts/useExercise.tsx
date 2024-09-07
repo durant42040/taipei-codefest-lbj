@@ -12,22 +12,22 @@ export type ExerciseContextType = {
   setIsVisible: (isVisible: boolean) => void;
   setSelectedCourt: (selectedCourt: CourtType) => void;
   setIsCourtInfoVisible: (isCourtInfoVisible: boolean) => void;
-    userData: {
-      id: string;
-      age: string;
-      name: string;
-      weight: string;
-      height: string;
-      gender: string;
-    };
-    setUserData: (userData: {
-      id: string;
-      name: string;
-      age: string;
-      weight: string;
-      height: string;
-      gender: string;
-    }) => void;
+  userData: {
+    id: string;
+    age: string;
+    name: string;
+    weight: string;
+    height: string;
+    gender: string;
+  };
+  setUserData: (userData: {
+    id: string;
+    name: string;
+    age: string;
+    weight: string;
+    height: string;
+    gender: string;
+  }) => void;
 };
 
 export const ExerciseContext = createContext<ExerciseContextType>({
@@ -41,15 +41,15 @@ export const ExerciseContext = createContext<ExerciseContextType>({
   setIsVisible: () => {},
   setSelectedCourt: () => {},
   setIsCourtInfoVisible: () => {},
-    userData: {
-        id: '',
-        age: '',
-        weight: '',
-        height: '',
-        name: '',
-       gender: '',
-    },
-    setUserData: () => {},
+  userData: {
+    id: "",
+    age: "",
+    weight: "",
+    height: "",
+    name: "",
+    gender: "",
+  },
+  setUserData: () => {},
 });
 
 type ExerciseProviderProps = {
@@ -62,6 +62,14 @@ export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isCourtInfoVisible, setIsCourtInfoVisible] = useState(false);
+  const [userData, setUserData] = useState({
+    id: "",
+    age: "",
+    weight: "",
+    name: "",
+    height: "",
+    gender: "",
+  });
 
   const contextValue = {
     exercise,
@@ -69,23 +77,14 @@ export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
     isExpanded,
     isVisible,
     isCourtInfoVisible,
+    userData,
     setExercise,
     setIsExpanded,
     setIsVisible,
     setSelectedCourt,
     setIsCourtInfoVisible,
+    setUserData,
   };
-
-  const [userData, setUserData] = useState({
-    id: '',
-    age: '',
-    weight: '',
-    name: '',
-    height: '',
-    gender: '',
-  })
-  
-  const contextValue = { exercise, setExercise, userData, setUserData };
 
   return (
     <ExerciseContext.Provider value={contextValue}>

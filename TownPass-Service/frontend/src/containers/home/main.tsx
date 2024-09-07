@@ -7,26 +7,25 @@ import Weight from "@/components/weight";
 import Journal from "@/components/journal/journal";
 
 import FoodHistory from "@/components/journal/foodHistory";
-import {useExercise} from "@/contexts/useExercise.tsx";
-import {useNavigate} from "react-router-dom";
+import { useExercise } from "@/contexts/useExercise.tsx";
+import { useNavigate } from "react-router-dom";
 import ExercisePage from "@/containers/exercise/main";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import SummaryCircle from "@/components/journal/summaryCircle";
 // import ToggleList from "@/components/exercise/ToggleList";
 
 function Home() {
-  const {userData} = useExercise();
+  const { userData } = useExercise();
   const client = axios.create({
     baseURL: "http://localhost:4000",
   });
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    if(userData.name !== "" && userData.age === ""){
+    if (userData.name !== "" && userData.age === "") {
       navigate("/LoginPage");
     }
   }, [navigate, userData]);
-  
 
   // useEffect(() => {
   //   client.get("/api/monster").then((response) => {
@@ -57,8 +56,13 @@ function Home() {
           <Weight />
           <Journal />
           {/* <SummaryCircle /> */}
-          <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
-          <FoodHistory  />
+          <SummaryCircle
+            title="今日總覽"
+            burned={600}
+            intake={1000}
+            time={105}
+          />
+          <FoodHistory />
         </TabsContent>
         <TabsContent value="password">
           <ExercisePage />
