@@ -19,26 +19,22 @@ export function ActivityCard({
 
   return (
     <Card
-      className="w-full max-w-3xl hover:bg-accent transition-colors my-1"
+      className="w-full hover:bg-accent transition-colors my-1"
       onClick={() => navigate(`/exerciseDetails/${id}`)}
     >
       <CardContent className="p-4">
-        <div className="grid grid-cols-3 gap-3 items-center">
+        <div className="flex flex-row justify-around items-center">
           <div className="flex items-center space-x-2">
             <Activity className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-medium">{sport}</span>
+            <span className="text-base font-medium">{sport}</span>
           </div>
           <div className="flex items-center space-x-2">
             <Clock className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-medium">{time} mins</span>
+            <span className="text-base font-medium">{time} hr</span>
           </div>
-          {/*<div className="flex items-center space-x-2">*/}
-          {/*  <MapPin className="w-4 h-4 text-muted-foreground" />*/}
-          {/*  <span className="text-sm font-medium truncate" title={location}>{location}</span>*/}
-          {/*</div>*/}
           <div className="flex items-center space-x-2">
             <Flame className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-medium">{caloriesBurnt} cal</span>
+            <span className="text-base font-medium">{caloriesBurnt} cal</span>
           </div>
         </div>
       </CardContent>

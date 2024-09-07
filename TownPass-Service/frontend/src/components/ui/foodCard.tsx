@@ -2,27 +2,25 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Utensils, Flame, Info, Weight, Pizza } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-interface FoodActivityProps {
+type FoodType = {
   id: number;
-  meal: string;
+  userId: string;
+  calories: string;
   food: string;
   amount: string;
-  calories: number;
-  protein: number;
-  fat: number;
-  carbo: number;
+  protein: string;
+  carbo: string;
+  fat: string;
 }
 
 export function FoodActivityCard({
-  id,
-  meal,
   food,
   amount,
   calories,
   protein,
   fat,
   carbo,
-}: FoodActivityProps) {
+}: FoodType) {
   const navigate = useNavigate();
 
   return (
@@ -31,7 +29,7 @@ export function FoodActivityCard({
       // onClick={() => navigate(`/foodDetails/${id}`)}
     >
       <CardContent className="p-4">
-        <div className="grid grid-cols-3 gap-3 items-center">
+        <div className="flex flex-row items-center gap-2.5 justify-between">
           <div className="flex items-center space-x-2">
             <Pizza className="w-4 h-4 text-muted-foreground" />
             <span className="text-sm font-medium">{food}</span>
@@ -40,7 +38,7 @@ export function FoodActivityCard({
             <Weight className="w-4 h-4 text-muted-foreground" />
             <span className="text-sm font-medium">{amount}</span>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 min-w-20">
             <Flame className="w-4 h-4 text-muted-foreground" />
             <span className="text-sm font-medium">{calories} cal</span>
           </div>
@@ -49,10 +47,10 @@ export function FoodActivityCard({
               title="紅色: 蛋白質 (克) | 黃色: 脂肪 (克) | 綠色: 碳水化合物 (克)"
               className="cursor-help"
             >
-              <span className="text-red-500">{protein}</span> /{" "}
-              <span className="text-yellow-500">{fat}</span> /{" "}
-              <span className="text-green-500">{carbo}</span>
-              <Info className="inline-block ml-1 w-4 h-4" />
+              <span className="text-red-500 text-sm">{protein}</span> /{" "}
+              <span className="text-yellow-500 text-sm">{fat}</span> /{" "}
+              <span className="text-green-500 text-sm">{carbo}</span>
+              <Info className="inline-block ml-1.5 w-4 h-4" />
             </span>
           </div>
         </div>
