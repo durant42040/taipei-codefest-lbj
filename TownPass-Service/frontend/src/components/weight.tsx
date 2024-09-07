@@ -34,10 +34,10 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function Weight() {
+export default function Weight() {
   return (
     <>
-      <h2 className="text-xl font-bold my-2 text-left mx-2">體重紀錄</h2>
+      <h2 className="text-xl font-bold mt-2 mb-1 text-left mx-2">體重紀錄</h2>
       <Card>
         <CardHeader>
           <CardTitle>Line Chart - Linear</CardTitle>

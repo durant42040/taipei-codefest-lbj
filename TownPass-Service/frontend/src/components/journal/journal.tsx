@@ -24,7 +24,7 @@ const activityHistory = [
 const Journal = () => {
   return (
     <div>
-      <h2 className="text-xl font-bold my-2 text-left mx-2">最近活動</h2>
+      <h2 className="text-xl font-bold mt-2 mb-1 text-left mx-2">最近活動</h2>
       <div className="rounded-lg border-2">
         <Table>
           <TableBody>
