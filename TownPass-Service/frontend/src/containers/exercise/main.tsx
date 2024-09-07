@@ -1,7 +1,11 @@
-import React from "react";
+import ToggleList from "@/components/exercise/ToggleList";
 
 function main() {
-  return <div></div>;
+  return (
+  <div>
+    <ToggleList />
+  </div>
+  );
 }
 
 export default main;

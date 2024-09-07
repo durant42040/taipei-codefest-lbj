@@ -6,8 +6,9 @@ import "./App.css";
 import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-import {Weight} from "./components/weight"
+import { Weight } from "./components/weight";
 import Journal from "./components/journal/journal";
+import Excercise from "./containers/exercise/main";
 
 function App() {
   const client = axios.create({
@@ -53,7 +54,9 @@ function App() {
           <Weight />
           <Journal />
         </TabsContent>
-        <TabsContent value="password">Maps</TabsContent>
+        <TabsContent value="password">
+          <Excercise />
+        </TabsContent>
       </Tabs>
     </div>
   );
