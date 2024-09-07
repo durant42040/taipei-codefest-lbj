@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
- 
+
 const activityHistoryInitial = [
   {
     id: 1,
@@ -53,13 +53,13 @@ const Journal = () => {
     ]);
     setNewActivity({ id: 0, sport: '', location: '', time: '', caloriesBurnt: 0 }); // Reset the form
   };
- 
+
   return (
     <div>
       {/* Flex container to align title and button */}
       <div className="flex items-center justify-between mx-2">
         <h2 className="text-xl font-bold mt-2 mb-1">最近活動</h2>
- 
+
         {/* Button aligned to the right */}
         <Dialog>
           <DialogTrigger asChild>
@@ -120,7 +120,7 @@ const Journal = () => {
           </DialogContent>
         </Dialog>
       </div>
- 
+
       <div className="rounded-lg">
         <Table>
           <TableBody>

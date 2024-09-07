@@ -9,12 +9,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Weight from "@/components/weight";
 import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
-import Activity from "@/components/journal/summaryCircle";
-import { useNavigate } from "react-router-dom";
-import ExercisePage from "@/containers/exercise/main";
+import SummaryCircle from "@/components/journal/summaryCircle";
 
 function Home() {
-  const navigate = useNavigate();
   const client = axios.create({
     baseURL: "http://localhost:4000",
   });
@@ -38,7 +35,7 @@ function Home() {
   return (
     <div>
       <Tabs defaultValue="account" className="text-black bg-white rounded-lg">
-        <TabsList className="grid grid-cols-2 rounded-lg border mb-3">
+        <TabsList className="grid grid-cols-2 rounded-lg mb-3">
           <TabsTrigger
             value="account"
             className="flex items-center cursor-pointer rounded-tl-lg rounded-r-none font-semibold text-xl"
@@ -55,9 +52,10 @@ function Home() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="account">
+          <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
           <Weight />
           <Journal />
-          <Activity burned={600} intake={2000} time={120} />
+          {/* <SummaryCircle /> */}
         </TabsContent>
         <TabsContent value="password">
           <ExercisePage />
