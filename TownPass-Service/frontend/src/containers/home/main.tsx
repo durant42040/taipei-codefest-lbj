@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Weight from "@/components/weight";
 import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
-import Today from "@/components/journal/today.tsx";
+import SummaryCircle from "@/components/journal/summaryCircle";
 
 function Home() {
   const client = axios.create({
@@ -54,7 +54,8 @@ function Home() {
         <TabsContent value="account">
           <Weight />
           <Journal />
-          <Today burned={600} intake={1000} time={105}/>
+          {/* <SummaryCircle /> */}
+          <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
         </TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>

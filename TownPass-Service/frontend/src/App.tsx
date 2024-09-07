@@ -13,7 +13,7 @@ function App() {
 
           <Route path="/" element={<Home />} /> {/* Home page (Journal stuff from main.tsx) */}
           <Route path="/weight" element={<WeightTrackingPage />} /> {/* Routing to weight.tsx */}
-          <Route path="/exerciseDetails" element={<ExerciseDetails />} />
+          <Route path="/exerciseDetails/:id" element={<ExerciseDetails />} />
 
           {/* Add other routes as needed */}
         </Routes>
