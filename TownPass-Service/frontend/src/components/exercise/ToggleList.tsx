@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,8 +28,8 @@ function ToggleList() {
     setShowBicycleKML,
     setFocusSingle,
   } = useExercise();
-  const [isRecommendationModalOpen, setIsRecommendationModalOpen] = useState(false);
-
+  const [isRecommendationModalOpen, setIsRecommendationModalOpen] =
+    useState(false);
 
   const handleSelectExercise = (sport: string) => {
     setIsVisible(false);
@@ -56,7 +56,6 @@ function ToggleList() {
   };
 
   const handleSportRecommendation = (sportName: string) => {
-    
     const recommendedSport = sports.find(sport => sport.name == sportName);
     if (recommendedSport) {
       handleSelectExercise(recommendedSport.icon + " " + recommendedSport.name);
@@ -79,16 +78,16 @@ function ToggleList() {
                   key={index}
                   className="text-xl hover:bg-gray-100 cursor-pointer"
                   onClick={() =>
-                    handleSelectExercise(sport.icon + " " + sport.name)
+                    handleSelectExercise(sport?.icon + " " + sport?.name)
                   }
                 >
-                  {sport.icon} {sport.name}
+                  {sport?.icon} {sport?.name}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
           <button
-            className="w-3/12 bg-gray-100 text-black p-1 text-base font-bold"
+            className="w-3/12 bg-[#5ab4c5] text-white p-1 text-base font-semibold"
             onClick={handleRecommendationClick}
           >
             建議
@@ -156,13 +155,18 @@ function ToggleList() {
       {isRecommendationModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-4 rounded-lg max-w-md w-full">
-            <ExerciseRecommendationAssistant onSportClick={handleSportRecommendation} />
+            <ExerciseRecommendationAssistant
+              onSportClick={handleSportRecommendation}
+            />
             <button
               className="mt-4 w-full bg-gray-200 text-black p-2 rounded"
               onClick={() => setIsRecommendationModalOpen(false)}
             >
               關閉
-              </button></div></div>)}
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

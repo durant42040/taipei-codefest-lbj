@@ -67,7 +67,7 @@ const SummaryCircle = ({
               <div className="flex items-baseline gap-1 text-xl font-bold tabular-nums leading-none">
                 {time}
                 <span className="text-sm font-normal text-muted-foreground">
-                  min
+                  hr
                 </span>
               </div>
             </div>

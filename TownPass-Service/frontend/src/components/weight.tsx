@@ -114,7 +114,7 @@ export default function Weight() {
             </DialogHeader>
             <div className="flex flex-col gap-2">
               <Label htmlFor="newWeight" className="text-lg">
-                新的體重
+                新的體重 (kg)
               </Label>
               <Input
                 id="newWeight"
