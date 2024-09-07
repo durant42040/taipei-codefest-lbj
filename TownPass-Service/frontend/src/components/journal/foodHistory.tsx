@@ -67,7 +67,7 @@ const FoodJournal = () => {
 
   return (
     <div className="mb-8 mt-4">
-      <div className="flex items-center justify-between  mx-2 mt-4 mb-2">
+      <div className="flex items-center justify-between mx-2 mt-4 mb-2">
         <h2 className="flex flex-row text-xl ml-1 font-bold mt-3 mb-3 text-left">
           <Utensils className="mr-2" />
           食物攝取紀錄

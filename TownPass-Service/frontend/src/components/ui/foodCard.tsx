@@ -46,7 +46,7 @@ export function FoodActivityCard({
         <div className="flex flex-row gap-1 mt-1">
           <span className="text-red-500 text-base">{protein}</span> /
           <span className="text-yellow-500 text-base">{fat}</span> /
-          <span className="text-green-500 text-base">{carbo}</span>
+          <span className="text-green-500 text-base">{carbo}</span> (g)
         </div>
       </CardContent>
     </Card>

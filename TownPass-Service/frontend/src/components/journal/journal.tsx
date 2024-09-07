@@ -145,7 +145,7 @@ const Journal = () => {
       </div>
       <div className="rounded-lg">
         <Table>
-          <TableBody className="flex flex-col gap-2">
+          <TableBody className="flex flex-col gap-1">
             {activityHistory.slice(0, 3).map((activity) => (
               <ActivityCard
                 key={activity.id}
