@@ -38,8 +38,8 @@ extension MyServiceIdExt on MyServiceItemId {
   MyServiceItem get item {
     return switch (this) {
       MyServiceItemId.dedicatedLine => MyServiceItem(
-          title: 'lbj',
-          description: 'Lebron James',
+          title: '健身通',
+          description: '動起來動起來',
           icon: Assets.svg.iconLebron.svg(),
           category: MyServiceCategory.cityService,
           destinationUrl: Platform.isAndroid ? 'http://192.168.192.1:5173/' : 'http://localhost:5173/journal',

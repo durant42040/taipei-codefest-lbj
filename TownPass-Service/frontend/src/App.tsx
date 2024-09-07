@@ -48,6 +48,7 @@ function App(): React.ReactNode {
   const handleUserInfo = (event: { data: string }) => {
     const result: { name: string; data: any } = JSON.parse(event.data);
     if (userData.name === "") {
+      // alert(result.data.id);
       client.get(`/user?id=${result.data.id}`).then((response) => {
         if (response.data.length) {
           setUserData(response.data[0]);
@@ -66,7 +67,7 @@ function App(): React.ReactNode {
   useEffect(() => {
     useConnectionMessage("userinfo", null);
     useHandleConnectionData(handleUserInfo);
-  }, []);
+  }, [handleUserInfo]);
 
   // useEffect(() => {
   //   if (userData.id !== "" && userData.age === "") {

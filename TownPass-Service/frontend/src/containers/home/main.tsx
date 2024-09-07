@@ -50,11 +50,12 @@ function Home() {
     return "journal"; // default tab
   };
 
-  useEffect(() => {
-    if (userData.name !== "" && userData.age === "") {
-      navigate("/LoginPage");
-    }
-  }, [navigate, userData]);
+  // useEffect(() => {
+  //   // alert(userData.name);
+  //   if (userData.name !== "" && userData.age === "") {
+  //     navigate("/LoginPage");
+  //   }
+  // }, [navigate, userData]);
 
   const handleTabChange = (value: string) => {
     const tab = tabs.find((tab) => tab.value === value);

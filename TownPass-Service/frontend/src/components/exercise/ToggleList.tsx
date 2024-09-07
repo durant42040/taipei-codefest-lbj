@@ -46,7 +46,7 @@ function ToggleList() {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col mb-2">
         <div className="w-full flex flex-row gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger className="w-full flex flex-row justify-between text-xl items-center">
