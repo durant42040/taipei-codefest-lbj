@@ -16,7 +16,7 @@ const ExerciseDetails = () => {
 
   const [session, setSession] = useState<Session | null>(null);
   const client = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_BASE_URL,
   });
   useEffect(() => {
     const fetchSession = async () => {

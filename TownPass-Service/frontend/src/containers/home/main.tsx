@@ -34,7 +34,7 @@ const tabs = [
 function Home() {
   const { userData } = useExercise();
   const client = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_BASE_URL,
   });
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,7 +51,6 @@ function Home() {
   };
 
   useEffect(() => {
-    // alert(userData.name);
     if (userData.name !== "" && userData.age === "") {
       navigate("/LoginPage");
     }
