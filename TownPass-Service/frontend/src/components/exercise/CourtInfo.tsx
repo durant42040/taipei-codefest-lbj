@@ -16,7 +16,9 @@ function CourtInfo() {
     <div className="flex flex-col gap-2 mt-2 ml-2">
       <div className="flex flex-row">
         <p className="font-semibold text-zinc-950 text-4xl mt-2">
-          {selectedCourt?.name.length! > 11 ? selectedCourt?.name.slice(0, 10) + "..." : selectedCourt?.name}
+          {selectedCourt?.name.length! > 11
+            ? selectedCourt?.name.slice(0, 10) + "..."
+            : selectedCourt?.name}
         </p>
       </div>
       <div>
@@ -35,7 +37,11 @@ function CourtInfo() {
       </div>
       <div className="flex flex-row items-center gap-0.5">
         <MapPin size={20} />
-        <p className="text-xl font-semibold">{selectedCourt?.location.length! > 18 ? selectedCourt?.location.slice(0, 17) + "..." : selectedCourt?.location}</p>
+        <p className="text-xl font-semibold">
+          {selectedCourt?.location.length! > 18
+            ? selectedCourt?.location.slice(0, 17) + "..."
+            : selectedCourt?.location}
+        </p>
       </div>
       <div className="flex flex-row gap-3">
         <p className="text-lg font-semibold">距離: 0.97公里</p>

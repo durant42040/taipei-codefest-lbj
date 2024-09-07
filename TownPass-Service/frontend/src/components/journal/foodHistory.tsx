@@ -10,7 +10,6 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "@/components/ui/label";
-import { useFood } from "@/contexts/useFood";
 import { FoodActivityCard } from "@/components/ui/foodCard";
 import { Utensils } from "lucide-react";
 import { useExercise } from "@/contexts/useExercise";
@@ -43,7 +42,7 @@ const FoodJournal = () => {
   const handleSubmit = () => {
     // Add the new activity with a unique id
     client
-      .post("food/", { ...newFood, userId: userData.id })
+      .post("/food", { ...newFood, userId: userData.id })
       .then((response) => {
         setFoodHistory([...foodHistory, response.data]);
         setNewFood({ food: "", calories: 0 }); // Reset the form
@@ -58,7 +57,7 @@ const FoodJournal = () => {
   }, [userData]);
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 mt-4">
       <div className="flex items-center justify-between mx-2">
         <h2 className="text-xl font-bold flex items-center">
           <Utensils className="mr-2" />
@@ -66,7 +65,7 @@ const FoodJournal = () => {
         </h2>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="my-4">新增食物</Button>
+            <button className="button-class">新增食物</button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>

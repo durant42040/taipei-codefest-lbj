@@ -94,8 +94,8 @@ export default function Weight() {
 
   return (
     <>
-      <div className="flex justify-between items-center mx-2">
-        <div className="flex">
+      <div className="flex justify-between items-center m-2">
+        <div className="flex flex-row">
           <img src={scale} />
           <h2 className="text-xl ml-1 font-bold mt-3 mb-3 text-left">
             體重紀錄
@@ -103,14 +103,16 @@ export default function Weight() {
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button>變更體重</Button>
+            <button className="button-class">變更體重</button>
           </DialogTrigger>
           <DialogContent className="w-10/12 rounded-xl">
             <DialogHeader>
               <DialogTitle className="text-2xl">更新體重</DialogTitle>
             </DialogHeader>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="newWeight" className="text-lg">新的體重</Label>
+              <Label htmlFor="newWeight" className="text-lg">
+                新的體重
+              </Label>
               <Input
                 id="newWeight"
                 type="number"
@@ -120,7 +122,12 @@ export default function Weight() {
               />
             </div>
             <DialogFooter className="flex flex-row-reverse mt-1">
-              <button onClick={handleSubmitWeight} className="w-20 text-[#5ab4c5] border-2 border-[#5ab4c5] bg-transparent font-semibold">提交</button>
+              <button
+                onClick={handleSubmitWeight}
+                className="w-20 text-[#5ab4c5] border-2 border-[#5ab4c5] bg-transparent font-semibold"
+              >
+                提交
+              </button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
