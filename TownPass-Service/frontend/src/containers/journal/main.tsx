@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import journalLogo from "@/assets/notebook-text.svg";
 import mapLogo from "@/assets/map-pinned.svg";
@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Weight from "@/components/weight";
 import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
+import Activity from "@/components/journal/activity.tsx";
 
 function Home() {
   const client = axios.create({
@@ -57,6 +58,7 @@ function Home() {
         </TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
+      <Activity/>
     </div>
   );
 }
