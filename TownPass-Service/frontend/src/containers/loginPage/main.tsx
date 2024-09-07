@@ -33,13 +33,13 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/user", userData);
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/user`, userData);
       toast({
         title: "Success!",
         description: "User registered successfully!",
       });
       console.log(response.data);
-      navigate("/");
+      navigate("/journal");
     } catch (error) {
       console.error("Error submitting user data", error);
       toast({

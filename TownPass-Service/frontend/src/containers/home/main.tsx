@@ -34,7 +34,7 @@ const tabs = [
 function Home() {
   const { userData } = useExercise();
   const client = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_BASE_URL,
   });
   const location = useLocation();
   const navigate = useNavigate();
@@ -50,12 +50,11 @@ function Home() {
     return "journal"; // default tab
   };
 
-  // useEffect(() => {
-  //   // alert(userData.name);
-  //   if (userData.name !== "" && userData.age === "") {
-  //     navigate("/LoginPage");
-  //   }
-  // }, [navigate, userData]);
+  useEffect(() => {
+    if (userData.name !== "" && userData.age === "") {
+      navigate("/LoginPage");
+    }
+  }, [navigate, userData]);
 
   const handleTabChange = (value: string) => {
     const tab = tabs.find((tab) => tab.value === value);
@@ -96,9 +95,9 @@ function Home() {
           <>
             <SummaryCircle
               title="今日總覽"
-              burned={600}
-              intake={1000}
-              time={105}
+              burned={today.burned}
+              intake={today.intake}
+              time={today.time}
             />
             <Weight />
             <Journal />

@@ -30,7 +30,7 @@ app.use(cors());
 
 app.post('/user', async (req, res) => {
     const user = req.body;
-    // console.log(user);
+    console.log(user);
     // @ts-ignore
     const isUserExist = await db.select().from(users).where(eq(users.id, user.id));
     if (isUserExist.length === 0) {
@@ -42,9 +42,8 @@ app.post('/user', async (req, res) => {
 
 app.get('/user', async (req, res) => {
     // @ts-ignore
-    // console.log(req.query);
+    console.log(req.query);
     const user = await db.select().from(users).where(eq(users.id, req.query.id));
-    console.log("userData", user);
     // console.log(user)
     res.json(user);
 });
@@ -83,7 +82,7 @@ app.get('/weight', async (req, res) => {
     const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.month);
     const weightinfo = weight.map((w) => {
         return {
-            month: months[w.month - 1],
+            month: months[w.month! - 1],
             weight: w.weight,
         };
     });
@@ -143,22 +142,29 @@ app.get("/today", async (req, res) => {
     let today = await db.select().from(sessions).where(eq(sessions.userId, user));
     
     today = today.filter((session) => {
-        return new Date(session.time).getDate() === new Date().getDate();
+        return new Date(session.time!).getDate() === new Date().getDate();
     });
     
     let duration = 0;
     today.forEach((session) => {
-        duration += parseInt(session.duration);
+        duration += parseInt(session.duration!);
     });
     
     let burned = 0;
     today.forEach((session) => {
-        burned += parseFloat(session.calories);
+        burned += parseFloat(session.calories!);
     });
     
     console.log("duration", duration);
     console.log("calories", burned);
-    const intake = 169;
+    let intake = 0;
+    let food = await db.select().from(foodLog).where(eq(foodLog.userId, user));
+    food = food.filter((f) => {
+        return new Date(f.time).getDate() === new Date().getDate();
+    });
+    food.forEach((f) => {
+        intake += parseFloat(f.calories) * parseFloat(f.amount);
+    } )
     
     res.json({
         burned,

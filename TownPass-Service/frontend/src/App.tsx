@@ -42,29 +42,29 @@ function App(): React.ReactNode {
   const { userData, setUserData } = useExercise();
 
   const client = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_BASE_URL,
   });
 
-  const handleUserInfo = (event: { data: string }) => {
-    const result: { name: string; data: any } = JSON.parse(event.data);
+  const handleUserInfo = () => {
     if (userData.name === "") {
-      client.get(`/user?id=7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250`).then((response) => {
-        if (response.data.length) {
-          setUserData(response.data[0]);
-        } else {
-          setUserData({
-            ...userData,
-            id: "7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250",
-            name: "金大森",
-          });
-        }
-      });
+      client
+        .get(`/user?id=7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250`)
+        .then((response) => {
+          if (response.data.length) {
+            setUserData(response.data[0]);
+          } else {
+            setUserData({
+              ...userData,
+              id: "7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250",
+              name: "金大森",
+            });
+          }
+        });
     }
   };
 
   useEffect(() => {
-    useConnectionMessage("userinfo", null);
-    useHandleConnectionData(handleUserInfo);
+    handleUserInfo();
   }, []);
 
   // useEffect(() => {

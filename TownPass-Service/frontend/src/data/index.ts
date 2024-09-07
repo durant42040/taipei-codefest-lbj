@@ -276,5 +276,5 @@ export const sports = [
     id: 9,
     name: "桌球",
     icon: "🏓",
-  }
+  },
 ];

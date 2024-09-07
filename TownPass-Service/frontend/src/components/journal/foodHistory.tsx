@@ -10,7 +10,6 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "@/components/ui/label";
-import { useFood } from "@/contexts/useFood";
 import { FoodActivityCard } from "@/components/ui/foodCard";
 import { Utensils } from "lucide-react";
 import { useExercise } from "@/contexts/useExercise";
@@ -23,7 +22,11 @@ const FoodJournal = () => {
   const [foodHistory, setFoodHistory] = useState([]);
   const [newFood, setNewFood] = useState({
     food: "",
+    amount: "",
     calories: 0,
+    protein: 0,
+    carbo: 0,
+    fat: 0,
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +35,7 @@ const FoodJournal = () => {
   };
 
   const client = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_BASE_URL,
   });
 
   // const handleSubmit = () => {
@@ -43,10 +46,17 @@ const FoodJournal = () => {
   const handleSubmit = () => {
     // Add the new activity with a unique id
     client
-      .post("food/", { ...newFood, userId: userData.id })
+      .post("/food", { ...newFood, userId: userData.id })
       .then((response) => {
         setFoodHistory([...foodHistory, response.data]);
-        setNewFood({ food: "", calories: 0 }); // Reset the form
+        setNewFood({
+          food: "",
+          amount: "",
+          calories: 0,
+          protein: 0,
+          carbo: 0,
+          fat: 0,
+        }); // Reset the form
         setIsDialogOpen(false); // Close the dialog after successful submission
       });
   };
@@ -58,7 +68,7 @@ const FoodJournal = () => {
   }, [userData]);
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 mt-4">
       <div className="flex items-center justify-between mx-2">
         <h2 className="text-xl font-bold flex items-center">
           <Utensils className="mr-2" />
@@ -66,7 +76,7 @@ const FoodJournal = () => {
         </h2>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="my-4">新增食物</Button>
+            <button className="button-class">新增食物</button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -84,12 +94,64 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="amount">數量</Label>
+                <Input
+                  id="amount"
+                  name="amount"
+                  value={newFood.amount}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
                 <Label htmlFor="calorie">熱量</Label>
                 <Input
                   id="calorie"
                   name="calorie"
+                  type="number"
                   value={newFood.calories}
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, calories: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="protein">蛋白質</Label>
+                <Input
+                  id="protein"
+                  name="protein"
+                  type="number"
+                  value={newFood.protein}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, protein: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="carbo">碳水</Label>
+                <Input
+                  id="carbo"
+                  name="carbo"
+                  type="number"
+                  value={newFood.carbo}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, carbo: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="fat">脂肪</Label>
+                <Input
+                  id="fat"
+                  name="fat"
+                  type="number"
+                  value={newFood.fat}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, fat: e.target.value })
+                  }
                   required
                 />
               </div>
