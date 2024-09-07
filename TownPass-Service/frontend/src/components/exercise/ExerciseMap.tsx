@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
-import { PinIcon } from "lucide-react";
+import { LocateFixed, PinIcon } from "lucide-react";
+import { useHandleConnectionData } from "@/composables/useHandleConnectionData";
+import { useConnectionMessage } from "@/composables/useConnectionMessage";
+
 const envConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
 };
@@ -39,12 +42,33 @@ function PoiMarkers({
   );
 }
 
-// function MyComponent() {
-//   const map = useMap() as google.maps.Map;
-//   google.maps.KmlLayer.
-// }
+function useLocation(setLocation: {
+  (value: React.SetStateAction<{ latitude: number; longitude: number }>): void;
+}) {
+  useConnectionMessage("location", null);
+  const cleanup = useHandleConnectionData((event) => {
+    const data = JSON.parse(event.data as string);
+    const { latitude, longitude } = data.data ?? { latitude: 25.021639, longitude: 121.535083 };
+    setLocation({ latitude, longitude });
+  });
+  setTimeout(() => {
+    if (cleanup) cleanup();
+  }, 10000);
+}
+
+function MyLocation({ lng, lat }: { lng: number; lat: number }) {
+  return (
+    <AdvancedMarker position={{ lat, lng }}>
+      <LocateFixed className="text-[#1f4fff]" />
+    </AdvancedMarker>
+  );
+}
 
 export default function ExerciseMap() {
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  }>({ latitude: 25.021639, longitude: 121.535083 });
   const [viewState, setViewState] = useState({
     latitude: 25.021639,
     longitude: 121.535083,
@@ -53,6 +77,9 @@ export default function ExerciseMap() {
   function setPosition(lat: number, lng: number) {
     setViewState({ latitude: lat, longitude: lng, zoom: 18 });
   }
+
+  useLocation(setLocation);
+
   return (
     <div>
       <div className="rounded-lg border-2">
@@ -65,12 +92,13 @@ export default function ExerciseMap() {
             }}
             viewState={viewState}
             gestureHandling={"greedy"}
-            disableDefaultUI={true}
+            // disableDefaultUI={true}
             style={{ width: "100%", height: "100vh" }}
             colorScheme="FOLLOW_SYSTEM"
             mapId={"ec82b278c6bb6c54"}
           >
             <PoiMarkers pois={pois} setPosition={setPosition} />
+            <MyLocation lat={location.latitude} lng={location.longitude} />
           </Map>
         </APIProvider>
       </div>
