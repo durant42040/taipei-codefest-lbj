@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import journalLogo from "./assets/notebook-text.svg"
+import journalLogo from "./assets/notebook-text.svg";
 import mapLogo from "./assets/map-pinned.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
@@ -12,7 +11,6 @@ import {Weight} from "./components/weight"
 import Journal from "./components/journal/journal";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [monster, setMonster] = useState({ name: "", health: 0, ugly: true });
 
   const client = axios.create({
@@ -37,24 +35,32 @@ function App() {
   }, []);
 
   return (
-    <>
-      <Tabs defaultValue="account">
-        <TabsList>
-          <TabsTrigger value="account" className="">
-            <img src={journalLogo} alt="Journal" className="mx-2" />
+    <div>
+      <Tabs defaultValue="account" className="text-black bg-white rounded-lg">
+        <TabsList className="grid grid-cols-2 rounded-t-md p-1">
+          <TabsTrigger
+            value="account"
+            className="flex items-center cursor-pointer rounded-tl-lg rounded-r-none font-semibold text-xl"
+          >
+            <img src={journalLogo} alt="Journal" className="mx-1" />
             運動紀錄
           </TabsTrigger>
-          <TabsTrigger value="password" className="flex items-center">
-            <img src={mapLogo} alt="Map" className="mx-2" />
+          <TabsTrigger
+            value="password"
+            className="flex items-center cursor-pointer rounded-tr-lg rounded-l-none font-semibold text-xl"
+          >
+            <img src={mapLogo} alt="Map" className="mx-1" />
             我要運動
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="account"><Journal/></TabsContent>
+        <TabsContent value="account">
+          <Weight />
+          <Journal />
+        </TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
-      <Weight />
-    </>
-    
+      
+    </div>
   );
 }
 
