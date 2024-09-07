@@ -20,27 +20,26 @@ function Home() {
     baseURL: "http://localhost:4000",
   });
   const navigate = useNavigate();
-  const [ today, setToday ] = useState({
+  const [today, setToday] = useState({
     burned: 0,
     intake: 0,
     time: 0,
   });
-  
+
   useEffect(() => {
     if (userData.name !== "" && userData.age === "") {
       navigate("/LoginPage");
     }
   }, [navigate, userData]);
-  
+
   useEffect(() => {
     if (userData.id && today.burned === 0) {
       client.get(`/today?id=${userData.id}`).then((response) => {
-        const {data: todayData} = response;
+        const { data: todayData } = response;
         setToday(todayData);
       });
     }
   }, [client, userData]);
-  
 
   // useEffect(() => {
   //   client.get("/api/monster").then((response) => {
@@ -71,8 +70,13 @@ function Home() {
           <Weight />
           <Journal />
           {/* <SummaryCircle /> */}
-          <SummaryCircle title="今日總覽" burned={today.burned} intake={today.intake} time={today.time}/>
-          <FoodHistory  />
+          <SummaryCircle
+            title="今日總覽"
+            burned={today.burned}
+            intake={today.intake}
+            time={today.time}
+          />
+          <FoodHistory />
         </TabsContent>
         <TabsContent value="password">
           <ExercisePage />
