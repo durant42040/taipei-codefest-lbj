@@ -1,31 +1,24 @@
-import { useEffect } from "react";
 import axios from "axios";
 import journalLogo from "@/assets/notebook-text.svg";
 import mapLogo from "@/assets/map-pinned.svg";
 import "@/App.css";
-import { useConnectionMessage } from "@/composables/useConnectionMessage";
-import { useHandleConnectionData } from "@/composables/useHandleConnectionData";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Weight from "@/components/weight";
-import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
-import SummaryCircle from "@/components/journal/summaryCircle";
-import ExercisePage from "@/containers/exercise/main";
+import {useExercise} from "@/contexts/useExercise.tsx";
+import {useNavigate} from "react-router-dom";
+import ExercisePage from "@/containers/exerciseLog/main";
 
 function Home() {
+  const {userData} = useExercise();
   const client = axios.create({
     baseURL: "http://localhost:4000",
   });
-
-  const handleDogInfo = (event: { data: string }) => {
-    const result: { name: string; data: any } = JSON.parse(event.data);
-    // alert(`name: ${result.data.name}, age: ${result.data.age}`);
-  };
-
-  useEffect(() => {
-    useConnectionMessage("doginfo", null);
-    useHandleConnectionData(handleDogInfo);
-  }, []);
+  const navigate = useNavigate();
+  if (userData.age === "") {
+    navigate("/LoginPage");
+  }
+  
 
   // useEffect(() => {
   //   client.get("/api/monster").then((response) => {
@@ -33,7 +26,7 @@ function Home() {
   //   });
   // }, []);
 
-  return (
+  if (userData.age) return (
     <div>
       <Tabs defaultValue="account" className="text-black bg-white rounded-lg">
         <TabsList className="grid grid-cols-2 rounded-lg mb-3">
@@ -53,7 +46,6 @@ function Home() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="account">
-          <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
           <Weight />
           <Journal />
           {/* <SummaryCircle /> */}
@@ -61,6 +53,7 @@ function Home() {
         <TabsContent value="password">
           <ExercisePage />
         </TabsContent>
+        <TabsContent value="password">Maps</TabsContent>
       </Tabs>
     </div>
   );
