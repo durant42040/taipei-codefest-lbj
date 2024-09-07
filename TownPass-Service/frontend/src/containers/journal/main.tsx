@@ -10,8 +10,11 @@ import Weight from "@/components/weight";
 import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
 import Activity from "@/components/journal/activity.tsx";
+import { useNavigate } from "react-router-dom";
+import ExercisePage from "@/containers/exercise/main";
 
 function Home() {
+  const navigate = useNavigate();
   const client = axios.create({
     baseURL: "http://localhost:4000",
   });
@@ -54,9 +57,11 @@ function Home() {
         <TabsContent value="account">
           <Weight />
           <Journal />
-          <Activity burned={600} intake={2000} time={120}/>
+          <Activity burned={600} intake={2000} time={120} />
         </TabsContent>
-        <TabsContent value="password">Maps</TabsContent>
+        <TabsContent value="password">
+          <ExercisePage />
+        </TabsContent>
       </Tabs>
     </div>
   );
