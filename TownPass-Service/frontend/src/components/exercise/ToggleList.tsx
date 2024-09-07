@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,11 +7,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { useExercise } from "@/contexts/useExercise";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { courts, sports } from "@/data";
 import Court from "./Court";
 import CourtInfo from "./CourtInfo";
+import ExerciseRecommendationAssistant from "./RecommendAgent";
 
 function ToggleList() {
   const {
@@ -27,6 +28,8 @@ function ToggleList() {
     setShowBicycleKML,
     setFocusSingle,
   } = useExercise();
+  const [isRecommendationModalOpen, setIsRecommendationModalOpen] = useState(false);
+
 
   const handleSelectExercise = (sport: string) => {
     setIsVisible(false);
@@ -46,6 +49,18 @@ function ToggleList() {
 
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const handleRecommendationClick = () => {
+    setIsRecommendationModalOpen(true);
+  };
+
+  const handleSportRecommendation = (sportId: string) => {
+    const recommendedSport = sports.find(sport => sport.id === parseInt(sportId));
+    if (recommendedSport) {
+      handleSelectExercise(recommendedSport.icon + " " + recommendedSport.name);
+    }
+    setIsRecommendationModalOpen(false);
   };
 
   return (
@@ -71,7 +86,12 @@ function ToggleList() {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <button className="w-3/12 button-class">建議</button>
+          <button
+            className="w-3/12 bg-gray-100 text-black p-1 text-base font-bold"
+            onClick={handleRecommendationClick}
+          >
+            建議
+          </button>
         </div>
       </div>
       <div
@@ -132,6 +152,16 @@ function ToggleList() {
       >
         {isCourtInfoVisible && <CourtInfo />}
       </div>
+      {isRecommendationModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-4 rounded-lg max-w-md w-full">
+            <ExerciseRecommendationAssistant onSportClick={handleSportRecommendation} />
+            <button
+              className="mt-4 w-full bg-gray-200 text-black p-2 rounded"
+              onClick={() => setIsRecommendationModalOpen(false)}
+            >
+              關閉
+              </button></div></div>)}
     </>
   );
 }
