@@ -33,7 +33,11 @@ export const foodLog = pgTable('food_log', {
   id: serial('id').primaryKey(),
   userId: varchar('user_id').references(() => users.id),
   food: varchar('food', {length: 100}),
+  amount: varchar('amount', {length: 100}),
   calories: decimal('calories', {precision: 5, scale: 2}),
-    time: timestamp('time').defaultNow(),
+  protein: decimal('protein', {precision:5, scale:2}),
+  carbo: decimal('carbo', {precision:5, scale:2}),
+  fat: decimal('fat', {precision:5, scale:2}),
+  time: timestamp('time').defaultNow(),
 });
 
