@@ -31,11 +31,13 @@ app.use(cors());
 app.post('/user', async (req, res) => {
     const user = req.body;
     console.log(user);
+    const weight = user.weight;
     // @ts-ignore
     const isUserExist = await db.select().from(users).where(eq(users.id, user.id));
     if (isUserExist.length === 0) {
         // @ts-ignore
         await db.insert(users).values(user).execute();
+        await db.insert(weights).values({userId: user.id, weight: weight, month: new Date().getMonth() + 1}).execute();
     }
     res.json(user);
 });
