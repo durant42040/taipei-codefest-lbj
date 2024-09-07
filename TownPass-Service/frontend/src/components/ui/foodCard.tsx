@@ -10,7 +10,7 @@ interface FoodActivityProps {
   calories: number;
   protein: number;
   fat: number;
-  carbs: number;
+  carbo: number;
 }
 
 export function FoodActivityCard({
@@ -21,14 +21,14 @@ export function FoodActivityCard({
   calories,
   protein,
   fat,
-  carbs,
+  carbo,
 }: FoodActivityProps) {
   const navigate = useNavigate();
 
   return (
     <Card
       className="w-full max-w-3xl hover:bg-accent transition-colors my-1"
-      onClick={() => navigate(`/foodDetails/${id}`)}
+      // onClick={() => navigate(`/foodDetails/${id}`)}
     >
       <CardContent className="p-4">
         <div className="grid grid-cols-3 gap-3 items-center">
@@ -44,14 +44,14 @@ export function FoodActivityCard({
             <Flame className="w-4 h-4 text-muted-foreground" />
             <span className="text-sm font-medium">{calories} cal</span>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4 min-w-64">
             <span
               title="紅色: 蛋白質 (克) | 黃色: 脂肪 (克) | 綠色: 碳水化合物 (克)"
               className="cursor-help"
             >
               <span className="text-red-500">{protein}</span> /{" "}
               <span className="text-yellow-500">{fat}</span> /{" "}
-              <span className="text-green-500">{carbs}</span>
+              <span className="text-green-500">{carbo}</span>
               <Info className="inline-block ml-1 w-4 h-4" />
             </span>
           </div>
