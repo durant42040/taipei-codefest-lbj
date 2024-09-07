@@ -5,10 +5,10 @@ import mapLogo from "./assets/map-pinned.svg";
 import "./App.css";
 import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
-import { Button } from "./components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-import {Weight} from "./components/weight"
+import { Weight } from "./components/weight";
 import Journal from "./components/journal/journal";
+import Excercise from "./containers/exercise/main";
 
 function App() {
   const [monster, setMonster] = useState({ name: "", health: 0, ugly: true });
@@ -57,9 +57,10 @@ function App() {
           <Weight />
           <Journal />
         </TabsContent>
-        <TabsContent value="password">Maps</TabsContent>
+        <TabsContent value="password">
+          <Excercise />
+        </TabsContent>
       </Tabs>
-      
     </div>
   );
 }
