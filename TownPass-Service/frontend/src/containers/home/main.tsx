@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Weight from "@/components/weight";
 import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
-import Activity from "@/components/journal/activity.tsx";
+import Activity from "@/components/journal/summaryCircle";
 import { useNavigate } from "react-router-dom";
 import ExercisePage from "@/containers/exercise/main";
 
