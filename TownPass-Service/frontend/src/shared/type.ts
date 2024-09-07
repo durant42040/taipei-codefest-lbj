@@ -6,10 +6,10 @@ export type CourtType = {
   lat: number;
   lng: number;
   K: number;
-}
+};
 
 export type SportType = {
   id: number;
   name: string;
   icon: string;
-}
+};

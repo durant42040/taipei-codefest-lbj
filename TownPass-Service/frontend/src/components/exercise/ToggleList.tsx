@@ -8,7 +8,7 @@ import { ChevronDown } from "lucide-react";
 import { useExercise } from "@/contexts/useExercise";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { courts, sports }from "@/data";
+import { courts, sports } from "@/data";
 
 function ToggleList() {
   const { exercise, setExercise } = useExercise();
@@ -18,7 +18,9 @@ function ToggleList() {
     setIsVisible(false);
     setTimeout(() => {
       setExercise(sport);
-      setFilteredCourts(courts.filter((court) => court.sports.includes(sport.split(" ")[1])));
+      setFilteredCourts(
+        courts.filter((court) => court.sports.includes(sport.split(" ")[1])),
+      );
       setIsVisible(true);
     }, 200);
   };
@@ -63,8 +65,12 @@ function ToggleList() {
               <p className="font-semibold text-zinc-950 text-4xl ml-2">
                 {exercise}
               </p>
-              <button className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 rounded-full text-sm">{filteredCourts.length}筆結果</button>
-              <button className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 mr-4">展開列表</button>
+              <button className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 rounded-full text-sm">
+                {filteredCourts.length}筆結果
+              </button>
+              <button className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 mr-4">
+                展開列表
+              </button>
             </div>
           </div>
         )}
