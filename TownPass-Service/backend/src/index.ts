@@ -15,7 +15,7 @@ app.use(cors());
 
 app.post('/user', async (req, res) => {
     const user = req.body;
-    console.log(user);
+    // console.log(user);
     // @ts-ignore
     const isUserExist = await db.select().from(users).where(eq(users.id, user.id));
     if (isUserExist.length === 0) {
@@ -38,7 +38,7 @@ app.get('/session', async (req, res) => {
     console.log("user", req.query);
     // @ts-ignore
     const userSessions = await db.select().from(sessions).where(eq(sessions.userId, user));
-    console.log("sessions", userSessions);
+    // console.log("sessions", userSessions);
     res.json(userSessions);
 });
 
@@ -63,9 +63,9 @@ app.post('/session', async (req, res) => {
 app.get('/weight', async (req, res) => {
     const user = req.query.user;
     // @ts-ignore
-    const weights = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.time);
+    const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.time);
     
-    res.json(weights);
+    res.json(weight);
 });
 
 app.post('/weight', async (req, res) => {
@@ -92,8 +92,35 @@ app.post('/food', async (req, res) => {
     res.json(new_food[0]);
 });
 
-
-
+app.get("/today", async (req, res) => {
+    const user = req.query.id;
+    // @ts-ignore
+    let today = await db.select().from(sessions).where(eq(sessions.userId, user));
+    
+    today = today.filter((session) => {
+        return new Date(session.time).getDate() === new Date().getDate();
+    });
+    
+    let duration = 0;
+    today.forEach((session) => {
+        duration += parseInt(session.duration);
+    });
+    
+    let burned = 0;
+    today.forEach((session) => {
+        burned += parseFloat(session.calories);
+    });
+    
+    console.log("duration", duration);
+    console.log("calories", burned);
+    const intake = 169;
+    
+    res.json({
+        burned,
+        intake,
+        time: duration,
+    });
+});
 
 
 app.listen(port, () => {
