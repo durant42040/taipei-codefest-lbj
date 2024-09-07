@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WeightTrackingPage from "./components/weight"; // Import your weight page
-import Home from "@/containers/journal/main"; // Import the main.tsx (journal stuff) as Home component
-
+import Home from "@/containers/home/main"; // Import the main.tsx (journal stuff) as Home component
 
 function App() {
   return (
