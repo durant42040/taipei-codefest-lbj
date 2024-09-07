@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 const activityHistory = [
