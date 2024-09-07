@@ -145,7 +145,7 @@ export default function ExerciseMap() {
             viewState={viewState}
             gestureHandling={"greedy"}
             disableDefaultUI={true}
-            style={{ width: "100%", height: "100vh" }}
+            style={{ width: "100%", height: "80vh" }}
             colorScheme="LIGHT"
             mapId={"ec82b278c6bb6c54"}
           >

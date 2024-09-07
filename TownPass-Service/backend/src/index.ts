@@ -54,7 +54,7 @@ app.get('/session', async (req, res) => {
     const user = req.query.user;
     console.log("user", req.query);
     // @ts-ignore
-    const userSessions = await db.select().from(sessions).where(eq(sessions.userId, user)).orderBy(sessions.time);
+    const userSessions = await db.select().from(sessions).where(eq(sessions.userId, user)).orderBy(desc(sessions.time));
     // console.log("sessions", userSessions);
     res.json(userSessions);
 });
