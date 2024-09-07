@@ -11,7 +11,7 @@ type FoodType = {
   protein: string;
   carbo: string;
   fat: string;
-}
+};
 
 export function FoodActivityCard({
   food,

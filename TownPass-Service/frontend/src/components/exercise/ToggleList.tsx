@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +27,8 @@ function ToggleList() {
   const [filteredCourts, setFilteredCourts] = useState(
     courts.filter((court) => court.sports.includes(exercise.split(" ")[1])),
   );
-  const [isRecommendationModalOpen, setIsRecommendationModalOpen] = useState(false);
+  const [isRecommendationModalOpen, setIsRecommendationModalOpen] =
+    useState(false);
 
   const handleSelectExercise = (sport: string) => {
     setIsVisible(false);
@@ -51,7 +52,9 @@ function ToggleList() {
   };
 
   const handleSportRecommendation = (sportId: string) => {
-    const recommendedSport = sports.find(sport => sport.id === parseInt(sportId));
+    const recommendedSport = sports.find(
+      (sport) => sport.id === parseInt(sportId),
+    );
     if (recommendedSport) {
       handleSelectExercise(recommendedSport.icon + " " + recommendedSport.name);
     }
@@ -82,7 +85,7 @@ function ToggleList() {
             </DropdownMenuContent>
           </DropdownMenu>
           <button
-            className="w-3/12 bg-gray-100 text-black p-1 text-base font-bold"
+            className="w-3/12 bg-[#5ab4c5] text-white p-1 text-base font-semibold"
             onClick={handleRecommendationClick}
           >
             建議
@@ -90,11 +93,13 @@ function ToggleList() {
         </div>
       </div>
       {/* ... (rest of the component remains the same) ... */}
-      
+
       {isRecommendationModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 w-10/12">
           <div className="bg-white p-4 rounded-lg max-w-md w-full">
-            <ExerciseRecommendationAssistant onSportClick={handleSportRecommendation} />
+            <ExerciseRecommendationAssistant
+              onSportClick={handleSportRecommendation}
+            />
             <button
               className="mt-4 w-full bg-gray-200 text-black p-2 rounded"
               onClick={() => setIsRecommendationModalOpen(false)}

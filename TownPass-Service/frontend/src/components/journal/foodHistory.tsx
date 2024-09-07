@@ -23,7 +23,7 @@ type FoodType = {
   protein: string;
   carbo: string;
   fat: string;
-}
+};
 
 const FoodJournal = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -38,7 +38,7 @@ const FoodJournal = () => {
     protein: "",
     carbo: "",
     fat: "",
-  }
+  };
   const [newFood, setNewFood] = useState(fakeFood);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +83,9 @@ const FoodJournal = () => {
             </DialogHeader>
             <div className="flex flex-col gap-2">
               <div className="space-y-0.5">
-                <Label htmlFor="food"  className="text-lg">食物</Label>
+                <Label htmlFor="food" className="text-lg">
+                  食物
+                </Label>
                 <Input
                   id="food"
                   name="food"
@@ -93,7 +95,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="amount"  className="text-lg">數量</Label>
+                <Label htmlFor="amount" className="text-lg">
+                  數量
+                </Label>
                 <Input
                   id="amount"
                   name="amount"
@@ -103,7 +107,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="calorie"  className="text-lg">熱量</Label>
+                <Label htmlFor="calorie" className="text-lg">
+                  熱量
+                </Label>
                 <Input
                   id="calorie"
                   name="calorie"
@@ -116,7 +122,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="protein"  className="text-lg">蛋白質</Label>
+                <Label htmlFor="protein" className="text-lg">
+                  蛋白質
+                </Label>
                 <Input
                   id="protein"
                   name="protein"
@@ -129,7 +137,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="carbo"  className="text-lg">碳水</Label>
+                <Label htmlFor="carbo" className="text-lg">
+                  碳水
+                </Label>
                 <Input
                   id="carbo"
                   name="carbo"
@@ -142,7 +152,9 @@ const FoodJournal = () => {
                 />
               </div>
               <div className="space-y-0.5">
-                <Label htmlFor="fat"  className="text-lg">脂肪</Label>
+                <Label htmlFor="fat" className="text-lg">
+                  脂肪
+                </Label>
                 <Input
                   id="fat"
                   name="fat"
