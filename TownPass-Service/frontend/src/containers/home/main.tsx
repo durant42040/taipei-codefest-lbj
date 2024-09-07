@@ -22,9 +22,9 @@ function Home() {
   });
   const navigate = useNavigate();
   const [today, setToday] = useState({
-    burned: 0,
-    intake: 0,
-    time: 0,
+    burned: -1,
+    intake: -1,
+    time: -1,
   });
 
   useEffect(() => {

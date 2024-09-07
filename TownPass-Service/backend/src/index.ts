@@ -7,6 +7,21 @@ import {eq} from "drizzle-orm";
 
 dotenv.config();
 
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+];
+
 const app = express();
 const port = process.env.PORT || 4000;
 
@@ -61,19 +76,47 @@ app.post('/session', async (req, res) => {
 });
 
 app.get('/weight', async (req, res) => {
-    const user = req.query.user;
-    // @ts-ignore
-    const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.time);
+    const user = req.query.id;
     
-    res.json(weight);
+    // @ts-ignore
+    const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.month);
+    const weightinfo = weight.map((w) => {
+        return {
+            month: months[w.month - 1],
+            weight: w.weight,
+        };
+    });
+    console.log("weightinfo", weightinfo);
+    
+    res.json(weightinfo);
 });
 
 app.post('/weight', async (req, res) => {
-    const weight = req.body;
+    let weight = req.body;
     // @ts-ignore
-    const new_weight = await db.insert(weights).values(weight).returning();
-    
-    res.json(new_weight[0]);
+    const month = new Date().getMonth() + 1;
+    weight.month = month;
+    // if month exist, update
+    // @ts-ignore
+    const isExist = await db.select().from(weights).where(eq(weights.userId, weight.userId)).where(eq(weights.month, month));
+    if (isExist.length > 0) {
+        // @ts-ignore
+         await db.update(weights).set(weight).where(eq(weights.userId, weight.userId)).where(eq(weights.month, month)).returning();
+    } else {
+        // @ts-ignore
+        await db.insert(weights).values(weight).returning();
+    }
+    weight.month = months[month - 1];
+    console.log("weight", weight);
+    res.json(weight);
+});
+
+app.get('/weight', async (req, res) => {
+    console.log("ok");
+    const user = req.query.id;
+    // @ts-ignore
+    const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.month);
+    res.json(weight);
 });
 
 app.get('/food', async (req, res) => {
