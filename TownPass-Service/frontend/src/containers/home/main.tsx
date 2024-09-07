@@ -9,8 +9,10 @@ import Journal from "@/components/journal/journal";
 import FoodHistory from "@/components/journal/foodHistory";
 import {useExercise} from "@/contexts/useExercise.tsx";
 import {useNavigate} from "react-router-dom";
-import ExercisePage from "@/containers/exerciseLog/main";
+import ExercisePage from "@/containers/exercise/main";
 import {useEffect} from "react";
+import SummaryCircle from "@/components/journal/summaryCircle";
+// import ToggleList from "@/components/exercise/ToggleList";
 
 function Home() {
   const {userData} = useExercise();
@@ -61,7 +63,6 @@ function Home() {
         <TabsContent value="password">
           <ExercisePage />
         </TabsContent>
-        <TabsContent value="password">Maps</TabsContent>
       </Tabs>
     </div>
   );
