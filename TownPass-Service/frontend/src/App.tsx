@@ -8,6 +8,7 @@ import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
 import { Button } from "./components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
+import Journal from "./components/journal";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -44,10 +45,10 @@ function App() {
           </TabsTrigger>
           <TabsTrigger value="password" className="flex items-center">
             <img src={mapLogo} alt="Map" className="mx-2" />
-            運動地圖
+            我要運動
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="account">Journal</TabsContent>
+        <TabsContent value="account"><Journal/></TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
     </>
