@@ -163,7 +163,7 @@ app.get("/today", async (req, res) => {
         return new Date(f.time).getDate() === new Date().getDate();
     });
     food.forEach((f) => {
-        intake += parseFloat(f.calories);
+        intake += parseFloat(f.calories) * parseFloat(f.amount);
     } )
     
     res.json({
