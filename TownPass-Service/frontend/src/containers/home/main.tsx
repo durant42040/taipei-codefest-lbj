@@ -10,7 +10,7 @@ import Weight from "@/components/weight";
 import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
 import SummaryCircle from "@/components/journal/summaryCircle";
-
+import FoodHistory from "@/components/journal/foodHistory";
 function Home() {
   const client = axios.create({
     baseURL: "http://localhost:4000",
@@ -56,6 +56,7 @@ function Home() {
           <Journal />
           {/* <SummaryCircle /> */}
           <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
+          <FoodHistory  />
         </TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
