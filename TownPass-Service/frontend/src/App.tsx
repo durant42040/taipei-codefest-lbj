@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import journalLogo from "./assets/notebook-text.svg";
+import journalLogo from "./assets/notebook-text.svg"
 import mapLogo from "./assets/map-pinned.svg";
 import "./App.css";
 import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
-import { Button } from "./components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import {Weight} from "./components/weight"
 import Journal from "./components/journal/journal";
 
 function App() {
-  const [monster, setMonster] = useState({ name: "", health: 0, ugly: true });
-
   const client = axios.create({
     baseURL: "http://localhost:4000",
   });
@@ -27,12 +24,11 @@ function App() {
     useHandleConnectionData(handleDogInfo);
   }, []);
 
-  useEffect(() => {
-    client.get("/api/monster").then((response) => {
-      const { data: monster } = response;
-      setMonster(monster);
-    });
-  }, []);
+  // useEffect(() => {
+  //   client.get("/api/monster").then((response) => {
+  //     const { data: monster } = response;
+  //   });
+  // }, []);
 
   return (
     <div>
@@ -59,7 +55,6 @@ function App() {
         </TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
-      
     </div>
   );
 }
