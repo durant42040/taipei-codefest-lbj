@@ -16,7 +16,7 @@ const SummaryCircle = ({
   return (
       <>
         <h2 className="text-xl font-bold mt-2 text-left mx-2">{title}</h2>
-        <Card className="max-w-xs mb-3 mt-1">
+        <Card className="custom-card">
           <CardContent className="flex gap-4 p-4">
             <div className="grid items-center gap-2">
               <div className="grid flex-1 auto-rows-min gap-0.5">
