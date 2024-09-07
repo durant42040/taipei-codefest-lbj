@@ -34,7 +34,7 @@ export function ActivityCard({
           </div>
           <div className="flex items-center space-x-2">
             <Flame className="w-4 h-4 text-muted-foreground" />
-            <span className="text-base font-medium">{caloriesBurnt} cal</span>
+            <span className="text-base font-medium">{caloriesBurnt} kcal</span>
           </div>
         </div>
       </CardContent>
