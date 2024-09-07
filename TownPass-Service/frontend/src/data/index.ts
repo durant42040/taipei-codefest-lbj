@@ -282,5 +282,4 @@ export const sports = [
     name: "自行車",
     icon: "🚲",
   },
-  ,
 ];

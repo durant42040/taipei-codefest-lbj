@@ -7,6 +7,7 @@ import { Activity } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import {useExercise} from "@/contexts/useExercise.tsx";
+
 const ExerciseRecommendationAssistant = ({ onSportClick }: { onSportClick: (id: string) => void }) => {
   const {userData} = useExercise();
   const [gender, setGender] = useState(userData.gender);
@@ -92,7 +93,7 @@ const ExerciseRecommendationAssistant = ({ onSportClick }: { onSportClick: (id: 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-blue-100 p-4 rounded-md cursor-pointer text-center"
-                  onClick={() => onSportClick(sport.id)}
+                  onClick={() => onSportClick(sport.name)}
                 >
                   {sport.name}
                 </motion.div>
