@@ -63,13 +63,33 @@ app.post('/session', async (req, res) => {
 app.get('/weight', async (req, res) => {
     const user = req.query.user;
     // @ts-ignore
-    const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.time);
+    const weights = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.time);
     
-    res.json(weight);
+    res.json(weights);
+});
+
+app.post('/weight', async (req, res) => {
+    const weight = req.body;
+    // @ts-ignore
+    const new_weight = await db.insert(weights).values(weight).returning();
+    
+    res.json(new_weight[0]);
 });
 
 app.get('/food', async (req, res) => {
+    const user = req.query.user;
+    // @ts-ignore
+    const food = await db.select().from(foods).where(eq(foods.userId, user)).orderBy(foods.time);
+    
+    res.json(food);
+});
 
+app.post('/food', async (req, res) => {
+    const food = req.body;
+    // @ts-ignore
+    const new_food = await db.insert(foods).values(food).returning();
+    
+    res.json(new_food[0]);
 });
 
 

@@ -19,17 +19,17 @@ import {
 export const description = "A linear line chart";
 
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { month: "January", weight: 60 },
+  { month: "February", weight: 70 },
+  { month: "March", weight: 80 },
+  { month: "April", weight: 90 },
+  { month: "May", weight: 100 },
+  { month: "June", weight: 120 },
 ];
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  weight: {
+    label: "weight",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
@@ -40,8 +40,7 @@ export default function Weight() {
       <h2 className="text-xl font-bold mt-2 mb-1 text-left mx-2">體重紀錄</h2>
       <Card>
         <CardHeader>
-          <CardTitle>Line Chart - Linear</CardTitle>
-          <CardDescription>January - June 2024</CardDescription>
+          <CardDescription>1月 - 6月 2024</CardDescription>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
@@ -66,9 +65,9 @@ export default function Weight() {
                 content={<ChartTooltipContent hideLabel />}
               />
               <Line
-                dataKey="desktop"
+                dataKey="weight"
                 type="linear"
-                stroke="var(--color-desktop)"
+                stroke="var(--color-weight)"
                 strokeWidth={2}
                 dot={false}
               />
@@ -77,10 +76,7 @@ export default function Weight() {
         </CardContent>
         <CardFooter className="flex-col items-start gap-2 text-sm">
           <div className="flex gap-2 font-medium leading-none">
-            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Showing total visitors for the last 6 months
+            You are Obese<TrendingUp className="h-4 w-4" />
           </div>
         </CardFooter>
       </Card>
