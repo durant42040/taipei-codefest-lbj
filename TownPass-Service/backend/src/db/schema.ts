@@ -14,7 +14,8 @@ export const sessions = pgTable('sessions', {
   userId: varchar('user_id').references(() => users.id),
   sport: varchar('sport', {length: 50}),
   time: varchar('time', {length: 8}), // Store time as HH:MM:SS
-  calories: decimal('calories', {precision: 5, scale: 2}),
+  duration: varchar('duration', {length: 8}), // Store duration
+  calories: decimal('calories', {precision: 5}),
   location: varchar('location', {length: 255}),
 });
 

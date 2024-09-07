@@ -27,16 +27,30 @@ app.post('/user', async (req, res) => {
 
 app.get('/user', async (req, res) => {
     // @ts-ignore
-    console.log(req.query);
+    // console.log(req.query);
     const user = await db.select().from(users).where(eq(users.id, req.query.id));
-    console.log(user)
+    // console.log(user)
     res.json(user);
 });
 
 app.get('/session', async (req, res) => {
     const user = req.query.user;
+    console.log("user", req.query);
     // @ts-ignore
-    const session = await db.select().from(sessions).where(eq(sessions.userId, user));
+    const userSessions = await db.select().from(sessions).where(eq(sessions.userId, user));
+    console.log("sessions", userSessions);
+    res.json(userSessions);
+});
+
+app.post('/session', async (req, res) => {
+    const session = req.body;
+    // add time field
+    const date = new Date();
+    const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    session.time = time;
+    console.log('session', session);
+    // @ts-ignore
+    await db.insert(sessions).values(session).execute();
     res.json(session);
 });
 
