@@ -277,4 +277,10 @@ export const sports = [
     name: "桌球",
     icon: "🏓",
   },
+  {
+    id: 10,
+    name: "自行車",
+    icon: "🚲",
+  },
+  ,
 ];

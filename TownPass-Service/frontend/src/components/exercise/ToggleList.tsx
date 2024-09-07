@@ -22,17 +22,21 @@ function ToggleList() {
     setIsVisible,
     isCourtInfoVisible,
     setIsCourtInfoVisible,
+    filteredCourts,
+    setFilteredCourts,
+    setShowBicycleKML,
+    setFocusSingle,
   } = useExercise();
-  const [filteredCourts, setFilteredCourts] = useState(
-    courts.filter((court) => court.sports.includes(exercise.split(" ")[1])),
-  );
 
   const handleSelectExercise = (sport: string) => {
     setIsVisible(false);
     setIsExpanded(false);
     setIsCourtInfoVisible(false);
+    setFocusSingle(false);
+
     setTimeout(() => {
       setExercise(sport);
+      setShowBicycleKML(sport === "🚲 自行車");
       setFilteredCourts(
         courts.filter((court) => court.sports.includes(sport.split(" ")[1])),
       );
@@ -93,15 +97,19 @@ function ToggleList() {
               <p className="font-semibold text-zinc-950 text-4xl ml-2">
                 {exercise}
               </p>
-              <button className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 rounded-full text-sm">
-                {filteredCourts.length} 筆結果
-              </button>
-              <button
-                className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 mr-4"
-                onClick={handleExpand}
-              >
-                {isExpanded ? "收回列表" : "展開列表"}
-              </button>
+              {exercise.split(" ")[1] !== "自行車" && (
+                <>
+                  <button className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 rounded-full text-sm">
+                    {filteredCourts.length} 筆結果
+                  </button>
+                  <button
+                    className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 mr-4"
+                    onClick={handleExpand}
+                  >
+                    {isExpanded ? "收回列表" : "展開列表"}
+                  </button>
+                </>
+              )}
             </div>
 
             {isExpanded && (

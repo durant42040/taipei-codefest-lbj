@@ -1,3 +1,4 @@
+import { courts } from "@/data";
 import { CourtType } from "@/shared/type";
 import { createContext, ReactNode, useContext, useState } from "react";
 
@@ -28,6 +29,30 @@ export type ExerciseContextType = {
     height: string;
     gender: string;
   }) => void;
+  filteredCourts: CourtType[];
+  setFilteredCourts: (courts: CourtType[]) => void;
+  viewState: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  setViewState: (viewState: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  }) => void;
+  showBicycleKML: boolean;
+  setShowBicycleKML: (showBicycleKML: boolean) => void;
+  focusSingle: boolean;
+  setFocusSingle: (focusSingle: boolean) => void;
+  userLocation: {
+    latitude: number;
+    longitude: number;
+  };
+  setUserLocation: (userLocation: {
+    latitude: number;
+    longitude: number;
+  }) => void;
 };
 
 export const ExerciseContext = createContext<ExerciseContextType>({
@@ -50,6 +75,23 @@ export const ExerciseContext = createContext<ExerciseContextType>({
     gender: "",
   },
   setUserData: () => {},
+  filteredCourts: [] as CourtType[],
+  setFilteredCourts: () => {},
+  viewState: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  },
+  setViewState: () => {},
+  showBicycleKML: false,
+  setShowBicycleKML: () => {},
+  focusSingle: false,
+  setFocusSingle: () => {},
+  userLocation: {
+    latitude: 25.021639,
+    longitude: 121.535083,
+  },
+  setUserLocation: () => {},
 });
 
 type ExerciseProviderProps = {
@@ -70,6 +112,20 @@ export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
     height: "",
     gender: "",
   });
+  const [filteredCourts, setFilteredCourts] = useState(
+    courts.filter((court) => court.sports.includes(exercise.split(" ")[1])),
+  );
+  const [viewState, setViewState] = useState({
+    latitude: 25.021639,
+    longitude: 121.535083,
+    zoom: 15,
+  });
+  const [showBicycleKML, setShowBicycleKML] = useState(false);
+  const [focusSingle, setFocusSingle] = useState(false);
+  const [userLocation, setUserLocation] = useState({
+    latitude: 25.021639,
+    longitude: 121.535083,
+  });
 
   const contextValue = {
     exercise,
@@ -78,12 +134,22 @@ export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
     isVisible,
     isCourtInfoVisible,
     userData,
+    filteredCourts,
     setExercise,
     setIsExpanded,
     setIsVisible,
     setSelectedCourt,
     setIsCourtInfoVisible,
     setUserData,
+    setFilteredCourts,
+    viewState,
+    setViewState,
+    showBicycleKML,
+    setShowBicycleKML,
+    focusSingle,
+    setFocusSingle,
+    userLocation,
+    setUserLocation,
   };
 
   return (

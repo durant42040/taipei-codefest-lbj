@@ -1,10 +1,16 @@
 import { useExercise } from "@/contexts/useExercise";
 import { MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
+import { distance } from "@/lib/utils";
 
 function CourtInfo() {
-  const { selectedCourt, setIsExpanded, setIsCourtInfoVisible, setIsVisible } =
-    useExercise();
+  const {
+    selectedCourt,
+    setIsExpanded,
+    setIsCourtInfoVisible,
+    setIsVisible,
+    userLocation,
+  } = useExercise();
 
   const handleReturn = () => {
     setIsExpanded(true);
@@ -44,7 +50,16 @@ function CourtInfo() {
         </p>
       </div>
       <div className="flex flex-row gap-3">
-        <p className="text-lg font-semibold">距離: 0.97公里</p>
+        <p className="text-lg font-semibold">
+          距離:{" "}
+          {distance(
+            userLocation.latitude,
+            userLocation.longitude,
+            selectedCourt?.lat,
+            selectedCourt?.lng,
+          ).toFixed(2)}{" "}
+          公里
+        </p>
         <p className="text-lg font-semibold">時間: {selectedCourt?.time}</p>
       </div>
       <div className="flex flex-row bottom-0 fixed right-0 mr-4 mb-4 gap-2">

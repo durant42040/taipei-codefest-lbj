@@ -1,6 +1,7 @@
 import { useExercise } from "@/contexts/useExercise";
 import { CourtType } from "@/shared/type";
 import { MapPin } from "lucide-react";
+import { distance } from "@/lib/utils";
 
 function Court({ court }: { court: CourtType }) {
   const {
@@ -8,12 +9,19 @@ function Court({ court }: { court: CourtType }) {
     setIsExpanded,
     setIsVisible,
     setIsCourtInfoVisible,
+    setViewState,
+    userLocation,
   } = useExercise();
   const handleClick = () => {
     setIsCourtInfoVisible(false);
     setSelectedCourt(court);
     setIsExpanded(false);
     setIsVisible(false);
+    setViewState({
+      latitude: court.lat - 0.002,
+      longitude: court.lng,
+      zoom: 16,
+    });
     setTimeout(() => {
       setIsCourtInfoVisible(true);
     }, 200);
@@ -34,7 +42,15 @@ function Court({ court }: { court: CourtType }) {
             : court.location}
         </span>
       </p>
-      <p className="flex flex-row text-gray-500">0.97公里</p>
+      <p className="flex flex-row text-gray-500">
+        {distance(
+          userLocation.latitude,
+          userLocation.longitude,
+          court?.lat,
+          court?.lng,
+        ).toFixed(2)}
+        公里
+      </p>
     </div>
   );
 }
