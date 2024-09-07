@@ -7,7 +7,6 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "@/components/ui/label";
 import { FoodActivityCard } from "@/components/ui/foodCard";
@@ -15,19 +14,32 @@ import { Utensils } from "lucide-react";
 import { useExercise } from "@/contexts/useExercise";
 import axios from "axios";
 
+type FoodType = {
+  id: number;
+  userId: string;
+  calories: string;
+  food: string;
+  amount: string;
+  protein: string;
+  carbo: string;
+  fat: string;
+}
+
 const FoodJournal = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { userData } = useExercise();
-  // const { foodHistory, addFoodEntry } = useFood();
-  const [foodHistory, setFoodHistory] = useState([]);
-  const [newFood, setNewFood] = useState({
+  const [foodHistory, setFoodHistory] = useState<FoodType[]>([]);
+  const fakeFood = {
+    id: 0,
+    userId: "",
+    calories: "",
     food: "",
     amount: "",
-    calories: 0,
-    protein: 0,
-    carbo: 0,
-    fat: 0,
-  });
+    protein: "",
+    carbo: "",
+    fat: "",
+  }
+  const [newFood, setNewFood] = useState(fakeFood);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,26 +50,13 @@ const FoodJournal = () => {
     baseURL: import.meta.env.VITE_BASE_URL,
   });
 
-  // const handleSubmit = () => {
-  //   addFoodEntry(newFood);
-  //   setNewFood({ food: "", calories: 0, userId:"0" }); // Reset form
-  //   setIsDialogOpen(false); // Close dialog
-  // };
   const handleSubmit = () => {
-    // Add the new activity with a unique id
     client
       .post("/food", { ...newFood, userId: userData.id })
       .then((response) => {
         setFoodHistory([...foodHistory, response.data]);
-        setNewFood({
-          food: "",
-          amount: "",
-          calories: 0,
-          protein: 0,
-          carbo: 0,
-          fat: 0,
-        }); // Reset the form
-        setIsDialogOpen(false); // Close the dialog after successful submission
+        setNewFood(fakeFood);
+        setIsDialogOpen(false);
       });
   };
   useEffect(() => {
@@ -69,8 +68,8 @@ const FoodJournal = () => {
 
   return (
     <div className="mb-8 mt-4">
-      <div className="flex items-center justify-between mx-2">
-        <h2 className="text-xl font-bold flex items-center">
+      <div className="flex items-center justify-between  mx-2 mt-4 mb-2">
+        <h2 className="flex flex-row text-xl ml-1 font-bold mt-3 mb-3 text-left">
           <Utensils className="mr-2" />
           食物攝取紀錄
         </h2>
@@ -78,13 +77,13 @@ const FoodJournal = () => {
           <DialogTrigger asChild>
             <button className="button-class">新增食物</button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="w-10/12 rounded-xl">
             <DialogHeader>
-              <DialogTitle>新增食物</DialogTitle>
+              <DialogTitle className="text-2xl">新增食物</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="food">食物</Label>
+            <div className="flex flex-col gap-2">
+              <div className="space-y-0.5">
+                <Label htmlFor="food"  className="text-lg">食物</Label>
                 <Input
                   id="food"
                   name="food"
@@ -93,8 +92,8 @@ const FoodJournal = () => {
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="amount">數量</Label>
+              <div className="space-y-0.5">
+                <Label htmlFor="amount"  className="text-lg">數量</Label>
                 <Input
                   id="amount"
                   name="amount"
@@ -103,8 +102,8 @@ const FoodJournal = () => {
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="calorie">熱量</Label>
+              <div className="space-y-0.5">
+                <Label htmlFor="calorie"  className="text-lg">熱量</Label>
                 <Input
                   id="calorie"
                   name="calorie"
@@ -116,8 +115,8 @@ const FoodJournal = () => {
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="protein">蛋白質</Label>
+              <div className="space-y-0.5">
+                <Label htmlFor="protein"  className="text-lg">蛋白質</Label>
                 <Input
                   id="protein"
                   name="protein"
@@ -129,8 +128,8 @@ const FoodJournal = () => {
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="carbo">碳水</Label>
+              <div className="space-y-0.5">
+                <Label htmlFor="carbo"  className="text-lg">碳水</Label>
                 <Input
                   id="carbo"
                   name="carbo"
@@ -142,8 +141,8 @@ const FoodJournal = () => {
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="fat">脂肪</Label>
+              <div className="space-y-0.5">
+                <Label htmlFor="fat"  className="text-lg">脂肪</Label>
                 <Input
                   id="fat"
                   name="fat"
@@ -156,10 +155,14 @@ const FoodJournal = () => {
                 />
               </div>
             </div>
-            <DialogFooter>
-              <Button type="button" onClick={handleSubmit}>
+            <DialogFooter className="flex flex-row-reverse mt-1">
+              <button
+                type="button"
+                onClick={handleSubmit}
+                className="w-20 text-[#5ab4c5] border-2 border-[#5ab4c5] bg-transparent font-semibold"
+              >
                 新增
-              </Button>
+              </button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
