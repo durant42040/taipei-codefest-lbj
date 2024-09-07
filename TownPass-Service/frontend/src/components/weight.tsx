@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { TrendingUp } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
@@ -27,7 +27,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import axios from "axios";
-import {useExercise} from "@/contexts/useExercise.tsx";
+import { useExercise } from "@/contexts/useExercise.tsx";
 
 export const description = "A linear line chart";
 
@@ -41,37 +41,41 @@ const chartConfig = {
 export default function Weight() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newWeight, setNewWeight] = useState("");
-  const [ weights, setWeights ] = useState([]);
-  const {userData} = useExercise();
+  const [weights, setWeights] = useState([]);
+  const { userData } = useExercise();
 
   const handleWeightChange = (event) => {
     setNewWeight(event.target.value);
   };
-  
+
   const client = axios.create({
-      baseURL: "http://localhost:4000",
-    });
+    baseURL: "http://localhost:4000",
+  });
 
   const handleSubmitWeight = () => {
     console.log("New weight submitted:", newWeight); // Replace with actual update logic
     setIsDialogOpen(false);
-    client.post("weight/", { weight: newWeight, userId: userData.id }).then((response) => {
-    setNewWeight("");
-    
-    // alert field of weights
-    
-    setWeights([...weights, {
-      weight: newWeight,
-        month: response.data.month,
-    }]);
-    
-    });
+    client
+      .post("weight/", { weight: newWeight, userId: userData.id })
+      .then((response) => {
+        setNewWeight("");
+
+        // alert field of weights
+
+        setWeights([
+          ...weights,
+          {
+            weight: newWeight,
+            month: response.data.month,
+          },
+        ]);
+      });
   };
-  
+
   useEffect(() => {
     if (userData.id && weights.length === 0) {
       client.get(`/weight?id=${userData.id}`).then((response) => {
-        const {data: weights} = response;
+        const { data: weights } = response;
         setWeights(weights);
       });
     }

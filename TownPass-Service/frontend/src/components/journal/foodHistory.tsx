@@ -15,8 +15,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 
-
-
 // Mock food history data
 const foodHistory = [
   {
@@ -72,9 +70,7 @@ const FoodHistory = () => {
               <DialogTitle>新增食物</DialogTitle>
             </DialogHeader>
             <DialogFooter>
-              <Button type="submit" >
-                新增
-              </Button>
+              <Button type="submit">新增</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

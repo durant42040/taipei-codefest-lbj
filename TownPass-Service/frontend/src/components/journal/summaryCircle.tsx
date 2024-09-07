@@ -17,7 +17,6 @@ const SummaryCircle = ({
   return (
     <>
       <div className="flex items-center justify-between mx-2">
-        
         <h2 className="text-xl font-bold mb-4 flex items-center">
           <Target className="mr-2" />
           {title}

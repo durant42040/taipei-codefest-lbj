@@ -137,6 +137,7 @@ app.post('/food', async (req, res) => {
 
 app.get("/today", async (req, res) => {
     const user = req.query.id;
+    console.log("userid", user);
     // @ts-ignore
     let today = await db.select().from(sessions).where(eq(sessions.userId, user));
     

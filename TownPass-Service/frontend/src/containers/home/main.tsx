@@ -34,7 +34,7 @@ function Home() {
   }, [navigate, userData]);
 
   useEffect(() => {
-    if (userData.id && today.burned === 0) {
+    if (userData.id && today.burned === -1) {
       client.get(`/today?id=${userData.id}`).then((response) => {
         const { data: todayData } = response;
         setToday(todayData);
