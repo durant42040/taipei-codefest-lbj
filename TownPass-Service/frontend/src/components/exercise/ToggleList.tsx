@@ -41,7 +41,7 @@ function ToggleList() {
   };
 
   const handleExpand = () => {
-    setIsExpanded(!isExpanded); // Toggle expanded state
+    setIsExpanded(!isExpanded);
   };
 
   return (
@@ -120,7 +120,7 @@ function ToggleList() {
         className={cn(
           "w-full fixed inset-x-0 transform transition-transform duration-500 ease-in-out bg-gray-100 rounded-lg z-50",
           isCourtInfoVisible
-            ? "translate-y-0 bottom-0 h-[45%]"
+            ? "translate-y-0 bottom-0 h-[33%]"
             : "translate-y-full",
         )}
       >

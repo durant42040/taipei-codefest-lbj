@@ -48,7 +48,10 @@ function useLocation(setLocation: {
   useConnectionMessage("location", null);
   const cleanup = useHandleConnectionData((event) => {
     const data = JSON.parse(event.data as string);
-    const { latitude, longitude } = data.data ?? { latitude: 25.021639, longitude: 121.535083 };
+    const { latitude, longitude } = data.data ?? {
+      latitude: 25.021639,
+      longitude: 121.535083,
+    };
     setLocation({ latitude, longitude });
   });
   setTimeout(() => {
