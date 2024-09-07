@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { LocateFixed, PinIcon } from "lucide-react";
 import { useHandleConnectionData } from "@/composables/useHandleConnectionData";

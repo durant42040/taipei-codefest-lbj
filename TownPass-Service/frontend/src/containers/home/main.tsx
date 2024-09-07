@@ -2,10 +2,9 @@ import axios from "axios";
 import journalLogo from "@/assets/notebook-text.svg";
 import mapLogo from "@/assets/map-pinned.svg";
 import "@/App.css";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Weight from "@/components/weight";
 import Journal from "@/components/journal/journal";
-
 import FoodHistory from "@/components/journal/foodHistory";
 import { useExercise } from "@/contexts/useExercise.tsx";
 import { useNavigate } from "react-router-dom";
@@ -13,13 +12,31 @@ import ExercisePage from "@/containers/exercise/main";
 import { useEffect, useState } from "react";
 
 import SummaryCircle from "@/components/journal/summaryCircle";
-// import ToggleList from "@/components/exercise/ToggleList";
+import { NavLink, useLocation } from "react-router-dom";
+
+const tabs = [
+  {
+    title: "運動紀錄",
+    path: "/journal",
+    icon: journalLogo,
+    alt: "Journal",
+    value: "journal",
+  },
+  {
+    title: "我要運動",
+    path: "/exercise",
+    icon: mapLogo,
+    alt: "Exercise",
+    value: "exercise",
+  },
+];
 
 function Home() {
   const { userData } = useExercise();
   const client = axios.create({
     baseURL: "http://localhost:4000",
   });
+  const location = useLocation();
   const navigate = useNavigate();
   const [today, setToday] = useState({
     burned: -1,
@@ -27,11 +44,24 @@ function Home() {
     time: -1,
   });
 
+  const getTabValueFromPath = (path: string) => {
+    if (path === "/journal") return "journal";
+    if (path === "/exercise") return "exercise";
+    return "journal"; // default tab
+  };
+
   useEffect(() => {
     if (userData.name !== "" && userData.age === "") {
       navigate("/LoginPage");
     }
   }, [navigate, userData]);
+
+  const handleTabChange = (value: string) => {
+    const tab = tabs.find((tab) => tab.value === value);
+    if (tab) {
+      navigate(tab.path);
+    }
+  };
 
   useEffect(() => {
     if (userData.id && today.burned === -1) {
@@ -42,47 +72,39 @@ function Home() {
     }
   }, [client, userData]);
 
-  // useEffect(() => {
-  //   client.get("/api/monster").then((response) => {
-  //     const { data: monster } = response;
-  //   });
-  // }, []);
-
   return (
     <div>
-      <Tabs defaultValue="account" className="text-black bg-white rounded-lg">
+      <Tabs
+        value={getTabValueFromPath(location.pathname)}
+        onValueChange={handleTabChange}
+        className="text-black bg-white rounded-lg"
+      >
         <TabsList className="grid grid-cols-2 rounded-lg mb-3">
-          <TabsTrigger
-            value="account"
-            className="flex items-center cursor-pointer rounded-tl-lg rounded-r-none font-semibold text-xl"
-          >
-            <img src={journalLogo} alt="Journal" className="mx-1" />
-            運動紀錄
-          </TabsTrigger>
-          <TabsTrigger
-            value="password"
-            className="flex items-center cursor-pointer rounded-tr-lg rounded-l-none font-semibold text-xl"
-          >
-            <img src={mapLogo} alt="Map" className="mx-1" />
-            我要運動
-          </TabsTrigger>
+          {tabs.map((tab) => (
+            <TabsTrigger
+              key={tab.title}
+              value={tab.value}
+              className="flex items-center cursor-pointer rounded-tl-lg rounded-r-none font-semibold text-xl"
+            >
+              <img src={tab.icon} alt={tab.alt} className="mx-1" />
+              <NavLink to={tab.path}>{tab.title}</NavLink>
+            </TabsTrigger>
+          ))}
         </TabsList>
-        <TabsContent value="account">
-          <SummaryCircle
-            title="今日總覽"
-            burned={today.burned}
-            intake={today.intake}
-            time={today.time}
-          />
-          <Weight />
-          <Journal />
-          {/* <SummaryCircle /> */}
-
-          <FoodHistory />
-        </TabsContent>
-        <TabsContent value="password">
-          <ExercisePage />
-        </TabsContent>
+        {location.pathname === "/journal" && (
+          <>
+            <Weight />
+            <Journal />
+            <SummaryCircle
+              title="今日總覽"
+              burned={600}
+              intake={1000}
+              time={105}
+            />
+            <FoodHistory />
+          </>
+        )}
+        {location.pathname === "/exercise" && <ExercisePage />}
       </Tabs>
     </div>
   );
