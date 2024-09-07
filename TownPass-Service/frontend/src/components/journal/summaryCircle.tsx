@@ -8,6 +8,7 @@ const SummaryCircle = ({
   burned,
   time,
 }: {
+
   title: string;
   intake: number;
   burned: number;

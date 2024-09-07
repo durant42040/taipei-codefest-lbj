@@ -15,6 +15,7 @@ app.use(cors());
 
 app.post('/user', async (req, res) => {
     const user = req.body;
+    console.log(user);
     // @ts-ignore
     const isUserExist = await db.select().from(users).where(eq(users.id, user.id));
     if (isUserExist.length === 0) {
@@ -26,7 +27,9 @@ app.post('/user', async (req, res) => {
 
 app.get('/user', async (req, res) => {
     // @ts-ignore
+    console.log(req.query);
     const user = await db.select().from(users).where(eq(users.id, req.query.id));
+    console.log(user)
     res.json(user);
 });
 

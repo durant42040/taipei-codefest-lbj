@@ -7,22 +7,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast, useToast } from "@/components/ui/use-toast"
 import { useNavigate } from 'react-router-dom'
+import {useExercise} from "@/contexts/useExercise.tsx";
 
 export default function LoginPage() {
   const { toast } = useToast()
   const navigate = useNavigate();
-  const [userData, setUserData] = useState({
-    id: '',
-    age: '',
-    weight: '',
-    height: '',
-    gender: '',
-  })
-
+  const { userData, setUserData } = useExercise();
   const handleChange = (name: string, value: string) => {
     setUserData({ ...userData, [name]: value })
   }
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
@@ -42,7 +35,7 @@ export default function LoginPage() {
       })
     }
   }
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md">
@@ -53,12 +46,12 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="id">User ID</Label>
+              <Label htmlFor="name">Name</Label>
               <Input 
-                id="id" 
-                name="id" 
-                value={userData.id} 
-                onChange={(e) => handleChange('id', e.target.value)} 
+                id="name"
+                name="name"
+                value={userData.name}
+                onChange={(e) => setUserData({...userData, name: e.target.value})}
                 required 
               />
             </div>

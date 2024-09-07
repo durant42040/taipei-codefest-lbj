@@ -1,30 +1,30 @@
-import { useEffect } from "react";
 import axios from "axios";
 import journalLogo from "@/assets/notebook-text.svg";
 import mapLogo from "@/assets/map-pinned.svg";
 import "@/App.css";
-import { useConnectionMessage } from "@/composables/useConnectionMessage";
-import { useHandleConnectionData } from "@/composables/useHandleConnectionData";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Weight from "@/components/weight";
-import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
-import SummaryCircle from "@/components/journal/summaryCircle";
+
 import FoodHistory from "@/components/journal/foodHistory";
+import {useExercise} from "@/contexts/useExercise.tsx";
+import {useNavigate} from "react-router-dom";
+import ExercisePage from "@/containers/exerciseLog/main";
+import {useEffect} from "react";
+
 function Home() {
+  const {userData} = useExercise();
   const client = axios.create({
     baseURL: "http://localhost:4000",
   });
-
-  const handleDogInfo = (event: { data: string }) => {
-    const result: { name: string; data: any } = JSON.parse(event.data);
-    // alert(`name: ${result.data.name}, age: ${result.data.age}`);
-  };
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
-    useConnectionMessage("doginfo", null);
-    useHandleConnectionData(handleDogInfo);
-  }, []);
+    if(userData.name !== "" && userData.age === ""){
+      navigate("/LoginPage");
+    }
+  }, [navigate, userData]);
+  
 
   // useEffect(() => {
   //   client.get("/api/monster").then((response) => {
@@ -57,6 +57,9 @@ function Home() {
           {/* <SummaryCircle /> */}
           <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
           <FoodHistory  />
+        </TabsContent>
+        <TabsContent value="password">
+          <ExercisePage />
         </TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
