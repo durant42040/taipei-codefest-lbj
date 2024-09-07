@@ -74,7 +74,7 @@ function ToggleList() {
       </div>
       <div
         className={cn(
-          "w-full fixed inset-x-0 transform transition-transform duration-300 ease-in-out",
+          "w-full fixed inset-x-0 transform transition-transform duration-300 ease-in-out z-50",
           isVisible ? "translate-y-0" : "translate-y-full",
           isExpanded ? "top-0 h-full" : "bottom-0 h-[13%]",
         )}
@@ -118,7 +118,7 @@ function ToggleList() {
       </div>
       <div
         className={cn(
-          "w-full fixed inset-x-0 transform transition-transform duration-500 ease-in-out bg-gray-100 rounded-lg",
+          "w-full fixed inset-x-0 transform transition-transform duration-500 ease-in-out bg-gray-100 rounded-lg z-50",
           isCourtInfoVisible
             ? "translate-y-0 bottom-0 h-[45%]"
             : "translate-y-full",

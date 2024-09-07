@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { PinIcon } from "lucide-react";
 const envConfig = {
@@ -38,11 +38,6 @@ function PoiMarkers({
     </>
   );
 }
-
-// function MyComponent() {
-//   const map = useMap() as google.maps.Map;
-//   google.maps.KmlLayer.
-// }
 
 export default function ExerciseMap() {
   const [viewState, setViewState] = useState({
