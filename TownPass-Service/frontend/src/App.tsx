@@ -33,7 +33,7 @@ function App() {
   return (
     <div>
       <Tabs defaultValue="account" className="text-black bg-white rounded-lg">
-        <TabsList className="grid grid-cols-2 rounded-t-md p-1">
+        <TabsList className="grid grid-cols-2 rounded-lg border mb-3">
           <TabsTrigger
             value="account"
             className="flex items-center cursor-pointer rounded-tl-lg rounded-r-none font-semibold text-xl"
