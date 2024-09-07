@@ -53,20 +53,20 @@ const Journal = () => {
         <div>
             {/* Flex container to align title and button */}
             <div className="flex items-center justify-between mx-2">
-                <h2 className="text-xl font-bold mt-2 mb-1">Recent Activities</h2>
+                <h2 className="text-xl font-bold mt-2 mb-1">最近活動</h2>
                 
                 {/* Button aligned to the right */}
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
-                        <Button className="my-4">Add Activity</Button>
+                        <Button className="my-4">新增活動</Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>Add New Activity</DialogTitle>
+                            <DialogTitle>新增活動</DialogTitle>
                         </DialogHeader>
                         <div className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="sport">Sport</Label>
+                                <Label htmlFor="sport">運動</Label>
                                 <Input
                                     id="sport"
                                     name="sport"
@@ -76,7 +76,7 @@ const Journal = () => {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="location">Location</Label>
+                                <Label htmlFor="location">地點</Label>
                                 <Input
                                     id="location"
                                     name="location"
@@ -86,7 +86,7 @@ const Journal = () => {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="time">Time (e.g., 1 hour, 30 min)</Label>
+                                <Label htmlFor="time">時長</Label>
                                 <Input
                                     id="duration"
                                     name="duration"
@@ -96,7 +96,7 @@ const Journal = () => {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="caloriesBurnt">Calories Burnt</Label>
+                                <Label htmlFor="caloriesBurnt">燃燒熱量</Label>
                                 <Input
                                     id="calories"
                                     name="calories"
@@ -109,7 +109,7 @@ const Journal = () => {
                         </div>
                         <DialogFooter>
                             <Button type="submit" onClick={handleSubmit}>
-                                Add Activity
+                                新增
                             </Button>
                         </DialogFooter>
                     </DialogContent>

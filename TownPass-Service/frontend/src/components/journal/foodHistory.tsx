@@ -47,7 +47,7 @@ const FoodHistory = () => {
         <Utensils className="mr-2" />
         食物攝取紀錄
       </h2>
-      <div className="rounded-lg border">
+      <div className="rounded-lg">
         {foodHistory.map((item) => (
           <FoodActivityCard
             key={item.id}

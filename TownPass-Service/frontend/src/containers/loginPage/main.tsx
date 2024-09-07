@@ -40,13 +40,13 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>User Registration</CardTitle>
-          <CardDescription>Please enter your details to register.</CardDescription>
+          <CardTitle>註冊基本資料</CardTitle>
+          <CardDescription>請輸入基本資料</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name" >姓名</Label>
               <Input 
                 id="name"
                 name="name"
@@ -56,7 +56,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="age">Age</Label>
+              <Label htmlFor="age">年紀</Label>
               <Input 
                 id="age" 
                 name="age" 
@@ -67,7 +67,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="weight">Weight (kg)</Label>
+              <Label htmlFor="weight">體重</Label>
               <Input 
                 id="weight" 
                 name="weight" 
@@ -79,7 +79,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="height">Height (cm)</Label>
+              <Label htmlFor="height">身高</Label>
               <Input 
                 id="height" 
                 name="height" 
@@ -91,21 +91,20 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="gender">Gender</Label>
+              <Label htmlFor="gender">性別</Label>
               <Select onValueChange={(value) => handleChange('gender', value)} required>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select gender" />
+                  <SelectValue placeholder="選擇性別" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="male">Male</SelectItem>
-                  <SelectItem value="female">Female</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
+                  <SelectItem value="male">男</SelectItem>
+                  <SelectItem value="female">女</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full">Register</Button>
+            <Button type="submit" className="w-full">註冊</Button>
           </CardFooter>
         </form>
       </Card>
