@@ -5,8 +5,8 @@ import { Badge } from "../ui/badge";
 function CourtInfo() {
   const { selectedCourt, setIsExpanded, setIsCourtInfoVisible, setIsVisible } =
     useExercise();
-  
-    const handleReturn = () => {
+
+  const handleReturn = () => {
     setIsExpanded(true);
     setIsVisible(true);
     setIsCourtInfoVisible(false);
@@ -49,7 +49,10 @@ function CourtInfo() {
           返回
         </button>
         <button className="bg-[#5ab4c5] text-white p-2 rounded-lg w-16">
-          <a href={`https://vbs.sports.taipei/venues/?K=${selectedCourt?.K}`} className="text-white">
+          <a
+            href={`https://vbs.sports.taipei/venues/?K=${selectedCourt?.K}`}
+            className="text-white"
+          >
             更多
           </a>
         </button>

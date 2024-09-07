@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Clock, Utensils, Flame, Info,Weight,Pizza } from 'lucide-react';
+import { Clock, Utensils, Flame, Info, Weight, Pizza } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface FoodActivityProps {
@@ -13,15 +13,27 @@ interface FoodActivityProps {
   carbs: number;
 }
 
-export function FoodActivityCard({ id, meal, food, amount, calories, protein, fat, carbs }: FoodActivityProps) {
+export function FoodActivityCard({
+  id,
+  meal,
+  food,
+  amount,
+  calories,
+  protein,
+  fat,
+  carbs,
+}: FoodActivityProps) {
   const navigate = useNavigate();
 
   return (
-    <Card className="w-full max-w-3xl hover:bg-accent transition-colors my-1" onClick={() => navigate(`/foodDetails/${id}`)}>
+    <Card
+      className="w-full max-w-3xl hover:bg-accent transition-colors my-1"
+      onClick={() => navigate(`/foodDetails/${id}`)}
+    >
       <CardContent className="p-4">
         <div className="grid grid-cols-3 gap-3 items-center">
           <div className="flex items-center space-x-2">
-          <Pizza className="w-4 h-4 text-muted-foreground" />
+            <Pizza className="w-4 h-4 text-muted-foreground" />
             <span className="text-sm font-medium">{food}</span>
           </div>
           <div className="flex items-center space-x-2">
