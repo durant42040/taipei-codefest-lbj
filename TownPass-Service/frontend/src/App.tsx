@@ -8,6 +8,7 @@ import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
 import { Button } from "./components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
+import {Weight} from "./components/weight"
 import Journal from "./components/journal/journal";
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <TabsContent value="account"><Journal/></TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
+      <Weight />
     </>
     
   );
