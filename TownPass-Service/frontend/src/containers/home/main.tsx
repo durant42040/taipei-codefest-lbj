@@ -5,6 +5,8 @@ import "@/App.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Weight from "@/components/weight";
 import Journal from "@/components/journal/journal";
+
+import FoodHistory from "@/components/journal/foodHistory";
 import {useExercise} from "@/contexts/useExercise.tsx";
 import {useNavigate} from "react-router-dom";
 import ExercisePage from "@/containers/exerciseLog/main";
@@ -53,6 +55,8 @@ function Home() {
           <Weight />
           <Journal />
           {/* <SummaryCircle /> */}
+          <SummaryCircle title="今日總覽" burned={600} intake={1000} time={105}/>
+          <FoodHistory  />
         </TabsContent>
         <TabsContent value="password">
           <ExercisePage />
