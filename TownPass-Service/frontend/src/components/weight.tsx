@@ -19,6 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Scale } from 'lucide-react';
 
 import {
   ChartConfig,
@@ -59,40 +60,44 @@ export default function Weight() {
     setNewWeight("");
   };
 
-  return (
-    <>
-      <div className="flex justify-between items-center mx-2">
-        <h2 className="text-xl font-bold mt-2 mb-1">體重紀錄</h2>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button>變更體重</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>更新體重</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
-              <Label htmlFor="newWeight">新的體重</Label>
-              <Input
-                id="newWeight"
-                type="number"
-                value={newWeight}
-                onChange={handleWeightChange}
-                required
-              />
+    return (
+        <>
+            <div className="flex items-center justify-between mx-2">
+              
+              <h2 className="text-xl font-bold mb-4 flex items-center">
+                <Scale className="mr-2" />
+                體重紀錄
+              </h2>
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogTrigger asChild>
+                        <Button>變更體重</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>更新體重</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                            <Label htmlFor="newWeight">新的體重</Label>
+                            <Input
+                                id="newWeight"
+                                type="number"
+                                value={newWeight}
+                                onChange={handleWeightChange}
+                                required
+                            />
+                        </div>
+                        <DialogFooter>
+                            <Button onClick={handleSubmitWeight}>提交</Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </div>
-            <DialogFooter>
-              <Button onClick={handleSubmitWeight}>提交</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </div>
-      <Card>
-        <CardHeader>
-          <CardDescription>1月 - 6月 2024</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={chartConfig}>
+            <Card>
+                <CardHeader>
+                    <CardDescription>1月 - 6月 2024</CardDescription>
+                </CardHeader>
+                <CardContent>
+                <ChartContainer config={chartConfig}>
             <LineChart
               accessibilityLayer
               data={chartData}

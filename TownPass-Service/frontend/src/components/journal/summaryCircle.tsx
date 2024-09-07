@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ChartContainer } from "@/components/ui/chart";
 import { PolarAngleAxis, RadialBar, RadialBarChart } from "recharts";
+import { Target } from "lucide-react";
 
 const SummaryCircle = ({
   title,
@@ -15,7 +16,13 @@ const SummaryCircle = ({
 }) => {
   return (
     <>
-      <h2 className="text-xl font-bold mt-2 text-left mx-2">{title}</h2>
+      <div className="flex items-center justify-between mx-2">
+        
+        <h2 className="text-xl font-bold mb-4 flex items-center">
+          <Target className="mr-2" />
+          {title}
+        </h2>
+      </div>
       <Card className="custom-card">
         <CardContent className="flex gap-4 p-4">
           <div className="grid items-center gap-2">

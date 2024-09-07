@@ -10,7 +10,8 @@ import FoodHistory from "@/components/journal/foodHistory";
 import { useExercise } from "@/contexts/useExercise.tsx";
 import { useNavigate } from "react-router-dom";
 import ExercisePage from "@/containers/exercise/main";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import SummaryCircle from "@/components/journal/summaryCircle";
 // import ToggleList from "@/components/exercise/ToggleList";
 
@@ -67,15 +68,16 @@ function Home() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="account">
-          <Weight />
-          <Journal />
-          {/* <SummaryCircle /> */}
           <SummaryCircle
             title="今日總覽"
             burned={today.burned}
             intake={today.intake}
             time={today.time}
           />
+          <Weight />
+          <Journal />
+          {/* <SummaryCircle /> */}
+
           <FoodHistory />
         </TabsContent>
         <TabsContent value="password">
