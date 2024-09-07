@@ -9,13 +9,28 @@ import { useExercise } from "@/contexts/useExercise";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { courts, sports } from "@/data";
+import Court from "./Court";
+import CourtInfo from "./CourtInfo";
 
 function ToggleList() {
-  const { exercise, setExercise } = useExercise();
-  const [isVisible, setIsVisible] = useState(false);
-  const [filteredCourts, setFilteredCourts] = useState(courts);
+  const {
+    exercise,
+    setExercise,
+    isExpanded,
+    setIsExpanded,
+    isVisible,
+    setIsVisible,
+    isCourtInfoVisible,
+    setIsCourtInfoVisible,
+  } = useExercise();
+  const [filteredCourts, setFilteredCourts] = useState(
+    courts.filter((court) => court.sports.includes(exercise.split(" ")[1])),
+  );
+
   const handleSelectExercise = (sport: string) => {
     setIsVisible(false);
+    setIsExpanded(false);
+    setIsCourtInfoVisible(false);
     setTimeout(() => {
       setExercise(sport);
       setFilteredCourts(
@@ -23,6 +38,10 @@ function ToggleList() {
       );
       setIsVisible(true);
     }, 200);
+  };
+
+  const handleExpand = () => {
+    setIsExpanded(!isExpanded); // Toggle expanded state
   };
 
   return (
@@ -34,7 +53,7 @@ function ToggleList() {
               {exercise || "運動一覽"}
               <ChevronDown />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-64">
+            <DropdownMenuContent className="w-72">
               {sports.map((sport, index) => (
                 <DropdownMenuItem
                   key={index}
@@ -55,25 +74,57 @@ function ToggleList() {
       </div>
       <div
         className={cn(
-          "w-full fixed inset-x-0 bottom-0 transform transition-transform duration-300 ease-in-out h-[13%]",
+          "w-full fixed inset-x-0 transform transition-transform duration-300 ease-in-out",
           isVisible ? "translate-y-0" : "translate-y-full",
+          isExpanded ? "top-0 h-full" : "bottom-0 h-[13%]",
         )}
       >
         {isVisible && (
-          <div className="flex flex-col gap-4 bg-gray-100 shadow-lg h-full rounded-t-xl justify-center">
-            <div className="flex flex-row justify-between">
+          <div
+            className={cn(
+              "flex flex-col gap-4 bg-gray-100 shadow-lg h-full ",
+              !isExpanded && "justify-center rounded-t-xl",
+            )}
+          >
+            <div
+              className={cn(
+                "flex flex-row justify-between items-center",
+                isExpanded && "mt-5",
+              )}
+            >
               <p className="font-semibold text-zinc-950 text-4xl ml-2">
                 {exercise}
               </p>
               <button className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 rounded-full text-sm">
-                {filteredCourts.length}筆結果
+                {filteredCourts.length} 筆結果
               </button>
-              <button className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 mr-4">
-                展開列表
+              <button
+                className="border border-[#5ab4c5] text-[#5ab4c5] bg-transparent p-2 mr-4"
+                onClick={handleExpand}
+              >
+                {isExpanded ? "收回列表" : "展開列表"}
               </button>
             </div>
+
+            {isExpanded && (
+              <div className="flex flex-col p-4 gap-2 overflow-scroll">
+                {filteredCourts.map((court) => (
+                  <Court key={court.K} court={court} />
+                ))}
+              </div>
+            )}
           </div>
         )}
+      </div>
+      <div
+        className={cn(
+          "w-full fixed inset-x-0 transform transition-transform duration-500 ease-in-out bg-gray-100 rounded-lg",
+          isCourtInfoVisible
+            ? "translate-y-0 bottom-0 h-[45%]"
+            : "translate-y-full",
+        )}
+      >
+        {isCourtInfoVisible && <CourtInfo />}
       </div>
     </>
   );

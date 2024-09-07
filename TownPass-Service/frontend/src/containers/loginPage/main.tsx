@@ -10,32 +10,33 @@ import { useNavigate } from 'react-router-dom'
 import {useExercise} from "@/contexts/useExercise.tsx";
 
 export default function LoginPage() {
-  const { toast } = useToast()
+  const { toast } = useToast();
   const navigate = useNavigate();
   const { userData, setUserData } = useExercise();
   const handleChange = (name: string, value: string) => {
     setUserData({ ...userData, [name]: value })
   }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/user', userData)
+      const response = await axios.post("http://localhost:4000/user", userData);
       toast({
         title: "Success!",
         description: "User registered successfully!",
-      })
-      console.log(response.data)
-      navigate("/")
+      });
+      console.log(response.data);
+      navigate("/");
     } catch (error) {
-      console.error('Error submitting user data', error)
+      console.error("Error submitting user data", error);
       toast({
         title: "Error",
         description: "Failed to register user. Please try again.",
         variant: "destructive",
-      })
+      });
     }
-  }
-  
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md">
@@ -109,5 +110,5 @@ export default function LoginPage() {
         </form>
       </Card>
     </div>
-  )
+  );
 }
