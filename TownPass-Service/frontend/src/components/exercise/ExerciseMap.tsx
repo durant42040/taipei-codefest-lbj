@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
-import { LocateFixed, PinIcon } from "lucide-react";
-import { useHandleConnectionData } from "@/composables/useHandleConnectionData";
-import { useConnectionMessage } from "@/composables/useConnectionMessage";
+import { PinIcon } from "lucide-react";
 
 const envConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -84,7 +82,7 @@ export default function ExerciseMap() {
   useLocation(setLocation);
 
   return (
-    <div>
+    <div className="mb-8">
       <div className="rounded-lg border-2">
         <APIProvider {...envConfig}>
           <Map

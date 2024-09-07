@@ -58,7 +58,7 @@ const Journal = () => {
     <div>
       {/* Flex container to align title and button */}
       <div className="flex items-center justify-between mx-2">
-        <h2 className="text-xl font-bold mb-4 flex items-center">
+        <h2 className="text-xl font-bold mb-1 flex items-center">
           <Dumbbell className="mr-2" />
           最近活動
         </h2>
