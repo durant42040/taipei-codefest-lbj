@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { db } from './db/index.js';
-import {sessions, users} from './db/schema.js';
+import {sessions, users, weights,} from './db/schema.js';
 import {eq} from "drizzle-orm";
 
 dotenv.config();
@@ -24,6 +24,12 @@ app.post('/user', async (req, res) => {
     res.json(user);
 });
 
+app.get('/user', async (req, res) => {
+    // @ts-ignore
+    const user = await db.select().from(users).where(eq(users.id, req.query.id));
+    res.json(user);
+});
+
 app.get('/session', async (req, res) => {
     const user = req.query.user;
     // @ts-ignore
@@ -32,7 +38,11 @@ app.get('/session', async (req, res) => {
 });
 
 app.get('/weight', async (req, res) => {
-
+    const user = req.query.user;
+    // @ts-ignore
+    const weight = await db.select().from(weights).where(eq(weights.userId, user)).orderBy(weights.time);
+    
+    res.json(weight);
 });
 
 app.get('/food', async (req, res) => {
