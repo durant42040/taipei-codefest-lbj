@@ -1,4 +1,6 @@
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import {Activity} from "lucide-react";
+import {ActivityCard} from "@/components/ui/activityCard.tsx";
 
 const activityHistory = [
   {
@@ -25,15 +27,15 @@ const Journal = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mt-2 mb-1 text-left mx-2">最近活動</h2>
-      <div className="rounded-lg border-2">
+      <div className="rounded-lg">
         <Table>
           <TableBody>
             {activityHistory.map((activity) => (
-              <TableRow key={activity.id} className="my-2">
-                <TableCell>{activity.sport}</TableCell>
-                <TableCell>{activity.location}</TableCell>
-                <TableCell>{activity.time}</TableCell>
-              </TableRow>
+                <ActivityCard
+                    sport={activity.sport}
+                    time={activity.time}
+                    caloriesBurnt={450}
+                />
             ))}
           </TableBody>
         </Table>

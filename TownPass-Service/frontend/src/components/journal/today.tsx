@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ChartContainer } from "@/components/ui/chart";
 import { PolarAngleAxis, RadialBar, RadialBarChart } from "recharts";
 
-const Activity = ({
+const Today = ({
   intake,
   burned,
   time,
@@ -108,4 +108,4 @@ const Activity = ({
   );
 };
 
-export default Activity;
+export default Today;
