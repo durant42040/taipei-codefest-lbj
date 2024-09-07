@@ -54,11 +54,10 @@ function Home() {
         <TabsContent value="account">
           <Weight />
           <Journal />
-          <Calorie />
+          <Activity burned={600} intake={2000} time={120}/>
         </TabsContent>
         <TabsContent value="password">Maps</TabsContent>
       </Tabs>
-      <Activity/>
     </div>
   );
 }
