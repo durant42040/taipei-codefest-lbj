@@ -71,10 +71,13 @@ export default function Weight() {
       .then((response) => {
         setNewWeight("");
 
-        // alert field of weights
+        // remove the old weight if it exists
+        const newWeights = weights.filter(
+          (weight) => weight.month !== response.data.month
+        );
 
         setWeights([
-          ...weights,
+          ...newWeights,
           {
             weight: newWeight,
             month: response.data.month,
