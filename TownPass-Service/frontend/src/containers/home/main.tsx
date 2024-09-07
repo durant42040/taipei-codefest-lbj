@@ -8,6 +8,7 @@ import Journal from "@/components/journal/journal";
 import {useExercise} from "@/contexts/useExercise.tsx";
 import {useNavigate} from "react-router-dom";
 import ExercisePage from "@/containers/exerciseLog/main";
+import {useEffect} from "react";
 
 function Home() {
   const {userData} = useExercise();
@@ -15,9 +16,12 @@ function Home() {
     baseURL: "http://localhost:4000",
   });
   const navigate = useNavigate();
-  if (userData.age === "") {
-    navigate("/LoginPage");
-  }
+  
+  useEffect(() => {
+    if(userData.name !== "" && userData.age === ""){
+      navigate("/LoginPage");
+    }
+  }, [navigate, userData]);
   
 
   // useEffect(() => {
@@ -26,7 +30,7 @@ function Home() {
   //   });
   // }, []);
 
-  if (userData.age) return (
+  return (
     <div>
       <Tabs defaultValue="account" className="text-black bg-white rounded-lg">
         <TabsList className="grid grid-cols-2 rounded-lg mb-3">

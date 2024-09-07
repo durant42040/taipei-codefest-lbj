@@ -16,7 +16,6 @@ export default function LoginPage() {
   const handleChange = (name: string, value: string) => {
     setUserData({ ...userData, [name]: value })
   }
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
@@ -36,7 +35,7 @@ export default function LoginPage() {
       })
     }
   }
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md">

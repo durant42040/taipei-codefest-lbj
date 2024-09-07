@@ -18,26 +18,35 @@ function App() {
   
   const handleUserInfo = (event: { data: string }) => {
     const result: { name: string; data: any } = JSON.parse(event.data);
-    setUserData({...userData, id: result.data.id, name: result.data.realName});
+    if (userData.name === "") {
+      client.get(`/user?id=${result.data.id}`).then((response) => {
+        if (response.data.length) {
+          setUserData(response.data[0]);
+        } else {
+          setUserData({...userData, id: result.data.id, name: result.data.realName});
+        }
+      });
+    }
     // alert(`name: ${result.data.name}, age: ${result.data.age}`);
   };
+  
   
   useEffect(() => {
     useConnectionMessage("userinfo", null);
     useHandleConnectionData(handleUserInfo);
   }, []);
   
-  useEffect(() => {
-    if (userData.id !== "" && userData.age === "") {
-      const id = userData.id;
-      console.log(id);
-      client.get(`/user?id=${id}`).then((response) => {
-        if(response.data){
-          setUserData(response.data);
-        }
-      });
-    }
-  }, [client, userData, setUserData]);
+  // useEffect(() => {
+  //   if (userData.id !== "" && userData.age === "") {
+  //     const id = userData.id;
+  //     console.log(id);
+  //     client.get(`/user?id=${id}`).then((response) => {
+  //       if(response.data){
+  //         setUserData(response.data[0]);
+  //       }
+  //     });
+  //   }
+  // }, [client, userData, setUserData]);
   
   
   return (
