@@ -105,12 +105,12 @@ export default function Weight() {
           <DialogTrigger asChild>
             <Button>變更體重</Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="w-10/12 rounded-xl">
             <DialogHeader>
-              <DialogTitle>更新體重</DialogTitle>
+              <DialogTitle className="text-2xl">更新體重</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4">
-              <Label htmlFor="newWeight">新的體重</Label>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="newWeight" className="text-lg">新的體重</Label>
               <Input
                 id="newWeight"
                 type="number"
@@ -119,8 +119,8 @@ export default function Weight() {
                 required
               />
             </div>
-            <DialogFooter>
-              <Button onClick={handleSubmitWeight}>提交</Button>
+            <DialogFooter className="flex flex-row-reverse mt-1">
+              <button onClick={handleSubmitWeight} className="w-20 text-[#5ab4c5] border-2 border-[#5ab4c5] bg-transparent font-semibold">提交</button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
