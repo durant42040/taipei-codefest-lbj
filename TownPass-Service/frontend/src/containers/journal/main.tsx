@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import journalLogo from "@/assets/notebook-text.svg"
+import journalLogo from "@/assets/notebook-text.svg";
 import mapLogo from "@/assets/map-pinned.svg";
 import "@/App.css";
 import { useConnectionMessage } from "@/composables/useConnectionMessage";
 import { useHandleConnectionData } from "@/composables/useHandleConnectionData";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Weight from "@/components/weight"
-import Calorie from "@/components/calorie"
+import Weight from "@/components/weight";
+import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
 
 function Home() {

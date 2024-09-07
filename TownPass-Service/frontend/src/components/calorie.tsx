@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 
 const calorieData = {
   totalCalories: 1500, // Example total calories consumed today
   foods: [
-    { name: 'Apple', calories: 95 },
-    { name: 'Chicken Breast', calories: 300 },
-    { name: 'Rice', calories: 250 },
-    { name: 'Protein Shake', calories: 200 },
-  ]
-}
+    { name: "Apple", calories: 95 },
+    { name: "Chicken Breast", calories: 300 },
+    { name: "Rice", calories: 250 },
+    { name: "Protein Shake", calories: 200 },
+  ],
+};
 
 export default function Calorie() {
-  const [totalCalories, setTotalCalories] = useState(0)
-  const [foods, setFoods] = useState([])
+  const [totalCalories, setTotalCalories] = useState(0);
+  const [foods, setFoods] = useState([]);
 
   // useEffect(() => {
   //   // Fetch or set the calorie data here
@@ -27,7 +33,9 @@ export default function Calorie() {
       <div className="flex-1 lg:w-1/3">
         <Card className="p-4 text-center">
           <CardHeader>
-            <CardTitle className="text-4xl font-bold">Calories Consumed</CardTitle>
+            <CardTitle className="text-4xl font-bold">
+              Calories Consumed
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-6xl font-extrabold text-green-600">
@@ -59,5 +67,5 @@ export default function Calorie() {
         </Card>
       </div> */}
     </div>
-  )
+  );
 }
