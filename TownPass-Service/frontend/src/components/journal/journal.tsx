@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Table, TableBody } from "@/components/ui/table";
 import { ActivityCard } from "@/components/ui/activityCard";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -29,29 +36,37 @@ const activityHistoryInitial = [
     caloriesBurnt: 600,
   },
 ];
- 
+
 const Journal = () => {
-  const [activityHistory, setActivityHistory] = useState(activityHistoryInitial);
+  const [activityHistory, setActivityHistory] = useState(
+    activityHistoryInitial,
+  );
   const [newActivity, setNewActivity] = useState({
     id: 0,
-    sport: '',
-    location: '',
-    time: '',
+    sport: "",
+    location: "",
+    time: "",
     caloriesBurnt: 0,
   });
- 
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewActivity({ ...newActivity, [name]: value });
   };
- 
+
   const handleSubmit = () => {
     // Add the new activity with a unique id
     setActivityHistory([
       ...activityHistory,
       { ...newActivity, id: activityHistory.length + 1 },
     ]);
-    setNewActivity({ id: 0, sport: '', location: '', time: '', caloriesBurnt: 0 }); // Reset the form
+    setNewActivity({
+      id: 0,
+      sport: "",
+      location: "",
+      time: "",
+      caloriesBurnt: 0,
+    }); // Reset the form
   };
 
   return (
@@ -139,6 +154,5 @@ const Journal = () => {
     </div>
   );
 };
- 
+
 export default Journal;
- 
