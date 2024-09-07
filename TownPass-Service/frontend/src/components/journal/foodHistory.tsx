@@ -31,7 +31,7 @@ const FoodJournal = () => {
   };
 
   const client = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_BASE_URL,
   });
 
   // const handleSubmit = () => {
@@ -87,9 +87,11 @@ const FoodJournal = () => {
                 <Input
                   id="calorie"
                   name="calorie"
-                    type="number"
+                  type="number"
                   value={newFood.calories}
-                  onChange={(e) => setNewFood({ ...newFood, calories: e.target.value })}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, calories: e.target.value })
+                  }
                   required
                 />
               </div>

@@ -42,7 +42,7 @@ function App(): React.ReactNode {
   const { userData, setUserData } = useExercise();
 
   const client = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_BASE_URL,
   });
 
   const handleUserInfo = () => {

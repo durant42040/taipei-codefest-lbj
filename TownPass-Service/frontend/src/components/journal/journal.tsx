@@ -47,7 +47,7 @@ const Journal = () => {
   };
 
   const client = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_BASE_URL,
   });
 
   const handleSubmit = () => {
@@ -79,17 +79,17 @@ const Journal = () => {
           <DialogTrigger asChild>
             <button className="button-class">新增活動</button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="w-10/12 rounded-xl">
             <DialogHeader>
-              <DialogTitle>新增活動</DialogTitle>
+              <DialogTitle className="text-2xl">新增活動</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4">
+            <div className="flex flex-col">
               <div className="space-y-2">
                 <Label htmlFor="sport">運動</Label>
                 <Input
                   id="sport"
                   name="sport"
-                  value={newActivity?.sport}
+                  value={newActivity.sport}
                   onChange={handleInputChange}
                   required
                 />
@@ -99,7 +99,7 @@ const Journal = () => {
                 <Input
                   id="location"
                   name="location"
-                  value={newActivity?.location}
+                  value={newActivity.location}
                   onChange={handleInputChange}
                   required
                 />
@@ -109,7 +109,7 @@ const Journal = () => {
                 <Input
                   id="duration"
                   name="duration"
-                  value={newActivity?.duration}
+                  value={newActivity.duration}
                   onChange={handleInputChange}
                   required
                 />
@@ -120,16 +120,20 @@ const Journal = () => {
                   id="calories"
                   name="calories"
                   type="number"
-                  value={newActivity?.calories}
+                  value={newActivity.calories}
                   onChange={handleInputChange}
                   required
                 />
               </div>
             </div>
-            <DialogFooter>
-              <Button type="submit" onClick={handleSubmit}>
+            <DialogFooter className="flex flex-row-reverse mt-1">
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="w-20 text-[#5ab4c5] border-2 border-[#5ab4c5] bg-transparent font-semibold"
+              >
                 新增
-              </Button>
+              </button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
