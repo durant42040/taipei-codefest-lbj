@@ -10,6 +10,7 @@ import Weight from "@/components/weight";
 import Calorie from "@/components/calorie";
 import Journal from "@/components/journal/journal";
 import SummaryCircle from "@/components/journal/summaryCircle";
+import ExercisePage from "@/containers/exercise/main";
 
 function Home() {
   const client = axios.create({
