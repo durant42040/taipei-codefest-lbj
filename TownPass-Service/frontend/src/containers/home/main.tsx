@@ -93,14 +93,14 @@ function Home() {
         </TabsList>
         {location.pathname === "/journal" && (
           <>
-            <Weight />
-            <Journal />
             <SummaryCircle
               title="今日總覽"
               burned={600}
               intake={1000}
               time={105}
             />
+            <Weight />
+            <Journal />
             <FoodHistory />
           </>
         )}
