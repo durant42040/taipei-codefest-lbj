@@ -35,6 +35,7 @@ const Journal = () => {
           <TableBody>
             {activityHistory.map((activity) => (
                 <ActivityCard
+                    key={activity.id}
                     id={activity.id}
                     sport={activity.sport}
                     time={activity.time}
