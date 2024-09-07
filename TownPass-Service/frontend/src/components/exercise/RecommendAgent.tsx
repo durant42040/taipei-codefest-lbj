@@ -12,18 +12,16 @@ import {
 import { Activity } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-const ExerciseRecommendationAssistant = ({
-  onSportClick,
-}: {
-  onSportClick: (id: string) => void;
-}) => {
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [recommendedSports, setRecommendedSports] = useState<
-    { id: string; name: string }[]
-  >([]);
+import {useExercise} from "@/contexts/useExercise.tsx";
+
+const ExerciseRecommendationAssistant = ({ onSportClick }: { onSportClick: (id: string) => void }) => {
+  const {userData} = useExercise();
+  const [gender, setGender] = useState(userData.gender);
+  const [age, setAge] = useState(userData.age);
+  const [weight, setWeight] = useState(userData.weight);
+  const [height, setHeight] = useState(userData.height);
+  const [recommendedSports, setRecommendedSports] = useState<{ id: string; name: string }[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const getRecommendation = async () => {
@@ -126,7 +124,7 @@ const ExerciseRecommendationAssistant = ({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-blue-100 p-4 rounded-md cursor-pointer text-center"
-                  onClick={() => onSportClick(sport.id)}
+                  onClick={() => onSportClick(sport.name)}
                 >
                   {sport.name}
                 </motion.div>

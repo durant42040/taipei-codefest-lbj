@@ -53,7 +53,7 @@ const FoodJournal = () => {
     client
       .post("/food", { ...newFood, userId: userData.id })
       .then((response) => {
-        setFoodHistory([...foodHistory, response.data]);
+        setFoodHistory([response.data, ...foodHistory]);
         setNewFood(fakeFood);
         setIsDialogOpen(false);
       });
