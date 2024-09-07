@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TrendingUp } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import scale from "@/assets/scale.svg";
 import {
   Card,
   CardContent,
@@ -53,6 +54,11 @@ export default function Weight() {
   });
 
   const handleSubmitWeight = () => {
+    // ensure weight is number
+    if (isNaN(newWeight) || newWeight === "") {
+      alert("請輸入數字");
+      return;
+    }
     console.log("New weight submitted:", newWeight); // Replace with actual update logic
     setIsDialogOpen(false);
     client
@@ -84,7 +90,12 @@ export default function Weight() {
   return (
     <>
       <div className="flex justify-between items-center mx-2">
-        <h2 className="text-xl font-bold mt-2 mb-3">體重紀錄</h2>
+        <div className="flex">
+          <img src={scale} />
+          <h2 className="text-xl ml-1 font-bold mt-3 mb-3 text-left">
+            體重紀錄
+          </h2>
+        </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button>變更體重</Button>

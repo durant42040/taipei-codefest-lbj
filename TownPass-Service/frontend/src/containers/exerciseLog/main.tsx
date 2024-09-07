@@ -1,42 +1,52 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import SummaryCircle from "@/components/journal/summaryCircle";
+import axios from "axios";
 
-interface Exercise {
+interface Session {
   id: number;
-  name: string;
-  sets: number;
-  reps: number;
-  weight: number;
+  sport: string;
+  time: number; // Assuming time is in hours
+  calories: number;
+  location: string;
 }
 
 const ExerciseDetails = () => {
   const { id } = useParams(); // Extract the id from the URL
 
-  const [name, setName] = useState<string>("");
-
+  const [session, setSession] = useState<Session | null>(null);
+  const client = axios.create({
+    baseURL: "http://localhost:4000",
+  });
   useEffect(() => {
-    // You can modify this to fetch the exercise name based on the id,
-    // or simply set the name using the id directly.
-    if (id) {
-      setName(`Exercise ID: ${id}`);
-    }
+    const fetchSession = async () => {
+      if (id) {
+        try {
+          await client.get(`/onesession?id=${id}`).then((response) => {
+            setSession(response.data[0]);
+            console.log(response.data[0]);
+          });
+        } catch (error) {
+          console.error("Error fetching session data:", error);
+        }
+      }
+    };
+
+    fetchSession();
   }, [id]);
 
   return (
     <div className="container mx-auto p-4">
-      <SummaryCircle title={name} />
+      {session ? (
+        <SummaryCircle
+          title={`${session.time.slice(0, 10).split("-").join("/")} ${session.sport}`}
+          intake={session.location}
+          burned={session.calories}
+          time={session.duration}
+        />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };

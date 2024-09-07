@@ -55,9 +55,9 @@ const foodHistory = [
 const FoodHistory = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false); // Manage dialog open state
   return (
-    <div>
+    <div className="mb-8">
       <div className="flex items-center justify-between mx-2">
-        <h2 className="text-xl font-bold mb-4 flex items-center">
+        <h2 className="text-xl font-bold flex items-center">
           <Utensils className="mr-2" />
           食物攝取紀錄
         </h2>

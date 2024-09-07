@@ -17,7 +17,7 @@ const SummaryCircle = ({
   return (
     <>
       <div className="flex items-center justify-between mx-2">
-        <h2 className="text-xl font-bold mb-4 flex items-center">
+        <h2 className="text-xl font-bold mb-1 flex items-center">
           <Target className="mr-2" />
           {title}
         </h2>
@@ -26,19 +26,32 @@ const SummaryCircle = ({
         <CardContent className="flex gap-4 p-4">
           <div className="grid items-center gap-2">
             <div className="grid flex-1 auto-rows-min gap-0.5">
-              <div className="text-sm text-muted-foreground text-left">
-                Intake
-              </div>
-              <div className="flex items-baseline gap-1 text-xl font-bold tabular-nums leading-none">
-                {intake}
-                <span className="text-sm font-normal text-muted-foreground">
-                  kcal
-                </span>
-              </div>
+              {typeof intake === "number" ? (
+                <>
+                  <div className="text-sm text-muted-foreground text-left">
+                    攝取熱量
+                  </div>
+                  <div className="flex items-baseline gap-1 text-xl font-bold tabular-nums leading-none">
+                    {intake}
+                    <span className="text-sm font-normal text-muted-foreground">
+                      kcal
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="text-sm text-muted-foreground text-left">
+                    地點
+                  </div>
+                  <div className="flex items-baseline gap-1 text-xl font-bold tabular-nums leading-none">
+                    {intake}
+                  </div>
+                </>
+              )}
             </div>
             <div className="grid flex-1 auto-rows-min gap-0.5">
               <div className="text-sm text-muted-foreground text-left">
-                Burned
+                燃燒熱量
               </div>
               <div className="flex items-baseline gap-1 text-xl font-bold tabular-nums leading-none">
                 {burned}
@@ -49,7 +62,7 @@ const SummaryCircle = ({
             </div>
             <div className="grid flex-1 auto-rows-min gap-0.5">
               <div className="text-sm text-muted-foreground text-left">
-                Time
+                時長
               </div>
               <div className="flex items-baseline gap-1 text-xl font-bold tabular-nums leading-none">
                 {time}
