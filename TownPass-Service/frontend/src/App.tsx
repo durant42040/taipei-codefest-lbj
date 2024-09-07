@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import reactLogo from "./assets/react.svg";
+import journalLogo from "./assets/notebook-text.svg"
+import mapLogo from "./assets/map-pinned.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { useConnectionMessage } from "./composables/useConnectionMessage";
 import { useHandleConnectionData } from "./composables/useHandleConnectionData";
 import { Button } from "./components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,28 +36,22 @@ function App() {
 
   return (
     <>
-      <Button variant="outline">Button</Button>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <h1 className="text-3xl font-bold underline">
-        {`Hello ${monster.name}!`}
-      </h1>
+      <Tabs defaultValue="account">
+        <TabsList>
+          <TabsTrigger value="account" className="">
+            <img src={journalLogo} alt="Journal" className="mx-2" />
+            運動紀錄
+          </TabsTrigger>
+          <TabsTrigger value="password" className="flex items-center">
+            <img src={mapLogo} alt="Map" className="mx-2" />
+            運動地圖
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="account">Journal</TabsContent>
+        <TabsContent value="password">Maps</TabsContent>
+      </Tabs>
     </>
+    
   );
 }
 
