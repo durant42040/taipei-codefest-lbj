@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter} from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,10 +43,10 @@ const FoodJournal = () => {
   const handleSubmit = () => {
     // Add the new activity with a unique id
     client
-      .post("food/", { ...newFood, userId: userData.id})
+      .post("food/", { ...newFood, userId: userData.id })
       .then((response) => {
         setFoodHistory([...foodHistory, response.data]);
-        setNewFood({ food:"", calories: 0 }); // Reset the form
+        setNewFood({ food: "", calories: 0 }); // Reset the form
         setIsDialogOpen(false); // Close the dialog after successful submission
       });
   };
@@ -96,7 +103,7 @@ const FoodJournal = () => {
         </Dialog>
       </div>
       <div className="rounded-lg">
-        {foodHistory.map(food => (
+        {foodHistory.map((food) => (
           <FoodActivityCard key={food.id} {...food} />
         ))}
       </div>
