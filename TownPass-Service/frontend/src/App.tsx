@@ -4,12 +4,14 @@ import Home from "@/containers/home/main"; // Import the main.tsx (journal stuff
 import ExerciseDetails from "./containers/exerciseLog/main";
 import LoginPage from "@/containers/loginPage/main";
 import { useEffect } from "react";
-import { useConnectionMessage } from "@/composables/useConnectionMessage.ts";
-import { useHandleConnectionData } from "@/composables/useHandleConnectionData.ts";
+// import { useConnectionMessage } from "@/composables/useConnectionMessage.ts";
+// import { useHandleConnectionData } from "@/composables/useHandleConnectionData.ts";
 import axios from "axios";
 import { useExercise } from "@/contexts/useExercise.tsx";
 import JournalPage from "@/containers/journal/main";
 import ExercisePage from "@/containers/exercise/main";
+import AllFoodHistoryPage from "./containers/journal/AllFoodHistoryPage";
+import AllJouralPage from "./containers/journal/AllJouralPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
   {
     path: "/LoginPage",
     Component: LoginPage,
+  },
+  {
+    path: "/foodHistory",
+    Component: AllFoodHistoryPage,
+  },
+  {
+    path: "/journalHistory",
+    Component: AllJouralPage,
   },
 ]);
 

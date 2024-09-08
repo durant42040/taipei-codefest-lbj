@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TrendingUp } from "lucide-react";
+// import { TrendingUp } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import scale from "@/assets/scale.svg";
 import {
@@ -17,7 +17,6 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -64,7 +63,7 @@ export default function Weight() {
       alert("請輸入數字");
       return;
     }
-    console.log("New weight submitted:", newWeight); // Replace with actual update logic
+    // console.log("New weight submitted:", newWeight);
     setIsDialogOpen(false);
     client
       .post("weight/", { weight: newWeight, userId: userData.id })
@@ -73,7 +72,7 @@ export default function Weight() {
 
         // remove the old weight if it exists
         const newWeights = weights.filter(
-          (weight) => weight.month !== response.data.month
+          (weight) => weight.month !== response.data.month,
         );
 
         setWeights([
@@ -172,8 +171,7 @@ export default function Weight() {
           </ChartContainer>
         </CardContent>
         <CardFooter className="flex-col items-start gap-2 text-sm">
-          <div className="flex gap-2 font-medium leading-none">
-          </div>
+          <div className="flex gap-2 font-medium leading-none"></div>
         </CardFooter>
       </Card>
     </>
