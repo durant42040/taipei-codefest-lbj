@@ -10,7 +10,7 @@ const SummaryCircle = ({
   time,
 }: {
   title: string;
-  intake: number;
+  intake: number | string;
   burned: number;
   time: number;
 }) => {
@@ -99,7 +99,7 @@ const SummaryCircle = ({
               data={[
                 {
                   activity: "intake",
-                  value: (intake / 2000) * 100,
+                  value: (intake as number / 2000) * 100,
                   fill: "var(--color-stand)",
                 },
                 {

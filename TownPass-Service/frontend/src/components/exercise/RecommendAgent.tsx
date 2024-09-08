@@ -12,15 +12,21 @@ import {
 import { Activity } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import {useExercise} from "@/contexts/useExercise.tsx";
+import { useExercise } from "@/contexts/useExercise.tsx";
 
-const ExerciseRecommendationAssistant = ({ onSportClick }: { onSportClick: (id: string) => void }) => {
-  const {userData} = useExercise();
+const ExerciseRecommendationAssistant = ({
+  onSportClick,
+}: {
+  onSportClick: (id: string) => void;
+}) => {
+  const { userData } = useExercise();
   const [gender, setGender] = useState(userData.gender);
   const [age, setAge] = useState(userData.age);
   const [weight, setWeight] = useState(userData.weight);
   const [height, setHeight] = useState(userData.height);
-  const [recommendedSports, setRecommendedSports] = useState<{ id: string; name: string }[]>([]);
+  const [recommendedSports, setRecommendedSports] = useState<
+    { id: string; name: string }[]
+  >([]);
 
   const [isLoading, setIsLoading] = useState(false);
 

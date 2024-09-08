@@ -56,13 +56,13 @@ function ToggleList() {
   };
 
   const handleSportRecommendation = (sportName: string) => {
-    const recommendedSport = sports.find(sport => sport.name == sportName);
+    const recommendedSport = sports.find((sport) => sport.name == sportName);
     if (recommendedSport) {
       handleSelectExercise(recommendedSport.icon + " " + recommendedSport.name);
     }
     setIsRecommendationModalOpen(false);
   };
-  
+
   return (
     <>
       <div className="flex flex-col mb-2">
