@@ -42,4 +42,4 @@ export type SessionType = {
   calories: number;
   location: string;
   duration: number; // Assuming duration is in hours
-}
+};

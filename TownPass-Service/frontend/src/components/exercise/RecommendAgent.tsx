@@ -59,7 +59,7 @@ const ExerciseRecommendationAssistant = ({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 py-6 bg-white rounded-lg shadow-md">
+    <div className="w-full max-w-md mx-auto px-4 py-6 bg-white rounded-lg">
       <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center">
         <Activity className="mr-2" />
         運動建議助手
