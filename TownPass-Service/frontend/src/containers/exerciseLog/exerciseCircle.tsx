@@ -3,7 +3,7 @@ import { ChartContainer } from "@/components/ui/chart";
 import { PolarAngleAxis, RadialBar, RadialBarChart } from "recharts";
 import { Target } from "lucide-react";
 
-const SummaryCircle = ({
+const ExerciseCircle = ({
   title,
   intake,
   burned,
@@ -31,7 +31,7 @@ const SummaryCircle = ({
                   <div className="text-sm text-muted-foreground text-left">
                     攝取熱量
                   </div>
-                  <div className="flex items-baseline gap-1 text-xl text-[hsl(var(--chart-3))] font-bold tabular-nums leading-none">
+                  <div className="flex items-baseline gap-1 text-xl font-bold tabular-nums leading-none">
                     {intake}
                     <span className="text-sm font-normal text-muted-foreground">
                       kcal
@@ -43,7 +43,8 @@ const SummaryCircle = ({
                   <div className="text-sm text-muted-foreground text-left">
                     地點
                   </div>
-                  <div className="flex items-baseline gap-1 text-xl font-bold tabular-nums leading-none">
+                  <div
+                      className="inline-flex items-baseline gap-1 font-bold tabular-nums leading-none whitespace-nowrap overflow-visible">
                     {intake}
                   </div>
                 </>
@@ -97,11 +98,11 @@ const SummaryCircle = ({
                 bottom: -10,
               }}
               data={[
-                {
-                  activity: "intake",
-                  value: ((intake as number) / 1000) * 100,
-                  fill: "var(--color-stand)",
-                },
+                // {
+                //   activity: "intake",
+                //   value: ((intake as number) / 1000) * 100,
+                //   fill: "var(--color-stand)",
+                // },
                 {
                   activity: "burned",
                   value: (burned / 1000) * 100,
@@ -109,7 +110,7 @@ const SummaryCircle = ({
                 },
                 {
                   activity: "move",
-                  value: (time / 10) * 100,
+                  value: (time / 6) * 100,
                   fill: "var(--color-move)",
                 },
               ]}
@@ -133,4 +134,4 @@ const SummaryCircle = ({
   );
 };
 
-export default SummaryCircle;
+export default ExerciseCircle;

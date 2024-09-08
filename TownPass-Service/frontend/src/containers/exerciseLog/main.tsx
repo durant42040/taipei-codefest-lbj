@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import SummaryCircle from "@/components/journal/summaryCircle";
+import SummaryCircle from "@/containers/exerciseLog/exerciseCircle";
 import axios from "axios";
 import type { SessionType } from "@/shared/type";
 
