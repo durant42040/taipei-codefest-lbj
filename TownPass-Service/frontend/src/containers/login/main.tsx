@@ -20,6 +20,7 @@ import {
 import { useToast } from "@/hooks/use-toast.ts";
 import { useNavigate } from "react-router-dom";
 import { useExercise } from "@/contexts/useExercise.tsx";
+import React from "react";
 
 export default function LoginPage() {
   const { toast } = useToast();
@@ -40,8 +41,10 @@ export default function LoginPage() {
         title: "Success!",
         description: "User registered successfully!",
       });
-      console.log(response.data);
-      navigate("/journal");
+      if (response.data[0].id) {
+        localStorage.setItem("userId", response.data[0].id);
+        navigate("/journal");
+      }
     } catch (error) {
       console.error("Error submitting user data", error);
       toast({

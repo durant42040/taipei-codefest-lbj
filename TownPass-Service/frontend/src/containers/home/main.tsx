@@ -32,7 +32,7 @@ const tabs = [
 ];
 
 function Home() {
-  const { userData } = useExercise();
+  const { userData, setUserData } = useExercise();
   const client = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
   });
@@ -50,18 +50,6 @@ function Home() {
     return "journal"; // default tab
   };
 
-  useEffect(() => {
-    if (userData.name !== "" && userData.age === "") {
-      navigate("/login");
-    }
-  }, [navigate, userData]);
-
-  useEffect(() => {
-    if (location.pathname === "/") {
-      navigate("/journal");
-    }
-  }, [location.pathname, navigate]);
-
   const handleTabChange = (value: string) => {
     const tab = tabs.find((tab) => tab.value === value);
     if (tab) {
@@ -77,6 +65,28 @@ function Home() {
       });
     }
   }, [client, today.burned, userData]);
+  
+  useEffect(() => {
+    // clear suerId from localStorage
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      client
+          .get(`/user?id=${userId}`)
+          .then((response) => {
+            if (response.data.length) {
+              setUserData(response.data[0]);
+            }
+          });
+    } else {
+      navigate("/login");
+    }
+  }, [client, navigate, setUserData, userData]);
+  
+  useEffect(() => {
+    if (userData.id && window.location.pathname === "/") {
+      navigate("/journal");
+    }
+  }, [navigate, userData.id]);
 
   return (
     <div>

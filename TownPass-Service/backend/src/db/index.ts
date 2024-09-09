@@ -9,9 +9,9 @@ const { Client } = pkg;
 const client = new Client({
   connectionString: process.env.POSTGRES_URL,
   connectionTimeoutMillis: 5000,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
 });
 
 // @ts-ignore
