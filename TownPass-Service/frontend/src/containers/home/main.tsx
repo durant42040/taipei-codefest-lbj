@@ -83,6 +83,7 @@ function Home() {
   }, [client, navigate, setUserData, userData]);
   
   useEffect(() => {
+    console.log("done")
     if (userData.id && window.location.pathname === "/") {
       navigate("/journal");
     }

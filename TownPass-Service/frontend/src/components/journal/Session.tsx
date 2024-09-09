@@ -59,7 +59,7 @@ const Session = () => {
           location: "",
         });
         setIsDialogOpen(false);
-        window.location.reload();
+        navigate("/journal");
       });
   };
 
