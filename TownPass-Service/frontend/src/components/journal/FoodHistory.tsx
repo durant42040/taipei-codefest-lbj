@@ -48,6 +48,7 @@ const FoodJournal = () => {
         setFoodHistory([response.data, ...foodHistory]);
         setNewFood(fakeFood);
         setIsDialogOpen(false);
+        window.location.reload();
       });
   };
 

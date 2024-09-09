@@ -3,15 +3,15 @@ import journalLogo from "@/assets/notebook-text.svg";
 import mapLogo from "@/assets/map-pinned.svg";
 import "@/App.css";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Weight from "@/components/weight";
-import Journal from "@/components/journal/journal";
-import FoodHistory from "@/components/journal/foodHistory";
+import Weight from "@/components/journal/Weight.tsx";
+import Session from "@/components/journal/Session.tsx";
+import FoodHistory from "@/components/journal/FoodHistory.tsx";
 import { useExercise } from "@/contexts/useExercise.tsx";
 import { useNavigate } from "react-router-dom";
 import ExercisePage from "@/containers/exercise/main";
 import { useEffect, useState } from "react";
 
-import SummaryCircle from "@/components/journal/summaryCircle";
+import SummaryCircle from "@/components/journal/SummaryCircle.tsx";
 import { NavLink, useLocation } from "react-router-dom";
 
 const tabs = [
@@ -52,9 +52,15 @@ function Home() {
 
   useEffect(() => {
     if (userData.name !== "" && userData.age === "") {
-      navigate("/LoginPage");
+      navigate("/login");
     }
   }, [navigate, userData]);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("/journal");
+    }
+  }, [location.pathname, navigate]);
 
   const handleTabChange = (value: string) => {
     const tab = tabs.find((tab) => tab.value === value);
@@ -70,7 +76,7 @@ function Home() {
         setToday(todayData);
       });
     }
-  }, [client, userData]);
+  }, [client, today.burned, userData]);
 
   return (
     <div>
@@ -100,7 +106,7 @@ function Home() {
               time={today.time}
             />
             <Weight />
-            <Journal />
+            <Session />
             <FoodHistory />
           </>
         )}

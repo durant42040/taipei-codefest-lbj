@@ -1,17 +1,14 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import WeightTrackingPage from "./components/weight"; // Import your weight page
-import Home from "@/containers/home/main"; // Import the main.tsx (journal stuff) as Home component
-import ExerciseDetails from "./containers/exerciseLog/main";
-import LoginPage from "@/containers/loginPage/main";
-import { useEffect } from "react";
-// import { useConnectionMessage } from "@/composables/useConnectionMessage.ts";
-// import { useHandleConnectionData } from "@/composables/useHandleConnectionData.ts";
-import axios from "axios";
-import { useExercise } from "@/contexts/useExercise.tsx";
-import JournalPage from "@/containers/journal/main";
+import WeightTrackingPage from "@/components/journal/Weight.tsx";
+import Home from "@/containers/home/main";
+import ExerciseDetails from "@/containers/journal/SessionDetails.tsx";
+import LoginPage from "@/containers/login/main";
 import ExercisePage from "@/containers/exercise/main";
-import AllFoodHistoryPage from "./containers/journal/AllFoodHistoryPage";
-import AllJouralPage from "./containers/journal/AllJouralPage";
+import FoodHistoryPage from "./containers/journal/FoodHistoryPage.tsx";
+import JournalPage from "./containers/journal/JournalPage.tsx";
+import { useEffect } from "react";
+import { useExercise } from "@/contexts/useExercise.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -35,16 +32,16 @@ const router = createBrowserRouter([
     Component: ExerciseDetails,
   },
   {
-    path: "/LoginPage",
+    path: "/login",
     Component: LoginPage,
   },
   {
     path: "/foodHistory",
-    Component: AllFoodHistoryPage,
+    Component: FoodHistoryPage,
   },
   {
     path: "/journalHistory",
-    Component: AllJouralPage,
+    Component: JournalPage,
   },
 ]);
 
@@ -55,8 +52,8 @@ function App(): React.ReactNode {
     baseURL: import.meta.env.VITE_BASE_URL,
   });
 
-  const handleUserInfo = () => {
-    if (userData.name === "") {
+  useEffect(() => {
+    if (userData.id === "") {
       client
         .get(`/user?id=7f3562f4-bb3f-4ec7-89b9-da3b4b5ff250`)
         .then((response) => {
@@ -71,23 +68,7 @@ function App(): React.ReactNode {
           }
         });
     }
-  };
-
-  useEffect(() => {
-    handleUserInfo();
-  }, []);
-
-  // useEffect(() => {
-  //   if (userData.id !== "" && userData.age === "") {
-  //     const id = userData.id;
-  //     console.log(id);
-  //     client.get(`/user?id=${id}`).then((response) => {
-  //       if(response.data){
-  //         setUserData(response.data[0]);
-  //       }
-  //     });
-  //   }
-  // }, [client, userData, setUserData]);
+  }, [client, setUserData, userData]);
 
   return <RouterProvider router={router} />;
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { TrendingUp } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import scale from "@/assets/scale.svg";
 import {
@@ -28,8 +27,6 @@ import {
 } from "@/components/ui/chart";
 import axios from "axios";
 import { useExercise } from "@/contexts/useExercise.tsx";
-
-export const description = "A linear line chart";
 
 type WeightType = {
   weight: string;
@@ -92,13 +89,13 @@ export default function Weight() {
         setWeights(weights);
       });
     }
-  }, [client, userData]);
+  }, [client, userData, weights.length]);
 
   return (
     <>
       <div className="flex justify-between items-center m-2">
         <div className="flex flex-row">
-          <img src={scale} />
+          <img src={scale} alt="scale" />
           <h2 className="text-xl ml-1 font-bold mt-3 mb-3 text-left">
             體重紀錄
           </h2>

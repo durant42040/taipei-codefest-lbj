@@ -1,33 +1,29 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import SummaryCircle from "@/containers/exerciseLog/exerciseCircle";
+import SummaryCircle from "@/components/journal/ExerciseCircle.tsx";
 import axios from "axios";
 import type { SessionType } from "@/shared/type";
 
-const ExerciseDetails = () => {
+const SessionDetails = () => {
   const { id } = useParams(); // Extract the id from the URL
 
-  const [session, setSession] = useState<SessionType | null>(null);
+  const [session, setSession] = useState<SessionType>({
+    id: 0,
+    time: 0,
+    sport: "",
+    location: "",
+    duration: 0,
+    calories: 0,
+  });
   const client = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
   });
 
   useEffect(() => {
-    const fetchSession = async () => {
-      if (id) {
-        try {
-          await client.get(`/onesession?id=${id}`).then((response) => {
-            setSession(response.data[0]);
-            // console.log(response.data[0]);
-          });
-        } catch (error) {
-          console.error("Error fetching session data:", error);
-        }
-      }
-    };
-
-    fetchSession();
-  }, [id]);
+    client.get(`/session?id=${id}`).then((response) => {
+      setSession(response.data[0]);
+    });
+  }, [client, id]);
 
   return (
     <div className="container mx-auto p-4">
@@ -45,4 +41,4 @@ const ExerciseDetails = () => {
   );
 };
 
-export default ExerciseDetails;
+export default SessionDetails;

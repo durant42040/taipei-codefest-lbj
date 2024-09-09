@@ -9,12 +9,6 @@ export type CourtType = {
   imgLink: string;
 };
 
-export type SportType = {
-  id: number;
-  name: string;
-  icon: string;
-};
-
 export type FoodType = {
   id?: number;
   userId: string;
@@ -38,8 +32,8 @@ export type ActivityType = {
 export type SessionType = {
   id: number;
   sport: string;
-  time: number; // Assuming time is in hours
+  time: number;
   calories: number;
   location: string;
-  duration: number; // Assuming duration is in hours
+  duration: number;
 };

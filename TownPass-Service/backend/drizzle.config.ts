@@ -11,6 +11,7 @@ export default defineConfig({
   dialect: "postgresql",
   schema: "./src/db/schema.ts",
   out: "./drizzle",
+// @ts-ignore
   url: process.env.POSTGRES_URL,
   dbCredentials: { connectionString: process.env.POSTGRES_URL },
 });

@@ -22,7 +22,7 @@ function CourtInfo() {
     <div className="flex flex-col gap-2 mt-2 ml-2">
       <div className="flex flex-row">
         <p className="font-semibold text-zinc-950 text-4xl mt-2">
-          {selectedCourt?.name.length! > 11
+          {selectedCourt.name.length! > 11
             ? selectedCourt?.name.slice(0, 10) + "..."
             : selectedCourt?.name}
         </p>

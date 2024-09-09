@@ -16,8 +16,7 @@ export const sessions = pgTable('sessions', {
   duration: varchar('duration', {length: 8}), // Store duration
   calories: decimal('calories', {precision: 7}),
   location: varchar('location', {length: 255}),
-    // store postgres timestamp
-    time: timestamp('time').defaultNow(),
+  time: timestamp('time').defaultNow(),
     
     
 });

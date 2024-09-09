@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Clock, MapPin, Activity, Flame } from "lucide-react";
+import { Clock, Activity, Flame } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { sports } from "@/data";
 
@@ -10,7 +10,7 @@ interface ExerciseSessionProps {
   caloriesBurnt: string;
 }
 
-export function ActivityCard({
+export function SessionCard({
   id,
   time,
   sport,

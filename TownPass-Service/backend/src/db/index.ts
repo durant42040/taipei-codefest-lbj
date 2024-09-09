@@ -11,5 +11,6 @@ const client = new Client({
   connectionTimeoutMillis: 5000,
 });
 
+// @ts-ignore
 await client.connect();
 export const db = drizzle(client);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table, TableBody } from "@/components/ui/table";
-import { ActivityCard } from "@/components/ui/activityCard";
+import { SessionCard } from "@/components/ui/sessionCard.tsx";
 import {
   Dialog,
   DialogContent,
@@ -13,27 +13,33 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useExercise } from "@/contexts/useExercise.tsx";
-import { Dumbbell } from "lucide-react";
+import { ChevronDown, Dumbbell } from "lucide-react";
 import type { ActivityType } from "@/shared/type";
 import { useNavigate } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu.tsx";
+import { sports } from "@/data";
 
-const Journal = () => {
-  const [activityHistory, setActivityHistory] = useState<ActivityType[]>([]);
+const Session = () => {
+  const [sessionHistory, setSessionHistory] = useState<ActivityType[]>([]);
   const navigate = useNavigate();
-  const fakeActivity = {
+  const [newSession, setNewSession] = useState<ActivityType>({
     userId: "",
     calories: "",
     sport: "",
     duration: "",
     location: "",
-  };
-  const [newActivity, setNewActivity] = useState<ActivityType>(fakeActivity);
+  });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { userData } = useExercise();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewActivity({ ...newActivity!, [name]: value });
+    setNewSession({ ...newSession!, [name]: value });
   };
 
   const client = axios.create({
@@ -42,20 +48,27 @@ const Journal = () => {
 
   const handleSubmit = () => {
     client
-      .post("/session", { ...newActivity, userId: userData.id })
+      .post("/session", { ...newSession, userId: userData.id })
       .then((response) => {
-        setActivityHistory([response.data, ...activityHistory!]);
-        setNewActivity(fakeActivity);
+        setSessionHistory([response.data, ...sessionHistory!]);
+        setNewSession({
+          userId: "",
+          calories: "",
+          sport: "",
+          duration: "",
+          location: "",
+        });
         setIsDialogOpen(false);
+        window.location.reload();
       });
   };
 
   useEffect(() => {
-    client.get(`session?user=${userData.id}`).then((response) => {
+    client.get(`session/all?user=${userData.id}`).then((response) => {
       const { data: sessions } = response;
-      setActivityHistory(sessions);
+      setSessionHistory(sessions);
     });
-  }, [userData]);
+  }, [client, userData]);
 
   return (
     <div>
@@ -84,13 +97,34 @@ const Journal = () => {
                   <Label htmlFor="sport" className="text-lg">
                     運動
                   </Label>
-                  <Input
-                    id="sport"
-                    name="sport"
-                    value={newActivity.sport}
-                    onChange={handleInputChange}
-                    required
-                  />
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="text-md w-full flex flex-row justify-between items-center">
+                      {newSession.sport !== ""
+                        ? sports.find(
+                            (sport) => sport.name === newSession.sport,
+                          )?.icon +
+                          " " +
+                          newSession.sport
+                        : "選擇運動"}
+                      <ChevronDown />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-72">
+                      {sports.map((sport, index) => (
+                        <DropdownMenuItem
+                          key={index}
+                          className="text-xl font-bold hover:bg-gray-100 cursor-pointer"
+                          onClick={() =>
+                            setNewSession({
+                              ...newSession,
+                              sport: sport?.name,
+                            })
+                          }
+                        >
+                          {sport?.icon} {sport?.name}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
                 <div className="space-y-0.5">
                   <Label htmlFor="location" className="text-lg">
@@ -99,7 +133,7 @@ const Journal = () => {
                   <Input
                     id="location"
                     name="location"
-                    value={newActivity.location}
+                    value={newSession.location}
                     onChange={handleInputChange}
                     required
                   />
@@ -111,7 +145,7 @@ const Journal = () => {
                   <Input
                     id="duration"
                     name="duration"
-                    value={newActivity.duration}
+                    value={newSession.duration}
                     onChange={handleInputChange}
                     required
                   />
@@ -124,7 +158,7 @@ const Journal = () => {
                     id="calories"
                     name="calories"
                     type="number"
-                    value={newActivity.calories}
+                    value={newSession.calories}
                     onChange={handleInputChange}
                     required
                   />
@@ -146,13 +180,13 @@ const Journal = () => {
       <div className="rounded-lg">
         <Table>
           <TableBody className="flex flex-col gap-1">
-            {activityHistory.slice(0, 3).map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                id={activity.id}
-                sport={activity.sport}
-                time={activity.duration}
-                caloriesBurnt={activity.calories}
+            {sessionHistory.slice(0, 3).map((session) => (
+              <SessionCard
+                key={session.id}
+                id={session.id}
+                sport={session.sport}
+                time={session.duration}
+                caloriesBurnt={session.calories}
               />
             ))}
           </TableBody>
@@ -162,4 +196,4 @@ const Journal = () => {
   );
 };
 
-export default Journal;
+export default Session;

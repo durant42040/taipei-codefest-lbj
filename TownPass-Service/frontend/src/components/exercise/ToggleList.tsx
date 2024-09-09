@@ -76,7 +76,7 @@ function ToggleList() {
               {sports.map((sport, index) => (
                 <DropdownMenuItem
                   key={index}
-                  className="text-xl hover:bg-gray-100 cursor-pointer"
+                  className="text-xl font-bold hover:bg-gray-100 cursor-pointer"
                   onClick={() =>
                     handleSelectExercise(sport?.icon + " " + sport?.name)
                   }

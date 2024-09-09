@@ -1,4 +1,3 @@
-import { useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast.ts";
 import { useNavigate } from "react-router-dom";
 import { useExercise } from "@/contexts/useExercise.tsx";
 
@@ -68,9 +67,7 @@ export default function LoginPage() {
                 id="name"
                 name="name"
                 value={userData.name}
-                onChange={(e) =>
-                  setUserData({ ...userData, name: e.target.value })
-                }
+                onChange={(e) => handleChange("name", e.target.value)}
                 required
               />
             </div>

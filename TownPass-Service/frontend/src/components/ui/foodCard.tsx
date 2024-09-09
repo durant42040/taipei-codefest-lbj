@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Clock, Utensils, Flame, Info, Weight, Pizza } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Flame, Weight, Pizza } from "lucide-react";
 
 type FoodType = {
   id?: number;
@@ -21,8 +20,6 @@ export function FoodActivityCard({
   fat,
   carbo,
 }: FoodType) {
-  const navigate = useNavigate();
-
   return (
     <Card
       className="w-full max-w-3xl hover:bg-accent transition-colors my-1"

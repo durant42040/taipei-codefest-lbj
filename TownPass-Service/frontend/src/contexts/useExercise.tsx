@@ -4,7 +4,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 export type ExerciseContextType = {
   exercise: string;
-  selectedCourt: CourtType | null;
+  selectedCourt: CourtType;
   isExpanded: boolean;
   isVisible: boolean;
   isCourtInfoVisible: boolean;
@@ -57,7 +57,16 @@ export type ExerciseContextType = {
 
 export const ExerciseContext = createContext<ExerciseContextType>({
   exercise: "",
-  selectedCourt: null,
+  selectedCourt: {
+    K: 0,
+    imgLink: "",
+    lat: 0,
+    lng: 0,
+    location: "",
+    name: "",
+    sports: [],
+    time: "",
+  },
   isExpanded: false,
   isVisible: false,
   isCourtInfoVisible: false,
@@ -100,7 +109,16 @@ type ExerciseProviderProps = {
 
 export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
   const [exercise, setExercise] = useState("");
-  const [selectedCourt, setSelectedCourt] = useState<CourtType | null>(null);
+  const [selectedCourt, setSelectedCourt] = useState<CourtType>({
+    K: 0,
+    imgLink: "",
+    lat: 0,
+    lng: 0,
+    location: "",
+    name: "",
+    sports: [],
+    time: "",
+  });
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isCourtInfoVisible, setIsCourtInfoVisible] = useState(false);

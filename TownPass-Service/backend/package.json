@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
+    "@types/express": "^4.17.12",
     "@types/node": "^22.5.0",
     "@types/pg": "^8.11.6",
     "drizzle-kit": "^0.24.2",

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import type { FoodType } from "@/shared/type";
 
-function AllFoodHistoryPage() {
+function FoodHistoryPage() {
   const { userData } = useExercise();
   const [foodHistory, setFoodHistory] = useState<FoodType[]>([]);
   const client = axios.create({
@@ -37,4 +37,4 @@ function AllFoodHistoryPage() {
   );
 }
 
-export default AllFoodHistoryPage;
+export default FoodHistoryPage;

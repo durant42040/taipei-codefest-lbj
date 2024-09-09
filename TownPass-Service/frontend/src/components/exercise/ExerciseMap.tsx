@@ -37,7 +37,7 @@ function PoiMarkers({
     });
     console.log("focusSingle", focusSingle);
 
-    map.fitBounds(bound);
+    map?.fitBounds(bound);
     setFocusSingle(true);
   }
   return (
@@ -45,15 +45,15 @@ function PoiMarkers({
       {pois.map((poi, index) => (
         <AdvancedMarker
           position={{
-            lat: typeof poi.lat === "number" ? poi.lat : 0,
-            lng: typeof poi.lng === "number" ? poi.lng : 0,
+            lat: poi.lat,
+            lng: poi.lng,
           }}
           key={index}
           onClick={(e: google.maps.MapMouseEvent) => {
             handleMarkerClick(e, poi);
           }}
         >
-          <Pin className="text-red-100" />
+          <Pin />
         </AdvancedMarker>
       ))}
     </>

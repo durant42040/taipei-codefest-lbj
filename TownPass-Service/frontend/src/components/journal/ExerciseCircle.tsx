@@ -43,8 +43,7 @@ const ExerciseCircle = ({
                   <div className="text-sm text-muted-foreground text-left">
                     地點
                   </div>
-                  <div
-                      className="inline-flex items-baseline gap-1 font-bold tabular-nums leading-none whitespace-nowrap overflow-visible">
+                  <div className="inline-flex items-baseline gap-1 font-bold tabular-nums leading-none whitespace-nowrap overflow-visible">
                     {intake}
                   </div>
                 </>
@@ -98,11 +97,6 @@ const ExerciseCircle = ({
                 bottom: -10,
               }}
               data={[
-                // {
-                //   activity: "intake",
-                //   value: ((intake as number) / 1000) * 100,
-                //   fill: "var(--color-stand)",
-                // },
                 {
                   activity: "burned",
                   value: (burned / 1000) * 100,
