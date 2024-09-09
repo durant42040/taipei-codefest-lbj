@@ -43,7 +43,7 @@ export default function LoginPage() {
       });
       if (response.data[0].id) {
         localStorage.setItem("userId", response.data[0].id);
-        navigate("/journal");
+        navigate("/");
       }
     } catch (error) {
       console.error("Error submitting user data", error);
